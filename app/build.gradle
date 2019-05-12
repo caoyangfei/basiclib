@@ -29,4 +29,3 @@ dependencies {
     implementation project(':util')
 }
 
-apply from: '../library.gradle'
