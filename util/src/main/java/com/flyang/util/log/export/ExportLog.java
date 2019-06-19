@@ -24,13 +24,13 @@ public class ExportLog {
     public static String printDividingLine(int dir) {
         switch (dir) {
             case DIVIDER_TOP:
-                return "╔══════════════════════════════════════════════════════════════";
+                return "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
             case DIVIDER_BOTTOM:
-                return "╚══════════════════════════════════════════════════════════════";
+                return "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
             case DIVIDER_NORMAL:
-                return "║ ";
+                return "┃";
             case DIVIDER_CENTER:
-                return "╟──────────────────────────────────────────────────────────────";
+                return "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━";
             default:
                 break;
         }

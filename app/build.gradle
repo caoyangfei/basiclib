@@ -5,12 +5,17 @@ android {
     defaultConfig {
         applicationId "com.flyang.demo"
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        targetSdkVersion 28
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         resValue("string", "app_name", rootProject.ext.app_name)
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
     buildTypes {
         release {
             minifyEnabled false

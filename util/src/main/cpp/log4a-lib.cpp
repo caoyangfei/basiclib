@@ -6,7 +6,7 @@
 
 #include "includes/LogBuffer.h"
 
-static const char* const kClassDocScanner = "com/flyang/basic/log/log2file/LogBuffer";
+static const char* const kClassDocScanner = "com/flyang/util/log/log2file/LogBuffer";
 
 static char* openMMap(int buffer_fd, size_t buffer_size);
 
