@@ -12,19 +12,13 @@ repositories {
     mavenCentral()
 }
 
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
 //  解决build警告：编码GBK的不可映射字符
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
 android {
-    compileSdkVersion 28
-
-
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
