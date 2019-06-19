@@ -108,7 +108,5 @@ LogUtils.getLogConfig().addParserClass(OkHttpResponseParse.class);
 ```
 
 
-### 结果展示
-![截图](../screenshot/screenshot07.png)
 
 

@@ -1,7 +1,4 @@
-# LogUtils
- 
-![](https://img.shields.io/badge/Logutil-1.7.5-blue.svg)
-![Codecov](https://img.shields.io/badge/log2File-1.3.0-brightgreen.svg)
+# basiclib->util->LogUtils
 
 #### More convenient and easy to use android Log manager
 

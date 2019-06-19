@@ -4,13 +4,6 @@
 如果代码不规范可能无法匹配。<br/>
 替换可能出现不完整的情况，所有请在执行替换前将当前代码进行`备份`
 
-##### 项目根目录右键选择Replace in path
-<img src="../screenshot/log/log_step_1.png" width="600px"/><br/>
-##### 输入匹配的正则表达式
-<img src="../screenshot/log/log_step_2.png" width="600px"/><br/>
-##### 选择全部文件替换
-<img src="../screenshot/log/log_step_3.png" width="600px"/><br/>
-
 ### 替换Log.*(TAG, String)  &  Log.*(TAG, String, Throwable) 
 
 ```
