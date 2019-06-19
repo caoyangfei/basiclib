@@ -3,12 +3,30 @@ package com.flyang.util.data;
 import android.support.v4.util.SimpleArrayMap;
 
 import com.flyang.util.constant.RegexConstant;
+import com.flyang.util.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.flyang.util.constant.RegexConstant.REGEX_CHINESE;
+import static com.flyang.util.constant.RegexConstant.REGEX_CHINESE_ALL;
+import static com.flyang.util.constant.RegexConstant.REGEX_CHINESE_ALL2;
+import static com.flyang.util.constant.RegexConstant.REGEX_CONTAIN_NUMBER;
+import static com.flyang.util.constant.RegexConstant.REGEX_EMAIL;
+import static com.flyang.util.constant.RegexConstant.REGEX_LETTER;
+import static com.flyang.util.constant.RegexConstant.REGEX_NICKNAME;
+import static com.flyang.util.constant.RegexConstant.REGEX_NUMBER;
+import static com.flyang.util.constant.RegexConstant.REGEX_NUMBER_OR_DECIMAL;
+import static com.flyang.util.constant.RegexConstant.REGEX_NUMBER_OR_LETTER;
+import static com.flyang.util.constant.RegexConstant.REGEX_PASSWORD;
+import static com.flyang.util.constant.RegexConstant.REGEX_REALNAME;
+import static com.flyang.util.constant.RegexConstant.REGEX_SPECIAL;
+import static com.flyang.util.constant.RegexConstant.REGEX_URL;
+import static com.flyang.util.constant.RegexConstant.REGEX_WX;
+import static com.flyang.util.data.StringUtils.isEmpty;
 
 /**
  * @author caoyangfei
@@ -24,10 +42,6 @@ public final class RegexUtils {
     private RegexUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // If u want more please visit http://toutiao.com/i6231678548520731137
-    ///////////////////////////////////////////////////////////////////////////
 
     /**
      * 简单验证手机号
@@ -152,7 +166,7 @@ public final class RegexUtils {
      * @return {@code true}: yes<br>{@code false}: no
      */
     public static boolean isEmail(final CharSequence input) {
-        return isMatch(RegexConstant.REGEX_EMAIL, input);
+        return isMatch(REGEX_EMAIL, input);
     }
 
     /**
@@ -162,7 +176,7 @@ public final class RegexUtils {
      * @return {@code true}: yes<br>{@code false}: no
      */
     public static boolean isURL(final CharSequence input) {
-        return isMatch(RegexConstant.REGEX_URL, input);
+        return isMatch(REGEX_URL, input);
     }
 
     /**
@@ -198,15 +212,6 @@ public final class RegexUtils {
         return isMatch(RegexConstant.REGEX_DATE, input);
     }
 
-    /**
-     * 验证 IP 地址
-     *
-     * @param input The input.
-     * @return {@code true}: yes<br>{@code false}: no
-     */
-    public static boolean isIP(final CharSequence input) {
-        return isMatch(RegexConstant.REGEX_IP, input);
-    }
 
     /**
      * 判断是否匹配正则
@@ -282,4 +287,179 @@ public final class RegexUtils {
         if (input == null) return "";
         return Pattern.compile(regex).matcher(input).replaceAll(replacement);
     }
+
+    /**
+     * 通用匹配函数
+     *
+     * @param regex 正则表达式
+     * @param input 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean match(final String regex, final String input) {
+        if (!isEmpty(input)) {
+            try {
+                return Pattern.matches(regex, input);
+            } catch (Exception e) {
+                LogUtils.e("match", e);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 检验数字
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isNumber(final String str) {
+        return match(REGEX_NUMBER, str);
+    }
+
+    /**
+     * 检验数字或包含小数点
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isNumberDecimal(final String str) {
+        return match(REGEX_NUMBER_OR_DECIMAL, str);
+    }
+
+    /**
+     * 判断字符串是不是全是字母
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isLetter(final String str) {
+        return match(REGEX_LETTER, str);
+    }
+
+    /**
+     * 判断字符串是不是包含数字
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isContainNumber(final String str) {
+        return match(REGEX_CONTAIN_NUMBER, str);
+    }
+
+    /**
+     * 判断字符串是不是只含字母和数字
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isNumberLetter(final String str) {
+        return match(REGEX_NUMBER_OR_LETTER, str);
+    }
+
+    /**
+     * 检验特殊符号
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isSpec(final String str) {
+        return match(REGEX_SPECIAL, str);
+    }
+
+    /**
+     * 检验微信号
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isWx(final String str) {
+        return match(REGEX_WX, str);
+    }
+
+    /**
+     * 检验真实姓名
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isRealName(final String str) {
+        return match(REGEX_REALNAME, str);
+    }
+
+    /**
+     * 校验昵称
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isNickName(final String str) {
+        return match(REGEX_NICKNAME, str);
+    }
+
+    /**
+     * 校验密码
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isPassword(final String str) {
+        return match(REGEX_PASSWORD, str);
+    }
+
+    /**
+     * 校验 IP 地址
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isIPAddress(final String str) {
+        return match(RegexConstant.REGEX_IP_ADDR, str);
+    }
+
+    /**
+     * 校验汉字(无符号, 纯汉字)
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isChinese(final String str) {
+        return match(REGEX_CHINESE, str);
+    }
+
+    /**
+     * 判断字符串是不是全是中文
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isChineseAll(final String str) {
+        return match(REGEX_CHINESE_ALL, str);
+    }
+
+    /**
+     * 判断字符串中包含中文、包括中文字符标点等
+     *
+     * @param str 待校验的字符串
+     * @return {@code true} yes, {@code false} no
+     */
+    public static boolean isContainChinese(final String str) {
+        if (!isEmpty(str)) {
+            try {
+                int length;
+                if (str != null && (length = str.length()) != 0) {
+                    char[] dChar = str.toCharArray();
+                    for (int i = 0; i < length; i++) {
+                        boolean flag = String.valueOf(dChar[i]).matches(REGEX_CHINESE_ALL2);
+                        if (flag) {
+                            return true;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                LogUtils.e("isContainChinese", e);
+            }
+        }
+        return false;
+    }
+
 }

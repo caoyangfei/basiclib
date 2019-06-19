@@ -61,7 +61,34 @@ public final class RegexConstant {
     public static final String REGEX_POSITIVE_FLOAT = "^[1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*$";
     //    匹配负浮点数
     public static final String REGEX_NEGATIVE_FLOAT = "^-[1-9]\\d*\\.\\d*|-0\\.\\d*[1-9]\\d*$";
-
+    // 正则表达式: 验证汉字(含双角符号)
+    public static final String REGEX_CHINESE_ALL2 = "[\u0391-\uFFE5]";
+    // 正则表达式: 验证汉字
+    public static final String REGEX_CHINESE = "^[\u4e00-\u9fa5]+$";
+    // 正则表达式: 验证汉字(含双角符号)
+    public static final String REGEX_CHINESE_ALL = "^[\u0391-\uFFE5]+$";
+    // 正则表达式: 验证 IP 地址
+    public static final String REGEX_IP_ADDR = "(2[5][0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})";
+    // 正则表达式: 验证密码 (不包含特殊字符)
+    public static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,18}$";
+    // 正则表达式: 验证昵称
+    public static final String REGEX_NICKNAME = "^[\\u4E00-\\u9FA5A-Za-z0-9_]+$";
+    // 正则表达式: 验证真实姓名 ^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$
+    public static final String REGEX_REALNAME = "^[\\u4e00-\\u9fa5]+(•[\\u4e00-\\u9fa5]*)*$|^[\\u4e00-\\u9fa5]+(·[\\u4e00-\\u9fa5]*)*$";
+    // 正则表达式: 验证微信号 ^[a-zA-Z]{1}[-_a-zA-Z0-9]{5,19}+$
+    public static final String REGEX_WX = "^[a-zA-Z]{1}[-_a-zA-Z0-9]{5,19}+$";
+    // 正则表达式: 不能输入特殊字符 ^[\u4E00-\u9FA5A-Za-z0-9]+$ 或 ^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$
+    public static final String REGEX_SPECIAL = "^[\\u4E00-\\u9FA5A-Za-z0-9]+$";
+    // 正则表达式: 验证是否数字或者字母
+    public static final String REGEX_NUMBER_OR_LETTER = "^[A-Za-z0-9]+$";
+    // 正则表达式: 验证是否包含数字
+    public static final String REGEX_CONTAIN_NUMBER = ".*\\d+.*";
+    // 正则表达式: 验证数字
+    public static final String REGEX_NUMBER = "^[0-9]*$";
+    // 正则表达式: 验证数字或包含小数点
+    public static final String REGEX_NUMBER_OR_DECIMAL = "^[0-9]*[.]?[0-9]*$";
+    // 正则表达式: 验证是否全是字母
+    public static final String REGEX_LETTER = "^[A-Za-z]+$";
     /**
      * <p> 数字：^[0-9]*$<p>
      * <p> n位的数字：^d{n}$<p>
