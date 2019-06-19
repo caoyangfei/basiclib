@@ -3,7 +3,7 @@
 
 ## APIs
 
-* ### Activity 相关 -> [ActivityUtil.java]
+* ### Activity 相关 -> [ActivityUtils.java]
 ```
 getActivityByView              : 根据视图获取 Activity
 getActivityByContext           : 根据上下文获取 Activity
@@ -24,18 +24,13 @@ finishAllActivities            : 结束所有 Activity
 finishAllActivitiesExceptNewest: 结束除最新之外的所有 Activity
 ```
 
-* ### AdaptScreen 相关 -> [AdaptScreenUtil.java]
+* ### AdaptScreen 相关 -> [AdaptScreenUtils.java]
 ```
 adaptWidth : 适配宽度
 adaptHeight: 适配高度
 closeAdapt : 关闭适配（pt 等同于 dp）
 pt2Px      : pt 转 px
 px2Pt      : px 转 pt
-```
-
-* ### AntiShake 相关 -> [AntiShakeUtils.java]
-```
-isValid: 是否有效
 ```
 
 * ### App 相关 -> [AppUtils.java]
@@ -101,12 +96,7 @@ setWindowBrightness     : 设置窗口亮度
 getWindowBrightness     : 获取窗口亮度
 ```
 
-* ### Bus 相关 -> [BusUtils.java]
-```
-post: 发送
-```
-
-* ### 磁盘缓存相关 -> [CacheDiskStaticUtils.java][cacheDiskStatic.java] -> [Test][cacheDiskStatic.test]
+* ### 磁盘缓存相关 -> [CacheDiskStaticUtils.java]
 ```
 setDefaultCacheDiskUtils: 设置默认磁盘缓存实例
 put                     : 缓存中写入数据
@@ -779,18 +769,6 @@ isServiceRunning     : 判断服务是否运行
 ```
 execCmd[Async]: 执行命令
 ```
-
-* ### 尺寸相关 -> [SizeUtils.java]
-```
-dp2px, px2dp     : dp 与 px 转换
-sp2px, px2sp     : sp 与 px 转换
-applyDimension   : 各种单位转换
-forceGetViewSize : 在 onCreate 中获取视图的尺寸
-measureView      : 测量视图尺寸
-getMeasuredWidth : 获取测量视图宽度
-getMeasuredHeight: 获取测量视图高度
-```
-
 * ### Snackbar 相关 -> [SnackbarUtils.java]
 ```
 with           : 设置 snackbar 依赖 view
@@ -991,3 +969,82 @@ getComments       : 获取压缩文件中的注释链表
 
 ## Skills
 * [日志类](./doc/logutils.md)
+
+[ActivityUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/app/ActivityUtils.java
+[AdaptScreenUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/AdaptScreenUtils.java
+[AppUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/app/AppUtils.java
+[BarUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/BarUtils.java
+[BrightnessUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/BrightnessUtils.java
+[CacheDiskStaticUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/cache/CacheDiskStaticUtils.java
+[CacheDiskUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/cache/CacheDiskUtils.java
+[CacheDoubleStaticUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/cache/CacheDoubleStaticUtils.java
+[CacheDoubleUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/cache/CacheDoubleUtils.java
+[CacheMemoryStaticUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/cache/CacheMemoryStaticUtils.java
+[CacheMemoryUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/cache/CacheMemoryUtils.java
+[CleanUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/CleanUtils.java
+[CloneUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/CloneUtils.java
+[CloseUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/CloseUtils.java
+[ColorUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/ColorUtils.java
+[ConvertUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/ConvertUtils.java
+[CrashUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/CrashUtils.java
+[DeviceUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/DeviceUtils.java
+[FlashlightUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/FlashlightUtils.java
+[EncodeUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/EncodeUtils.java
+[EncryptUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/EncryptUtils.java
+[FileIOUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/FileIOUtils.java
+[FileUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/FileUtils.java
+[FragmentUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/FragmentUtils.java
+[GsonUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/GsonUtils.java
+[FieldUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/FieldUtils.java
+[HexUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/HexUtils.java
+[HtmlParser.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/HtmlParser.java
+[HtmlTagHandler.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/HtmlTagHandler.java
+[ImageUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/ImageUtils.java
+[IntentUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/IntentUtils.java
+[KeyboardUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/KeyboardUtils.java
+[LogUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/log/LogUtils.java
+[MetaDataUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/MetaDataUtils.java
+[NetworkUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/NetworkUtils.java
+[ObjectUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/ObjectUtils.java
+[PathUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/PathUtils.java
+[PermissionUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/PermissionUtils.java
+[PhoneUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/PhoneUtils.java
+[ProcessUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/ProcessUtils.java
+[ReflectUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/ReflectUtils.java
+[RegexUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/RegexUtils.java
+[ResourceUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/ResourceUtils.java
+[RomUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/RomUtils.java
+[ScreenUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/ScreenUtils.java
+[SDCardUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/SDCardUtils.java
+[ServiceUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/ServiceUtils.java
+[ShellUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/ShellUtils.java
+[SnackbarUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/SnackbarUtils.java
+[SpanUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/SpanUtils.java
+[SPStaticUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/SPStaticUtils.java
+[SPUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/SPUtils.java
+[StringUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/StringUtils.java
+[ThreadUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/app/ThreadUtils.java
+[TimeUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/TimeUtils.java
+[ToastUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/ToastUtils.java
+[UriUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/UriUtils.java
+[VibrateUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/system/VibrateUtils.java
+[ZipUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/data/ZipUtils.java
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

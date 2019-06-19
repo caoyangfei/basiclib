@@ -6,7 +6,7 @@
 * 常用工具类(持续更新)包含:日志,系统,缓存等
 
 
-## 5. Skills
+## 2. Skills
 #### 工具类AND基础Base库
 * [Base库](./doc/basic_base.md)
 * [基础类库](./doc/basic_util.md)
