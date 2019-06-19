@@ -22,15 +22,6 @@ public class ApplicationUtils {
 
     private static final ActivityLifecycleImpl ACTIVITY_LIFECYCLE = new ActivityLifecycleImpl();
 
-    public static final class FileProvider4UtilCode extends FileProvider {
-
-        @Override
-        public boolean onCreate() {
-            init(getContext());
-            return true;
-        }
-    }
-
     @SuppressLint("StaticFieldLeak")
     private static Application sApplication;
 

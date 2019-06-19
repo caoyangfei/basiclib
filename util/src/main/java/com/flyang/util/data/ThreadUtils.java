@@ -1,4 +1,4 @@
-package com.flyang.util.app;
+package com.flyang.util.data;
 
 import android.os.Handler;
 import android.os.Looper;

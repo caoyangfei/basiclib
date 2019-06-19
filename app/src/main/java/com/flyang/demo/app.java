@@ -3,6 +3,7 @@ package com.flyang.demo;
 import android.app.Application;
 import android.os.Environment;
 
+import com.flyang.util.app.ApplicationUtils;
 import com.flyang.util.log.file.LogFileEngineFactory;
 import com.flyang.util.log.config.LogLevel;
 import com.flyang.util.log.LogUtils;
@@ -18,6 +19,8 @@ public class app extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ApplicationUtils.init(this);
+
         LogUtils.getLogConfig()
                 .configAllowLog(true)  // 是否在Logcat显示日志
                 .configTagPrefix("LogUtilsDemo") // 配置统一的TAG 前缀

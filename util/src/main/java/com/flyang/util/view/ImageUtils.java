@@ -1924,10 +1924,6 @@ public final class ImageUtils {
         return inSampleSize;
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // other utils methods
-    ///////////////////////////////////////////////////////////////////////////
-
     private static File getFileByPath(final String filePath) {
         return isSpace(filePath) ? null : new File(filePath);
     }
