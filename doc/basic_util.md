@@ -967,9 +967,6 @@ getFilesPath      : 获取压缩文件中的文件路径链表
 getComments       : 获取压缩文件中的注释链表
 ```
 
-## Skills
-* [日志类](./doc/log_util.md)
-
 [ActivityUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/app/ActivityUtils.java
 [AdaptScreenUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/view/AdaptScreenUtils.java
 [AppUtils.java]: https://github.com/caoyangfei/basiclib/blob/master/util/src/main/java/com/flyang/util/app/AppUtils.java
