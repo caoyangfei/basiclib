@@ -12,6 +12,7 @@
 * [基础类库](./doc/basic_util.md)
 
 #### 日志
+* [日志](./doc/log_util.md)
 * [自定义对象打印](./doc/custom_parser.md)
 * [从Log切换到LogUtils](./doc/log_to_logutils.md)
 * [为LogUtils设置快捷键](./doc/logutils_templates.md)
