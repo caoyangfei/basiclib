@@ -17,7 +17,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void Button(View view) {
         LogUtils.d("测试打印日记");
-        //立即写入
-        LogUtils.getLog2FileConfig().flushAsync();
     }
 }

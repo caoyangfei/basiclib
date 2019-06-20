@@ -219,8 +219,6 @@ public final class BigDecimalUtils {
         return 0d;
     }
 
-    // =
-
     /**
      * 提供精确的乘法运算
      *
@@ -244,8 +242,6 @@ public final class BigDecimalUtils {
         return 0d;
     }
 
-    // =
-
     /**
      * 提供精确的乘法运算
      *
@@ -268,8 +264,6 @@ public final class BigDecimalUtils {
         }
         return null;
     }
-
-    // =
 
     /**
      * 提供(相对)精确的除法运算
@@ -331,8 +325,6 @@ public final class BigDecimalUtils {
         return null;
     }
 
-    // =
-
     /**
      * 提供精确的小数位四舍五入处理
      *
@@ -371,8 +363,6 @@ public final class BigDecimalUtils {
         return null;
     }
 
-    // =
-
     /**
      * 提供精确的小数位获取
      *
@@ -395,8 +385,6 @@ public final class BigDecimalUtils {
         }
         return 0d;
     }
-
-    // =
 
     /**
      * 取余数
@@ -441,8 +429,6 @@ public final class BigDecimalUtils {
         }
         return null;
     }
-
-    // =
 
     /**
      * 比较大小
@@ -491,8 +477,6 @@ public final class BigDecimalUtils {
         }
         return true;
     }
-
-    // =
 
     /**
      * 金额分割, 四舍五入金额
@@ -600,8 +584,6 @@ public final class BigDecimalUtils {
         }
         return null;
     }
-
-    // =
 
     /**
      * 获取自己想要的数据格式
