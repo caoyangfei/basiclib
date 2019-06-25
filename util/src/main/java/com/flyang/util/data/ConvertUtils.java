@@ -653,7 +653,7 @@ public final class ConvertUtils {
      * 在 onCreate 中获取视图的尺寸
      * <p>e.g.</p>
      * <pre>
-     * SizeUtil.forceGetViewSize(view, new SizeUtil.onGetSizeListener() {
+     * ConvertUtils.forceGetViewSize(view, new SizeUtil.onGetSizeListener() {
      *     Override
      *     public void onGetSize(final View view) {
      *         view.getWidth();
