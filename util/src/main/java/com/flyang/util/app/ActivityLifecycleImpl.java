@@ -5,8 +5,11 @@ import android.app.Activity;
 import android.app.Application.ActivityLifecycleCallbacks;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 
 import com.flyang.util.interf.OnActivityDestroyedListener;
 import com.flyang.util.interf.OnAppStatusChangedListener;
@@ -16,9 +19,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 /**
  * @author yangfei.cao
@@ -29,13 +33,19 @@ import java.util.Set;
  */
 public class ActivityLifecycleImpl implements ActivityLifecycleCallbacks {
 
-    final LinkedList<Activity> mActivityList = new LinkedList<>();
+    final Stack<Activity> mActivityStack = new Stack<>();
     final Map<Object, OnAppStatusChangedListener> mStatusListenerMap = new HashMap<>();
     final Map<Activity, Set<OnActivityDestroyedListener>> mDestroyedListenerMap = new HashMap<>();
+    final Set<Class<? extends View>> mProblemViewClassSet = new HashSet<>();
 
     private int mForegroundCount = 0;
     private int mConfigCount = 0;
     private boolean mIsBackground = false;
+
+    public ActivityLifecycleImpl() {
+        mProblemViewClassSet.add(WebView.class);
+        mProblemViewClassSet.add(SurfaceView.class);
+    }
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
@@ -86,7 +96,7 @@ public class ActivityLifecycleImpl implements ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        mActivityList.remove(activity);
+        mActivityStack.remove(activity);
         consumeOnActivityDestroyedListener(activity);
         fixSoftInputLeaks(activity);
     }
@@ -97,8 +107,8 @@ public class ActivityLifecycleImpl implements ActivityLifecycleCallbacks {
      * @return
      */
     public Activity getTopActivity() {
-        if (!mActivityList.isEmpty()) {
-            final Activity topActivity = mActivityList.getLast();
+        if (!mActivityStack.isEmpty()) {
+            final Activity topActivity = mActivityStack.lastElement();
             if (topActivity != null) {
                 return topActivity;
             }
@@ -110,20 +120,92 @@ public class ActivityLifecycleImpl implements ActivityLifecycleCallbacks {
         return topActivityByReflect;
     }
 
+    /**
+     * 获取倒数第二个 Activity
+     *
+     * @return
+     */
+    @Nullable
+    public Activity getPenultimateActivity(Activity currentActivity) {
+        Activity activity = null;
+        try {
+            if (mActivityStack.size() > 1) {
+                activity = mActivityStack.get(mActivityStack.size() - 2);
+
+                if (currentActivity.equals(activity)) {
+                    int index = mActivityStack.indexOf(currentActivity);
+                    if (index > 0) {
+                        // 处理内存泄漏或最后一个 Activity 正在 finishing 的情况
+                        activity = mActivityStack.get(index - 1);
+                    } else if (mActivityStack.size() == 2) {
+                        // 处理屏幕旋转后 mActivityStack 中顺序错乱
+                        activity = mActivityStack.lastElement();
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
+        return activity;
+    }
+
+    /**
+     * 滑动返回是否可用
+     *
+     * @return
+     */
+    public boolean isSwipeBackEnable() {
+        return mActivityStack.size() > 1;
+    }
+
+    /**
+     * 如果发现滑动返回后立即触摸界面时应用崩溃，请把该界面里比较特殊的 View 的 class 添加到该集合中，
+     * 目前在库中已经添加了 WebView 和 SurfaceView
+     *
+     * @param problemViewClassList
+     */
+    public void addProblemView(List<Class<? extends View>> problemViewClassList) {
+        if (problemViewClassList != null) {
+            mProblemViewClassSet.addAll(problemViewClassList);
+        }
+    }
+
+    /**
+     * 某个 view 是否会导致滑动返回后立即触摸界面时应用崩溃
+     *
+     * @param view
+     * @return
+     */
+    public boolean isProblemView(View view) {
+        return mProblemViewClassSet.contains(view.getClass());
+    }
+
+    /**
+     * 注册 App 前后台切换监听器
+     *
+     * @param object
+     * @param listener
+     */
     public void addOnAppStatusChangedListener(final Object object,
                                               final OnAppStatusChangedListener listener) {
         mStatusListenerMap.put(object, listener);
     }
 
+    /**
+     * 注销 App 前后台切换监听器
+     *
+     * @param object
+     */
     public void removeOnAppStatusChangedListener(final Object object) {
         mStatusListenerMap.remove(object);
     }
 
-    public void removeOnActivityDestroyedListener(final Activity activity) {
-        if (activity == null) return;
-        mDestroyedListenerMap.remove(activity);
-    }
 
+    /**
+     * 注册 App 销毁监听器
+     *
+     * @param activity
+     * @param listener
+     */
     public void addOnActivityDestroyedListener(final Activity activity,
                                                final OnActivityDestroyedListener listener) {
         if (activity == null || listener == null) return;
@@ -136,6 +218,16 @@ public class ActivityLifecycleImpl implements ActivityLifecycleCallbacks {
             if (listeners.contains(listener)) return;
         }
         listeners.add(listener);
+    }
+
+    /**
+     * 注销 App 销毁监听器
+     *
+     * @param activity
+     */
+    public void removeOnActivityDestroyedListener(final Activity activity) {
+        if (activity == null) return;
+        mDestroyedListenerMap.remove(activity);
     }
 
     private void postStatus(final boolean isForeground) {
@@ -156,13 +248,13 @@ public class ActivityLifecycleImpl implements ActivityLifecycleCallbacks {
      * @param activity
      */
     private void setTopActivity(final Activity activity) {
-        if (mActivityList.contains(activity)) {
-            if (!mActivityList.getLast().equals(activity)) {
-                mActivityList.remove(activity);
-                mActivityList.addLast(activity);
+        if (mActivityStack.contains(activity)) {
+            if (!mActivityStack.lastElement().equals(activity)) {
+                mActivityStack.remove(activity);
+                mActivityStack.addElement(activity);
             }
         } else {
-            mActivityList.addLast(activity);
+            mActivityStack.addElement(activity);
         }
     }
 

@@ -6,11 +6,10 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
-import android.support.v4.content.FileProvider;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @author yangfei.cao
@@ -54,7 +53,7 @@ public class ApplicationUtils {
         } else {
             if (app != null && app.getClass() != sApplication.getClass()) {
                 sApplication.unregisterActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
-                ACTIVITY_LIFECYCLE.mActivityList.clear();
+                ACTIVITY_LIFECYCLE.mActivityStack.clear();
                 sApplication = app;
                 sApplication.registerActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
             }
@@ -115,8 +114,8 @@ public class ApplicationUtils {
      *
      * @return
      */
-    public static LinkedList<Activity> getActivityList() {
-        return ACTIVITY_LIFECYCLE.mActivityList;
+    public static Stack<Activity> getActivityList() {
+        return ACTIVITY_LIFECYCLE.mActivityStack;
     }
 
     /**

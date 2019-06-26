@@ -16,12 +16,12 @@ import com.flyang.util.log.pattern.LogPattern;
  */
 public class LogConfigImpl implements LogConfig {
 
-    private boolean enable = true;
+    private boolean enable = true;//默认显示日志
     private String tagPrefix="BasicLog:";
-    private boolean showBorder = false;
+    private boolean showBorder = false;//默认不显示边框
     @LogLevel.LogLevelType
     private int logLevel = LogLevel.TYPE_VERBOSE;
-    private String formatTag;
+    private String formatTag="%d{HH:mm:ss:SSS} %t %c{20}";//日志默认显示时间，位置
     private int methodOffset = 0;
 
     private static LogConfigImpl singleton;
