@@ -12,7 +12,7 @@
     android:paddingBottom="18dp">
 
     <com.flyang.view.loader.SpinKitLoadingView
-        android:id="@+id/spinkitloading"
+        android:id="@+id/spinkitLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

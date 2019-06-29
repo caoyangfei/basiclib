@@ -1,4 +1,4 @@
-package com.flyang.base.controller;
+package com.flyang.base.controller.loader;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.flyang.base.controller.BaseLoaderController;
 import com.flyang.basic.R;
 import com.flyang.util.data.ConvertUtils;
 import com.flyang.util.data.StringUtils;
@@ -36,8 +37,8 @@ public class CircleLoaderController extends BaseLoaderController {
     public void initView() {
         super.initView();
         contentView = mPopupWindow.getContentView();
-        mLoadingView = contentView.findViewById(R.id.common_loader);
-        mLoadingText = contentView.findViewById(R.id.common_msg);
+        mLoadingView = contentView.findViewById(R.id.circleLoading);
+        mLoadingText = contentView.findViewById(R.id.loadingText);
         mLoadingView.setDoneColor(ContextCompat.getColor(context, R.color.color_0000FF));
         mLoadingView.setInitialHeight(ConvertUtils.dp2px(80));
         mLoadingView.setSpinningBarColor(ContextCompat.getColor(context, R.color.color_FF0000));
@@ -62,12 +63,6 @@ public class CircleLoaderController extends BaseLoaderController {
 
 
     @Override
-    public void closeLoader() {
-        if (mPopupWindow != null && mPopupWindow.isShowing())
-            mPopupWindow.dismiss();
-    }
-
-    @Override
     public void showResultMsg(String msg, boolean isSuccess) {
         if (mPopupWindow != null && mPopupWindow.isShowing()) {
             if (isSuccess) {
@@ -80,14 +75,10 @@ public class CircleLoaderController extends BaseLoaderController {
                         BitmapFactory.decodeResource(context.getResources(), R.drawable.loading_fail));
             }
             setLoadingText(msg);
+            mPopupWindow.dismiss();
         }
     }
 
-    @Override
-    public void showMsg(String msg) {
-        if (mPopupWindow != null && mPopupWindow.isShowing())
-            setLoadingText(msg);
-    }
 
     public void setLoadingText(String str) {
         if (!StringUtils.isNULL(str)) {

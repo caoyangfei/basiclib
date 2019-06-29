@@ -15,7 +15,7 @@ import com.flyang.api.bind.FacadeBind;
 import com.flyang.base.Lifecycle;
 import com.flyang.base.LifecycleManage;
 import com.flyang.base.controller.BaseController;
-import com.flyang.base.controller.SpinKitLoaderController;
+import com.flyang.base.controller.loader.SpinKitLoaderController;
 import com.flyang.basic.R;
 import com.flyang.util.app.ActivityUtils;
 import com.flyang.util.log.LogUtils;
