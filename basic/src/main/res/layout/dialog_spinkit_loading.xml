@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_bg"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="36dp"
+    android:paddingTop="18dp"
+    android:paddingRight="36dp"
+    android:paddingBottom="18dp">
+
+    <com.flyang.view.loader.SpinKitLoadingView
+        android:id="@+id/spinkitloading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        app:SpinKit_Color="?colorPrimary"
+        app:SpinKit_Style="Wave" />
+
+    <TextView
+        android:id="@+id/loadingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="正在进行网络请求..."
+        android:textColor="#A52A2A"
+        android:textSize="16sp" />
+</LinearLayout>

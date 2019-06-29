@@ -12,8 +12,6 @@ import android.content.Intent;
  */
 public interface Lifecycle {
 
-    void onCreate();
-
     /**
      * 初始化
      */

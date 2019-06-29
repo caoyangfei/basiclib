@@ -9,7 +9,6 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         resValue("string", "app_name", rootProject.ext.app_name)
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility 1.8
@@ -31,8 +30,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation project(':util')
 
-    api 'org.apache.commons:commons-lang3:3.4'
+    implementation project(':util')
+    implementation project(path: ':basic')
+    implementation dep.view
+    implementation dep.api
+    implementation dep.annotation
 }
 

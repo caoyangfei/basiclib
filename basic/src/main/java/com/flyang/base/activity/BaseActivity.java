@@ -1,17 +1,39 @@
 package com.flyang.base.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.flyang.annotation.Controller;
 import com.flyang.api.bind.FacadeBind;
+import com.flyang.base.Lifecycle;
+import com.flyang.base.LifecycleManage;
+import com.flyang.base.controller.BaseController;
+import com.flyang.base.controller.SpinKitLoaderController;
 import com.flyang.basic.R;
 import com.flyang.util.app.ActivityUtils;
+import com.flyang.util.log.LogUtils;
+import com.flyang.util.view.AdaptScreenUtils;
 import com.flyang.util.view.KeyboardUtils;
 import com.flyang.view.inter.Delegate;
+import com.flyang.view.inter.Loader;
 import com.flyang.view.manager.SwipeBackManager;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import io.reactivex.Flowable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 /**
  * @author yangfei.cao
@@ -22,9 +44,12 @@ import com.flyang.view.manager.SwipeBackManager;
 public abstract class BaseActivity extends AppCompatActivity implements Delegate {
 
 
+    final static LifecycleManage lifecycleManage = new LifecycleManage();
+
     protected View rootView;
 
     protected SwipeBackManager mSwipeBackManager;
+    protected Loader loaderController;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +65,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
 
     protected abstract int getLayoutID();
 
+    //适配（使用单位pt）
+    @Override
+    public Resources getResources() {
+        return AdaptScreenUtils.adaptWidth(super.getResources(), 720);
+    }
 
     public View getRootView() {
         return rootView;
@@ -48,25 +78,117 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
 
     protected void onInit() {
         FacadeBind.bind(this);
+        initControllers();
+        lifecycleManage.onInit();
+    }
+
+    /**
+     * 初始化controller
+     */
+    @SuppressLint("CheckResult")
+    protected void initControllers() {
+        loaderController = getLoaderController();
+        //获取所有注解
+        Annotation[] annotations = getClass().getAnnotations();
+        if (annotations.length > 0) {
+            Flowable.fromIterable(Arrays.asList(annotations))
+                    .filter(annotation -> {
+                        if (annotation instanceof Controller) {
+                            return true;
+                        }
+                        return false;
+                    })
+                    .flatMap((Function<Annotation, Flowable<Class>>) annotation -> {
+                        Class[] controllerClasses = ((Controller) annotation).value();
+                        if (controllerClasses.length > 0) {
+                            return Flowable.fromIterable(Arrays.asList(controllerClasses));
+                        } else {
+                            return Flowable.fromIterable(new ArrayList<>());
+                        }
+                    })
+                    .subscribe(new Consumer<Class>() {
+                        @Override
+                        public void accept(Class aClass) throws Exception {
+                            try {
+                                Constructor constructor = aClass.getConstructor(new Class[]{View.class});
+                                BaseController baseController = (BaseController) constructor.newInstance(this, rootView);
+                                if (baseController != null) {
+                                    LogUtils.tag("conroller:").d(aClass.getName());
+                                    registerController(aClass.getSimpleName(), baseController);
+                                }
+                            } catch (NoSuchMethodException e) {
+                                e.printStackTrace();
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            } catch (InstantiationException e) {
+                                e.printStackTrace();
+                            } catch (InvocationTargetException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+        }
+    }
+
+    /**
+     * 注册加载控制器
+     *
+     * @return
+     */
+    protected Loader getLoaderController() {
+        SpinKitLoaderController spinKitLoaderController = new SpinKitLoaderController(this, rootView);
+        registerController(SpinKitLoaderController.class.getSimpleName(), spinKitLoaderController);
+        return spinKitLoaderController;
+    }
+
+    /**
+     * 注册控制器
+     *
+     * @param key        控制器key
+     * @param controller 控制器
+     */
+    protected void registerController(String key, Lifecycle controller) {
+        if (!TextUtils.isEmpty(key) && controller != null) {
+            lifecycleManage.register(key, controller);
+        }
+    }
+
+    /**
+     * 获取注册的控制器
+     *
+     * @param clazz
+     * @return 注册器
+     */
+    public <T extends Lifecycle> T getController(Class<T> clazz) {
+        return (T) lifecycleManage.get(clazz.getSimpleName());
     }
 
     /**
      * 初始化view
      */
     protected void initView() {
+        lifecycleManage.initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        lifecycleManage.onResume();
     }
 
     /**
      * 初始化监听
      */
     protected void initListener() {
-
+        lifecycleManage.initListener();
     }
 
     /**
      * 初始化数据
      */
     protected void initData() {
+        lifecycleManage.initData();
     }
 
 
@@ -134,6 +256,25 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
         finish();
         //防止闪屏
         overridePendingTransition(0, 0);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        lifecycleManage.onActivityResult(resultCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        lifecycleManage.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        lifecycleManage.onDestroy();
     }
 
     @Override
