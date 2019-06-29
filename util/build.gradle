@@ -68,7 +68,7 @@ dependencies {
     implementation dep.gson
 }
 
-def version = "1.1.1.2019_beta_01"
+def version = "1.2.1.2019_beta_04"
 
 uploadArchives {
 

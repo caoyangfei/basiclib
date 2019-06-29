@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Build;
 import android.support.annotation.ColorInt;
+import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.RequiresPermission;
@@ -27,6 +28,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.flyang.util.app.ApplicationUtils;
+import com.flyang.util.system.ColorUtils;
 
 import java.lang.reflect.Method;
 
@@ -225,8 +227,21 @@ public final class BarUtils {
     /**
      * 设置状态栏颜色
      *
+     * @param activity
+     * @param color    颜色
+     * @param alpha    透明度 [0-255]
+     * @return
+     */
+    public static View setStatusBarColor(@NonNull final Activity activity,
+                                         @ColorInt final int color, @FloatRange(from = 0, to = 255) float alpha) {
+        return setStatusBarColor(activity, color, alpha, false);
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
      * @param activity The activity.
-     * @param color    The status bar's color.
+     * @param color    颜色
      * @param isDecor  True to add fake status bar in DecorView,
      *                 false to add fake status bar in ContentView.
      */
@@ -236,6 +251,23 @@ public final class BarUtils {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return null;
         transparentStatusBar(activity);
         return applyStatusBarColor(activity, color, isDecor);
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @param activity The activity.
+     * @param color    颜色
+     * @param alpha    透明度 [0-255]
+     * @param isDecor  True to add fake status bar in DecorView,
+     *                 false to add fake status bar in ContentView.
+     */
+    public static View setStatusBarColor(@NonNull final Activity activity,
+                                         @ColorInt final int color, @FloatRange(from = 0, to = 255) float alpha,
+                                         final boolean isDecor) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) return null;
+        transparentStatusBar(activity);
+        return applyStatusBarColor(activity, ColorUtils.setAlpha(color, alpha), isDecor);
     }
 
     /**

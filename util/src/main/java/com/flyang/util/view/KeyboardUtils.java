@@ -2,6 +2,7 @@ package com.flyang.util.view;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.WindowManager;
@@ -55,6 +57,26 @@ public final class KeyboardUtils {
     /**
      * 显示软键盘
      *
+     * @param view The view.
+     */
+    public static void showSoftInput(final View view) {
+        showSoftInput(view, InputMethodManager.SHOW_FORCED);
+    }
+
+    /**
+     * 显示软键盘
+     *
+     * @param dialog
+     */
+    public static void showSoftInput(Dialog dialog) {
+        View view = dialog.getWindow().peekDecorView();
+        showSoftInput(view, InputMethodManager.SHOW_FORCED);
+    }
+
+
+    /**
+     * 显示软键盘
+     *
      * @param activity The activity.
      * @param flags    Provides additional operating flags.  Currently may be
      *                 0 or have the {@link InputMethodManager#SHOW_IMPLICIT} bit set.
@@ -70,11 +92,15 @@ public final class KeyboardUtils {
     /**
      * 显示软键盘
      *
-     * @param view The view.
+     * @param dialog The dialog.
+     * @param flags  Provides additional operating flags.  Currently may be
+     *               0 or have the {@link InputMethodManager#SHOW_IMPLICIT} bit set.
      */
-    public static void showSoftInput(final View view) {
-        showSoftInput(view, InputMethodManager.SHOW_FORCED);
+    public static void showSoftInput(final Dialog dialog, final int flags) {
+        View view = dialog.getWindow().peekDecorView();
+        showSoftInput(view, flags);
     }
+
 
     /**
      * 显示软键盘
@@ -111,6 +137,16 @@ public final class KeyboardUtils {
         if (view == null) {
             view = new View(activity);
         }
+        hideSoftInput(view);
+    }
+
+    /**
+     * 隐藏软键盘
+     *
+     * @param dialog
+     */
+    public static void hideSoftInput(Dialog dialog) {
+        View view = dialog.getWindow().peekDecorView();
         hideSoftInput(view);
     }
 
@@ -311,8 +347,34 @@ public final class KeyboardUtils {
     }
 
     /**
+     * 处理点击非 EditText 区域时，自动关闭键盘
+     *
+     * @param isAutoCloseKeyboard 是否自动关闭键盘
+     * @param currentFocusView    当前获取焦点的控件
+     * @param motionEvent         触摸事件
+     * @param dialogOrActivity    Dialog 或 Activity
+     */
+    public static void handleAutoCloseKeyboard(boolean isAutoCloseKeyboard, View currentFocusView, MotionEvent motionEvent, Object dialogOrActivity) {
+        if (isAutoCloseKeyboard && motionEvent.getAction() == MotionEvent.ACTION_DOWN && currentFocusView != null && (currentFocusView instanceof EditText) && dialogOrActivity != null) {
+            int[] leftTop = {0, 0};
+            currentFocusView.getLocationInWindow(leftTop);
+            int left = leftTop[0];
+            int top = leftTop[1];
+            int bottom = top + currentFocusView.getHeight();
+            int right = left + currentFocusView.getWidth();
+            if (!(motionEvent.getX() > left && motionEvent.getX() < right && motionEvent.getY() > top && motionEvent.getY() < bottom)) {
+                if (dialogOrActivity instanceof Dialog) {
+                    hideSoftInput((Dialog) dialogOrActivity);
+                } else if (dialogOrActivity instanceof Activity) {
+                    hideSoftInput((Activity) dialogOrActivity);
+                }
+            }
+        }
+    }
+
+    /**
      * 点击屏幕空白区域隐藏软键盘
-     * <p>Copy the following code in ur activity.</p>
+     * <p>粘贴到activity使用</p>
      */
     public static void clickBlankArea2HideSoftInput() {
         Log.i("KeyboardUtils", "Please refer to the following code.");
