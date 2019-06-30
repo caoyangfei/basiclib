@@ -14,6 +14,7 @@ import com.flyang.view.loader.IOSLoaderView;
  * @ClassName basiclib
  * @date 2019/6/29
  * ------------- Description -------------
+ * ios风格加载
  */
 public class IOSLoaderController extends BaseLoaderController {
 
@@ -41,6 +42,13 @@ public class IOSLoaderController extends BaseLoaderController {
     public void setLoadingText(String str) {
         if (!StringUtils.isNULL(str)) {
             mLoadingText.setText(str);
+        }
+    }
+
+    @Override
+    public void setLoadingTextColor(int color) {
+        if (color!=0) {
+            mLoadingText.setTextColor(color);
         }
     }
 

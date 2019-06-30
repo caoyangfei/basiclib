@@ -8,6 +8,9 @@ import com.flyang.base.controller.BaseLoaderController;
 import com.flyang.basic.R;
 import com.flyang.util.data.StringUtils;
 import com.flyang.view.loader.SpinKitLoadingView;
+import com.flyang.view.loader.spinkit.SpinKitStyle;
+import com.flyang.view.loader.spinkit.SpriteFactory;
+import com.flyang.view.loader.spinkit.sprite.Sprite;
 
 /**
  * @author yangfei.cao
@@ -45,12 +48,29 @@ public class SpinKitLoaderController extends BaseLoaderController {
         }
     }
 
+    @Override
+    public void setLoadingTextColor(int color) {
+        if (color != 0) {
+            mLoadingText.setTextColor(color);
+        }
+    }
+
     public SpinKitLoadingView getmLoadingView() {
         return mLoadingView;
     }
 
     public TextView getLoadingText() {
         return mLoadingText;
+    }
+
+    /**
+     * 设置动画样式
+     *
+     * @param style
+     */
+    public void setStyle(SpinKitStyle style) {
+        Sprite sprite = SpriteFactory.create(style);
+        mLoadingView.setIndeterminateDrawable(sprite);
     }
 }
 

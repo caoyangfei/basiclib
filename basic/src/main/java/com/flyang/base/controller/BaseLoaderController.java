@@ -1,14 +1,17 @@
 package com.flyang.base.controller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.PopupWindow;
 
-import com.flyang.basic.R;
 import com.flyang.view.inter.Loader;
 
 import java.lang.ref.WeakReference;
@@ -27,6 +30,8 @@ public abstract class BaseLoaderController extends BaseController implements Loa
 
     private WeakReference<View> rootView;
 
+    protected boolean backDismiss = true;//拦截返回键(取消拦截返回键，重写setOnDismissListener监听和修改默认值为false)
+
     public BaseLoaderController(Context context, View rootView) {
         this.rootView = new WeakReference<>(rootView);
         this.context = context;
@@ -38,13 +43,41 @@ public abstract class BaseLoaderController extends BaseController implements Loa
             View contentView = LayoutInflater.from(context).inflate(getViewID(), null);
             if (mPopupWindow == null) {
                 mPopupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-                mPopupWindow.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.base_bg_loader));
-                mPopupWindow.setFocusable(true); // 获取焦点
+                        ViewGroup.LayoutParams.WRAP_CONTENT) {
+                    @Override
+                    public void dismiss() {
+                        dismiss(backDismiss);
+                    }
+
+                    public void dismiss(boolean isBackDismiss) {
+                        if (isBackDismiss) {
+                            return;
+                        } else {
+                            super.dismiss();
+                        }
+                    }
+                };
+                mPopupWindow.setFocusable(true);
                 mPopupWindow.setOutsideTouchable(false);
-                mPopupWindow.getContentView().setFocusableInTouchMode(true);
+                mPopupWindow.setTouchable(true);
+                mPopupWindow.setBackgroundDrawable(null);
+
+                mPopupWindow.setTouchInterceptor(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        //拦截事件，防止触发背景
+                        return true;
+                    }
+                });
+                mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        backDismiss = true;
+                        backgroundAlpha(1.0f);
+                    }
+                });
+
                 mPopupWindow.update();
-                isKeyDown(mPopupWindow);
             }
         }
     }
@@ -61,8 +94,10 @@ public abstract class BaseLoaderController extends BaseController implements Loa
     @Override
     public void showLoader(String s) {
         setLoadingText(s);
-        if (mPopupWindow != null && !mPopupWindow.isShowing())
+        if (mPopupWindow != null && !mPopupWindow.isShowing()) {
+            backgroundAlpha(0.3f);
             mPopupWindow.showAtLocation(getRootView(), Gravity.CENTER, 0, 0);
+        }
     }
 
     @Override
@@ -73,16 +108,20 @@ public abstract class BaseLoaderController extends BaseController implements Loa
 
     @Override
     public void closeLoader() {
-        if (mPopupWindow != null && mPopupWindow.isShowing())
+        if (mPopupWindow != null && mPopupWindow.isShowing()) {
+            backDismiss = false;
             mPopupWindow.dismiss();
+        }
     }
 
 
     @Override
     public void showResultMsg(String s, boolean b) {
         setLoadingText(s);
-        if (mPopupWindow != null && mPopupWindow.isShowing())
+        if (mPopupWindow != null && mPopupWindow.isShowing()) {
+            backDismiss = false;
             mPopupWindow.dismiss();
+        }
     }
 
     public void setBackground(int color) {
@@ -90,23 +129,16 @@ public abstract class BaseLoaderController extends BaseController implements Loa
         gradientDrawable.setColor(color);
     }
 
-    public static boolean isKeyDown(PopupWindow popupWindow) {
-        View content = popupWindow.getContentView();
-        if (content == null) return false;
-
-        View backgroundView = (View) content.getParent();
-        if (backgroundView == null) return false;
-
-        View view = (View) backgroundView.getParent();
-
-        KeyEvent.DispatcherState state = view.getKeyDispatcherState();
-
-        boolean isKeyDown = state.isTracking(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_BACK));
-
-        if (isKeyDown) {
-            state.reset();
+    protected void backgroundAlpha(float f) {
+        Window window = ((Activity) context).getWindow();
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.alpha = f;
+        if (f == 1) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
         }
-        return isKeyDown;
-
+        window.setAttributes(lp);
     }
+
 }

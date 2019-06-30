@@ -132,7 +132,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
     }
 
     /**
-     * 注册加载控制器
+     * 注册加载控制器(替换加载框重写此方法)
      *
      * @return
      */
@@ -275,6 +275,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
     protected void onDestroy() {
         super.onDestroy();
         lifecycleManage.onDestroy();
+        if (loaderController != null) {
+            loaderController.closeLoader();
+        }
     }
 
     @Override

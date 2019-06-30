@@ -31,10 +31,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation project(':util')
-    implementation project(path: ':basic')
+    implementation project(':basic')
     implementation dep.view
     implementation dep.api
     implementation dep.annotation
+    implementation dep.util
 }
 

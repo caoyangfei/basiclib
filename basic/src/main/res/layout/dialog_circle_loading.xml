@@ -3,16 +3,15 @@
     android:id="@+id/loading_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    android:gravity="center"
-    android:orientation="horizontal">
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/base_bg_loader"
+        android:background="@drawable/dialog_bg"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <com.flyang.view.loader.CircularLoaderView
             android:id="@+id/circleLoading"
@@ -25,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="  正在加载..."
-            android:textColor="#1a1a1a"
+            android:textColor="?colorPrimary"
             android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>

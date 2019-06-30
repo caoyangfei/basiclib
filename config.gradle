@@ -11,7 +11,7 @@ ext {
 
     isAlone = false
 
-    viewVersion = "1.1.1.2019_beta_06"
+    viewVersion = "1.1.1.2019_beta_17"
     utilVersion = "1.2.1.2019_beta_04"
 
     apiVersion = "1.1.1.2019_beta_01"

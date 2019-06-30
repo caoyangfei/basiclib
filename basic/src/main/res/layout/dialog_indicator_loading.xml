@@ -13,14 +13,12 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <com.flyang.view.loader.SpinKitLoadingView
-            android:id="@+id/spinkitLoading"
+        <com.flyang.view.loader.IndicatorLoadingView
+            android:id="@+id/indicatorLoading"
+            style="@style/LoadingIndicatorView.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="10dp"
-            app:SpinKit_Color="?colorPrimary"
-            app:SpinKit_Style="Wave" />
+            app:indicatorColor="@color/color_00BFFF" />
 
         <TextView
             android:id="@+id/loadingText"
@@ -32,4 +30,6 @@
             android:textColor="?colorPrimary"
             android:textSize="16sp" />
     </LinearLayout>
+
+
 </LinearLayout>

@@ -3,7 +3,17 @@ package com.flyang.demo;
 import android.view.View;
 
 import com.flyang.base.activity.BaseActivity;
+import com.flyang.base.controller.loader.IndicatorLoaderController;
+import com.flyang.base.controller.loader.ShapeLoadingController;
 import com.flyang.util.log.LogUtils;
+import com.flyang.view.inter.Loader;
+import com.flyang.view.loader.indicator.IndicatorStyle;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity {
 
@@ -12,9 +22,40 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
+    @Override
+    protected void initView() {
+        super.initView();
+        //                ((SpinKitLoaderController) loaderController).setStyle(SpinKitStyle.WANDERING_CUBES);
+        ((IndicatorLoaderController) loaderController).setStyle(IndicatorStyle.BallZigZagDeflectIndicator);
+
+    }
 
     public void Button(View view) {
-        LogUtils.d("测试打印日记");
-        loaderController.showLoader("加载中。。。");
+        switch (view.getId()) {
+            case R.id.btn1:
+                LogUtils.d("测试打印日记");
+                break;
+            case R.id.btn2:
+                loaderController.showLoader("加载中。。。");
+                Flowable.just(1)
+                        .delay(10, TimeUnit.SECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                loaderController.closeLoader();
+                            }
+                        });
+                break;
+
+        }
+
+    }
+
+    @Override
+    protected Loader getLoaderController() {
+        IndicatorLoaderController shapeLoadingController = new IndicatorLoaderController(this, rootView);
+        registerController(ShapeLoadingController.class.getSimpleName(), shapeLoadingController);
+        return shapeLoadingController;
     }
 }

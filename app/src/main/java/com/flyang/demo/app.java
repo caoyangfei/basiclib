@@ -12,7 +12,7 @@ import com.flyang.util.log.config.LogLevel;
  * @date 2019/4/21
  * ------------- Description -------------
  */
-public class app extends Application {
+public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -31,7 +31,7 @@ public class app extends Application {
 //                .configLog2FileEnable(true)  // 是否输出日志到文件
 //                .configLogFileEngine(new LogFileEngineFactory(this)) // 日志文件引擎实现
 //                .configLog2FilePath(filePath)  // 日志路径
-//                .configLog2FileNameFormat("app-%d{yyyy-MM-dd-HH}.txt") // 日志文件名称
+//                .configLog2FileNameFormat("App-%d{yyyy-MM-dd-HH}.txt") // 日志文件名称
 //                .configLog2FileLevel(LogLevel.TYPE_VERBOSE) // 文件日志等级
 //                .configLogFileFilter(new LogFileFilter() {  // 文件日志过滤
 //                    @Override

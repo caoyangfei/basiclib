@@ -54,6 +54,7 @@ public class CircleLoaderController extends BaseLoaderController {
     @Override
     public void showLoader(String msg) {
         if (mPopupWindow != null && !mPopupWindow.isShowing()) {
+            backgroundAlpha(0.3f);
             setLoadingText(msg);
             mPopupWindow.showAtLocation(getRootView(), Gravity.CENTER, 0, 0);
             mLoadingView.revertAnimation();
@@ -75,6 +76,7 @@ public class CircleLoaderController extends BaseLoaderController {
                         BitmapFactory.decodeResource(context.getResources(), R.drawable.loading_fail));
             }
             setLoadingText(msg);
+            backDismiss = false;
             mPopupWindow.dismiss();
         }
     }
@@ -83,6 +85,13 @@ public class CircleLoaderController extends BaseLoaderController {
     public void setLoadingText(String str) {
         if (!StringUtils.isNULL(str)) {
             mLoadingText.setText(str);
+        }
+    }
+
+    @Override
+    public void setLoadingTextColor(int color) {
+        if (color!=0) {
+            mLoadingText.setTextColor(color);
         }
     }
 

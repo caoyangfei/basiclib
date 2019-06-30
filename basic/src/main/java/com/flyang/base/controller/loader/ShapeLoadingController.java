@@ -33,13 +33,19 @@ public class ShapeLoadingController extends BaseLoaderController {
     public void initView() {
         super.initView();
         contentView = mPopupWindow.getContentView();
-        mLoadingView = (ShapeLoadingView) contentView.findViewById(R.id.shapeLoading);
+        mLoadingView = contentView.findViewById(R.id.shapeLoading);
     }
-
 
     public void setLoadingText(String str) {
         if (!StringUtils.isNULL(str)) {
             mLoadingView.setLoadingText(str);
+        }
+    }
+
+    @Override
+    public void setLoadingTextColor(int color) {
+        if (color != 0) {
+            mLoadingView.setColor(color);
         }
     }
 }
