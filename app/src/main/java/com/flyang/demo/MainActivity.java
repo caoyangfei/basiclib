@@ -1,5 +1,6 @@
 package com.flyang.demo;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.flyang.base.activity.BaseActivity;
@@ -34,6 +35,8 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn1:
                 LogUtils.d("测试打印日记");
+                Intent intent = new Intent(this, TestActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn2:
                 loaderController.showLoader("加载中。。。");

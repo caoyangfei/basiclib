@@ -195,7 +195,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
     /**
      * 初始化滑动返回。在 super.onCreate(savedInstanceState) 之前调用该方法
      */
-    private void initSwipeBackFinish() {
+    protected void initSwipeBackFinish() {
         mSwipeBackManager = new SwipeBackManager(this, this);
 
         // 「必须在 Application 的 onCreate 方法中执行 BGASwipeBackHelper.init 来初始化滑动返回」
@@ -204,7 +204,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
         // 设置滑动返回是否可用。默认值为 true
         mSwipeBackManager.setSwipeBackEnable(true);
         // 设置是否仅仅跟踪左侧边缘的滑动返回。默认值为 true
-        mSwipeBackManager.setIsOnlyTrackingLeftEdge(true);
+        mSwipeBackManager.setIsOnlyTrackingLeftEdge(false);
         // 设置是否是微信滑动返回样式。默认值为 true
         mSwipeBackManager.setIsWeChatStyle(true);
         // 设置阴影资源 id。默认值为 R.drawable.bga_sbl_shadow
@@ -226,7 +226,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
      */
     @Override
     public boolean isSupportSwipeBack() {
-        return false;
+        return true;
     }
 
     /**
