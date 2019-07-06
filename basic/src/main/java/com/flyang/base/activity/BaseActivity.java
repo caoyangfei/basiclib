@@ -23,7 +23,7 @@ import com.flyang.util.view.AdaptScreenUtils;
 import com.flyang.util.view.KeyboardUtils;
 import com.flyang.view.inter.Delegate;
 import com.flyang.view.inter.Loader;
-import com.flyang.view.manager.SwipeBackManager;
+import com.flyang.view.layout.manager.SwipeBackManager;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
