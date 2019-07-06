@@ -12,10 +12,6 @@ repositories {
     mavenCentral()
 }
 
-//  解决build警告：编码GBK的不可映射字符
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -41,6 +37,34 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
+    //  解决build警告：编码GBK的不可映射字符
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    task sourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        classifier = 'sources'
+    }
+    task javadoc(type: Javadoc) {
+        failOnError false
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+    artifacts {
+        archives javadocJar
+        archives sourcesJar
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -52,9 +76,6 @@ android {
         cmake {
             path "CMakeLists.txt"
         }
-    }
-    lintOptions {
-        abortOnError false
     }
 }
 
@@ -68,7 +89,8 @@ dependencies {
     implementation dep.gson
 }
 
-def version = "1.2.1.2019_beta_04"
+
+def version = "1.2.1.2019_beta_11"
 
 uploadArchives {
 
@@ -88,3 +110,4 @@ uploadArchives {
 }
 
 //注意⚠️:   插件修改后运行前需要重新发布: ./gradlew -p plugin clean build uploadArchives --info
+

@@ -1,5 +1,6 @@
 package com.flyang.util.view.img;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -9,20 +10,19 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
-import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RSRuntimeException;
@@ -35,9 +35,11 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.flyang.util.app.ApplicationUtils;
+import com.flyang.util.data.FileUtils;
 import com.flyang.util.log.LogUtils;
 
 import java.io.BufferedOutputStream;
@@ -1090,49 +1092,64 @@ public final class ImageUtils {
      * 保存图片
      *
      * @param src      The source of bitmap.
-     * @param filePath The path of file.
+     * @param fileDir  图片路径
+     * @param fileName 图片名字
      * @param format   The format of the image.
      * @return {@code true}: success<br>{@code false}: fail
      */
     public static boolean save(final Bitmap src,
-                               final String filePath,
+                               final String fileDir, String fileName,
                                final CompressFormat format) {
-        return save(src, getFileByPath(filePath), format, false);
-    }
+        if (TextUtils.isEmpty(fileName)) {
+            fileName = String.valueOf(System.currentTimeMillis());
+        }
+        String filePath = fileDir + File.separator + fileName;
 
-    /**
-     * 保存图片
-     *
-     * @param src    The source of bitmap.
-     * @param file   The file.
-     * @param format The format of the image.
-     * @return {@code true}: success<br>{@code false}: fail
-     */
-    public static boolean save(final Bitmap src, final File file, final CompressFormat format) {
-        return save(src, file, format, false);
+        return save(src, FileUtils.getFileByPath(filePath), format, false);
     }
 
     /**
      * 保存图片
      *
      * @param src      The source of bitmap.
-     * @param filePath The path of file.
+     * @param fileDir  图片路径
+     * @param fileName 图片名字
      * @param format   The format of the image.
+     * @return {@code true}: success<br>{@code false}: fail
+     */
+    public static boolean save(final Bitmap src, final File fileDir, String fileName, final CompressFormat format) {
+        if (TextUtils.isEmpty(fileName)) {
+            fileName = String.valueOf(System.currentTimeMillis());
+        }
+        String filePath = fileDir + File.separator + fileName;
+        return save(src, FileUtils.getFileByPath(filePath), format, false);
+    }
+
+    /**
+     * 保存图片
+     *
+     * @param src      The source of bitmap.
+     * @param fileDir  图片路径
+     * @param fileName 图片名字
      * @param recycle  True to recycle the source of bitmap, false otherwise.
      * @return {@code true}: success<br>{@code false}: fail
      */
     public static boolean save(final Bitmap src,
-                               final String filePath,
+                               final String fileDir, String fileName,
                                final CompressFormat format,
                                final boolean recycle) {
-        return save(src, getFileByPath(filePath), format, recycle);
+        if (TextUtils.isEmpty(fileName)) {
+            fileName = String.valueOf(System.currentTimeMillis());
+        }
+        String filePath = fileDir + File.separator + fileName;
+        return save(src, FileUtils.getFileByPath(filePath), format, recycle);
     }
 
     /**
      * 保存图片
      *
      * @param src     The source of bitmap.
-     * @param file    The file.
+     * @param file    图片全文件
      * @param format  The format of the image.
      * @param recycle True to recycle the source of bitmap, false otherwise.
      * @return {@code true}: success<br>{@code false}: fail
@@ -1141,12 +1158,14 @@ public final class ImageUtils {
                                final File file,
                                final CompressFormat format,
                                final boolean recycle) {
-        if (isEmptyBitmap(src) || !createFileByDeleteOldFile(file)) return false;
+        if (isEmptyBitmap(src) || !FileUtils.createFileByDeleteOldFile(file)) return false;
+
         OutputStream os = null;
         boolean ret = false;
         try {
             os = new BufferedOutputStream(new FileOutputStream(file));
             ret = src.compress(format, 100, os);
+
             if (recycle && !src.isRecycled()) src.recycle();
         } catch (IOException e) {
             e.printStackTrace();
@@ -1160,6 +1179,34 @@ public final class ImageUtils {
             }
         }
         return ret;
+    }
+
+    /**
+     * 保存到系统图库
+     *
+     * @param src
+     * @param format
+     */
+    public static void saveImageToGallery(final Bitmap src,
+                                          final CompressFormat format) {
+        // 首先保存图片
+        String fileDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath();//注意小米手机必须这样获得public绝对路径
+
+        String fileName = System.currentTimeMillis() + ".jpg";
+        File currentFile = FileUtils.getFileByPath(fileDir + File.separator + fileName);
+        save(src, currentFile, format, true);
+
+        //暂时去掉插入图库，华为的可以直接显示在图库
+//        try {
+//            MediaStore.Images.Media.insertImage(ApplicationUtils.getApp().getContentResolver(),
+//                    currentFile.getAbsolutePath(), fileName, null);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+
+        // 最后通知图库更新
+        ApplicationUtils.getApp().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                Uri.fromFile(new File(currentFile.getPath()))));
     }
 
     /**
@@ -1199,7 +1246,7 @@ public final class ImageUtils {
      * @return the type of image
      */
     public static String getImageType(final String filePath) {
-        return getImageType(getFileByPath(filePath));
+        return getImageType(FileUtils.getFileByPath(filePath));
     }
 
     /**
@@ -1520,7 +1567,7 @@ public final class ImageUtils {
      * @return the size of bitmap
      */
     public static int[] getSize(String filePath) {
-        return getSize(getFileByPath(filePath));
+        return getSize(FileUtils.getFileByPath(filePath));
     }
 
     /**
@@ -1543,7 +1590,6 @@ public final class ImageUtils {
      *
      * @param bitmap 待模糊图片
      * @param radius 模糊度(0-25)
-     * @return
      * @throws RSRuntimeException
      */
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -1586,26 +1632,6 @@ public final class ImageUtils {
             inSampleSize <<= 1;
         }
         return inSampleSize;
-    }
-
-    private static File getFileByPath(final String filePath) {
-        return isSpace(filePath) ? null : new File(filePath);
-    }
-
-    private static boolean createFileByDeleteOldFile(final File file) {
-        if (file == null) return false;
-        if (file.exists() && !file.delete()) return false;
-        if (!createOrExistsDir(file.getParentFile())) return false;
-        try {
-            return file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private static boolean createOrExistsDir(final File file) {
-        return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
     }
 
     private static boolean isSpace(final String s) {
