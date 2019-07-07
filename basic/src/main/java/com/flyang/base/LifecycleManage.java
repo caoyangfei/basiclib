@@ -2,7 +2,7 @@ package com.flyang.base;
 
 import android.content.Intent;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -16,7 +16,7 @@ public class LifecycleManage implements Lifecycle {
     private Map<String, Lifecycle> iifecycleMap;
 
     public LifecycleManage() {
-        iifecycleMap = new HashMap<String, Lifecycle>();
+        iifecycleMap = new LinkedHashMap<>();
     }
 
 

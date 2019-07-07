@@ -37,9 +37,17 @@ import io.reactivex.functions.Function;
 
 /**
  * @author yangfei.cao
- * @ClassName basiclib
+ * @ClassName BaseActivity
  * @date 2019/6/26
  * ------------- Description -------------
+ * 基类
+ * <p>
+ * 包含侧滑关闭activity
+ * <p>
+ * Lifecycle监听生命周期
+ * <p>
+ * Loader加载动画，替换动画重写{@link #getLoaderController()},
+ * 必须{@link #registerController(String, Lifecycle)}，目的为了监听加载控制器生命周期
  */
 public abstract class BaseActivity extends AppCompatActivity implements Delegate {
 

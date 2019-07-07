@@ -12,6 +12,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
+import com.flyang.base.controller.loader.SpinKitLoaderController;
+import com.flyang.base.activity.BaseActivity;
 import com.flyang.view.inter.Loader;
 
 import java.lang.ref.WeakReference;
@@ -21,7 +23,11 @@ import java.lang.ref.WeakReference;
  * @ClassName BaseLoader
  * @date 2019/6/29
  * ------------- Description -------------
- * 加载基类(重写activity中加载，继承此类)
+ * 加载基类
+ * <p>
+ * 自定义加载样式
+ * 重写此类，仿照{@link SpinKitLoaderController}
+ * 然后在activity重写{@link BaseActivity#getLoaderController()}
  */
 public abstract class BaseLoaderController extends BaseController implements Loader {
 
