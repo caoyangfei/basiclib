@@ -17,4 +17,3 @@
 * [从Log切换到LogUtils](./doc/log_to_logutils.md)
 * [为LogUtils设置快捷键](./doc/logutils_templates.md)
 * [修改LogCat显示字体颜色](./doc/logcat_color.md)
-
