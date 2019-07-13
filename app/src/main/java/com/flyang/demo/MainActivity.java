@@ -3,7 +3,7 @@ package com.flyang.demo;
 import android.content.Intent;
 import android.view.View;
 
-import com.flyang.base.activity.BaseActivity;
+import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.controller.loader.IndicatorLoaderController;
 import com.flyang.base.controller.loader.ShapeLoadingController;
 import com.flyang.util.log.LogUtils;
@@ -16,7 +16,7 @@ import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BasePresenterActivity {
 
     @Override
     protected int getLayoutID() {

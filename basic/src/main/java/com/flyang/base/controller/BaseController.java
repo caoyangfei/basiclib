@@ -1,13 +1,10 @@
 package com.flyang.base.controller;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.view.View;
+import android.support.v4.app.FragmentActivity;
 
-import com.flyang.api.bind.FacadeBind;
 import com.flyang.base.Lifecycle;
-import com.flyang.util.app.ApplicationUtils;
 
 /**
  * @author caoyangfei
@@ -15,32 +12,24 @@ import com.flyang.util.app.ApplicationUtils;
  * @date 2019/6/29
  * ------------- Description -------------
  * 基础controller
+ * <p>
+ * 绑定实例
  */
 public class BaseController implements Lifecycle {
-    protected Context context;
 
-    private View rootView;
+    protected FragmentActivity activity;
 
-    public BaseController() {
-    }
-
-    public BaseController(Context context) {
-        this.context = context;
-    }
-
-    public BaseController(View rootView) {
-        this(ApplicationUtils.getApp(), rootView);
-        this.rootView = rootView;
-    }
-
-    public BaseController(Context context, View rootView) {
-        this.context = context;
-        this.rootView = rootView;
-        FacadeBind.bind(rootView);
+    public BaseController(FragmentActivity activity) {
+        this.activity = activity;
     }
 
     @Override
     public void onInit() {
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
 
     }
 

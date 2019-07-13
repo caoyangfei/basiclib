@@ -1,6 +1,6 @@
 package com.flyang.base.controller.loader;
 
-import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.flyang.base.controller.BaseLoaderController;
@@ -20,8 +20,8 @@ public class ShapeLoadingController extends BaseLoaderController {
     private View contentView;
     private ShapeLoadingView mLoadingView;
 
-    public ShapeLoadingController(Context context, View rootView) {
-        super(context, rootView);
+    public ShapeLoadingController(FragmentActivity activity, View rootView) {
+        super(activity, rootView);
     }
 
     @Override

@@ -11,11 +11,11 @@ ext {
 
     isAlone = false
 
-    viewVersion = "2.1.1.2019_beta_01"
+    viewVersion = "2.1.1.2019_beta_02"
     utilVersion = "2.1.1.2019_beta_01"
 
-    apiVersion = "2.1.1.2019_beta_01"
-    annotationVersion = "2.1.1.2019_beta_01"
+    apiVersion = "2.1.1.2019_beta_02"
+    annotationVersion = "2.1.1.2019_beta_04"
 
     dep = [
             gson      : "com.google.code.gson:gson:2.8.5",

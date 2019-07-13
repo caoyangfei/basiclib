@@ -3,7 +3,7 @@ package com.flyang.demo;
 import android.annotation.SuppressLint;
 import android.view.View;
 
-import com.flyang.base.activity.BaseActivity;
+import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.controller.loader.IndicatorLoaderController;
 import com.flyang.base.controller.loader.ShapeLoadingController;
 import com.flyang.view.inter.Loader;
@@ -21,7 +21,7 @@ import io.reactivex.functions.Consumer;
  * @date 2019/6/30
  * ------------- Description -------------
  */
-public class TestActivity extends BaseActivity {
+public class TestActivity extends BasePresenterActivity {
     @Override
     protected int getLayoutID() {
         return R.layout.activity_test;

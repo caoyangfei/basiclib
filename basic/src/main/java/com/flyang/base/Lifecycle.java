@@ -17,6 +17,8 @@ public interface Lifecycle {
      */
     void onInit();
 
+    void onHiddenChanged(boolean hidden);
+
     /**
      * 初始化VIEW
      */

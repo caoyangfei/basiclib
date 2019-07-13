@@ -1,6 +1,6 @@
 package com.flyang.base.controller.loader;
 
-import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,8 +25,8 @@ public class IndicatorLoaderController extends BaseLoaderController {
     private TextView mLoadingText;
     private IndicatorLoadingView mLoadingView;
 
-    public IndicatorLoaderController(Context context, View rootView) {
-        super(context, rootView);
+    public IndicatorLoaderController(FragmentActivity activity, View rootView) {
+        super(activity, rootView);
     }
 
     @Override

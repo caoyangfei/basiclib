@@ -2,8 +2,8 @@ package com.flyang.base;
 
 import android.content.Intent;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * @author caoyangfei
@@ -13,10 +13,13 @@ import java.util.Map;
  * 生命周期管理
  */
 public class LifecycleManage implements Lifecycle {
-    private Map<String, Lifecycle> iifecycleMap;
+    /**
+     * 软引用map，没有使用时回收controller
+     */
+    private WeakHashMap<String, Lifecycle> iifecycleMap;
 
     public LifecycleManage() {
-        iifecycleMap = new LinkedHashMap<>();
+        iifecycleMap = new WeakHashMap<>();
     }
 
 
@@ -24,14 +27,17 @@ public class LifecycleManage implements Lifecycle {
         iifecycleMap.put(key, lifecycle);
     }
 
-    public void unregister(String key) {
-        iifecycleMap.remove(key);
-    }
-
     @Override
     public void onInit() {
         for (Map.Entry<String, Lifecycle> entry : iifecycleMap.entrySet()) {
             entry.getValue().onInit();
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        for (Map.Entry<String, Lifecycle> entry : iifecycleMap.entrySet()) {
+            entry.getValue().onHiddenChanged(hidden);
         }
     }
 
@@ -89,7 +95,6 @@ public class LifecycleManage implements Lifecycle {
         for (Map.Entry<String, Lifecycle> entry : iifecycleMap.entrySet()) {
             entry.getValue().onDestroy();
         }
-
     }
 
     @Override

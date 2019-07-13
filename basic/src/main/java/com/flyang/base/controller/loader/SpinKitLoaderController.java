@@ -1,6 +1,6 @@
 package com.flyang.base.controller.loader;
 
-import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,8 +24,8 @@ public class SpinKitLoaderController extends BaseLoaderController {
     private SpinKitLoadingView mLoadingView;
     private TextView mLoadingText;
 
-    public SpinKitLoaderController(Context context, View rootView) {
-        super(context, rootView);
+    public SpinKitLoaderController(FragmentActivity activity, View rootView) {
+        super(activity, rootView);
     }
 
 

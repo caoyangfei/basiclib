@@ -1,6 +1,6 @@
 package com.flyang.base.controller.loader;
 
-import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,8 +22,8 @@ public class IOSLoaderController extends BaseLoaderController {
     private IOSLoaderView mLoadingView;
     private TextView mLoadingText;
 
-    public IOSLoaderController(Context context, View rootView) {
-        super(context, rootView);
+    public IOSLoaderController(FragmentActivity activity, View rootView) {
+        super(activity, rootView);
     }
 
     @Override

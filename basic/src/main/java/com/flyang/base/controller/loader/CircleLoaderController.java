@@ -1,7 +1,7 @@
 package com.flyang.base.controller.loader;
 
-import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -29,8 +29,8 @@ public class CircleLoaderController extends BaseLoaderController {
     private CircularLoaderView mLoadingView;
     private TextView mLoadingText;
 
-    public CircleLoaderController(Context context, View rootView) {
-        super(context, rootView);
+    public CircleLoaderController(FragmentActivity activity, View rootView) {
+        super(activity, rootView);
     }
 
     @Override
@@ -39,9 +39,9 @@ public class CircleLoaderController extends BaseLoaderController {
         contentView = mPopupWindow.getContentView();
         mLoadingView = contentView.findViewById(R.id.circleLoading);
         mLoadingText = contentView.findViewById(R.id.loadingText);
-        mLoadingView.setDoneColor(ContextCompat.getColor(context, R.color.color_0000FF));
+        mLoadingView.setDoneColor(ContextCompat.getColor(activity, R.color.color_0000FF));
         mLoadingView.setInitialHeight(ConvertUtils.dp2px(80));
-        mLoadingView.setSpinningBarColor(ContextCompat.getColor(context, R.color.color_FF0000));
+        mLoadingView.setSpinningBarColor(ContextCompat.getColor(activity, R.color.color_FF0000));
     }
 
 
@@ -68,12 +68,12 @@ public class CircleLoaderController extends BaseLoaderController {
         if (mPopupWindow != null && mPopupWindow.isShowing()) {
             if (isSuccess) {
                 msg = !TextUtils.isEmpty(msg) ? msg : "操作成功";
-                mLoadingView.doneLoadingAnimation(ContextCompat.getColor(context, R.color.color_0000FF),
-                        BitmapFactory.decodeResource(context.getResources(), R.drawable.loading_success));
+                mLoadingView.doneLoadingAnimation(ContextCompat.getColor(activity, R.color.color_0000FF),
+                        BitmapFactory.decodeResource(activity.getResources(), R.drawable.loading_success));
             } else {
                 msg = !TextUtils.isEmpty(msg) ? msg : "加载失败";
-                mLoadingView.doneLoadingAnimation(ContextCompat.getColor(context, R.color.color_FF7F50),
-                        BitmapFactory.decodeResource(context.getResources(), R.drawable.loading_fail));
+                mLoadingView.doneLoadingAnimation(ContextCompat.getColor(activity, R.color.color_FF7F50),
+                        BitmapFactory.decodeResource(activity.getResources(), R.drawable.loading_fail));
             }
             setLoadingText(msg);
             backDismiss = false;
@@ -90,7 +90,7 @@ public class CircleLoaderController extends BaseLoaderController {
 
     @Override
     public void setLoadingTextColor(int color) {
-        if (color!=0) {
+        if (color != 0) {
             mLoadingText.setTextColor(color);
         }
     }

@@ -1,8 +1,7 @@
 package com.flyang.base.controller;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,41 +11,35 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
+import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.controller.loader.SpinKitLoaderController;
-import com.flyang.base.activity.BaseActivity;
 import com.flyang.view.inter.Loader;
-
-import java.lang.ref.WeakReference;
 
 /**
  * @author caoyangfei
- * @ClassName BaseLoader
+ * @ClassName BaseLoaderController
  * @date 2019/6/29
  * ------------- Description -------------
  * 加载基类
  * <p>
  * 自定义加载样式
  * 重写此类，仿照{@link SpinKitLoaderController}
- * 然后在activity重写{@link BaseActivity#getLoaderController()}
+ * 然后在activity重写{@link BasePresenterActivity#getLoaderController()}
  */
-public abstract class BaseLoaderController extends BaseController implements Loader {
+public abstract class BaseLoaderController extends BaseViewController implements Loader {
 
     protected PopupWindow mPopupWindow;
-    protected Context context;
-
-    private WeakReference<View> rootView;
 
     protected boolean backDismiss = true;//拦截返回键(取消拦截返回键，重写setOnDismissListener监听和修改默认值为false)
 
-    public BaseLoaderController(Context context, View rootView) {
-        this.rootView = new WeakReference<>(rootView);
-        this.context = context;
+    public BaseLoaderController(FragmentActivity activity, View rootView) {
+        super(activity, rootView);
         initPop();
     }
 
     protected void initPop() {
         if (getViewID() != 0) {
-            View contentView = LayoutInflater.from(context).inflate(getViewID(), null);
+            View contentView = LayoutInflater.from(activity).inflate(getViewID(), null);
             if (mPopupWindow == null) {
                 mPopupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT) {
@@ -136,7 +129,7 @@ public abstract class BaseLoaderController extends BaseController implements Loa
     }
 
     protected void backgroundAlpha(float f) {
-        Window window = ((Activity) context).getWindow();
+        Window window = activity.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.alpha = f;
         if (f == 1) {
