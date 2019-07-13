@@ -101,7 +101,7 @@ public class BasePresenterController extends BaseViewController implements IView
         }
         Fragment fragment = (Fragment) build.getFragment(this);
         if (fragment != null) {
-            activity.getSupportFragmentManager().beginTransaction().add(resId, fragment).commit();
+            activity.getSupportFragmentManager().beginTransaction().replace(resId, fragment).commit();
         }
     }
 

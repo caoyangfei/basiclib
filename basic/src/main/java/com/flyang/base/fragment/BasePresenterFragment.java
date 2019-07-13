@@ -195,7 +195,7 @@ public abstract class BasePresenterFragment extends BaseFragment {
         }
         Fragment fragment = (Fragment) build.getFragment(this);
         if (fragment != null) {
-            getChildFragmentManager().beginTransaction().add(resId, fragment).commit();
+            getChildFragmentManager().beginTransaction().replace(resId, fragment).commit();
         }
     }
 

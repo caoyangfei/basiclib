@@ -201,7 +201,7 @@ public abstract class BasePresenterActivity extends BaseActivity {
         }
         Fragment fragment = (Fragment) build.getFragment(this);
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().add(resId, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(resId, fragment).commit();
         }
     }
 
