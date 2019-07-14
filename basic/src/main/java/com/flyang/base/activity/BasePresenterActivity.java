@@ -79,9 +79,11 @@ public abstract class BasePresenterActivity extends BaseActivity {
     }
 
     /**
-     * 重写此方发获取Presenter对象（不是必写方法）
+     * 重写此方发获取Presenter对象
      * <p>
      * 配合{@link InstanceFactory}使用，InstanceFactory注解Presenter生成工厂类InstanceFactory
+     * <p>
+     * 重写此方法减少反射，优化性能（不是必写方法）
      *
      * @param clazz
      * @param <T>
