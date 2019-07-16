@@ -69,7 +69,7 @@ public class PresenterImple implements IProxy {
     @SuppressLint("CheckResult")
     @Override
     public void unbind() {
-        if (mPresenters!=null) {
+        if (mPresenters != null) {
             Flowable.fromIterable(mPresenters)
                     .subscribe(presenter -> presenter.onDestroy());
             mPresenters.clear();
@@ -90,8 +90,9 @@ public class PresenterImple implements IProxy {
          * getGenericSuperclass()返回直接继承的父类（包含泛型参数）
          * 此处返回具体presenter父辈basePresenter<V extends IView>
          */
-        Type genericSuperclass = presenter.getClass().getGenericSuperclass();
+        Type genericSuperclass = presenter.getClass().getSuperclass().getGenericSuperclass();
         //ParameterizedType参数化类型，即泛型，它是type的一种
+
         ParameterizedType pt = (ParameterizedType) genericSuperclass;
         //泛型数组
         Type[] actualTypeArguments = pt.getActualTypeArguments();
