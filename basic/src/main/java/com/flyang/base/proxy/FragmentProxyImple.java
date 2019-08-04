@@ -29,7 +29,7 @@ public class FragmentProxyImple extends PresenterImple implements FragmentProxy 
     private BaseController baseController;
 
     public FragmentProxyImple(BaseFragment baseFragment) {
-        super(baseFragment);
+        super(baseFragment.getActivity(), baseFragment);
         this.baseFragment = baseFragment;
     }
 

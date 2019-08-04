@@ -1,6 +1,7 @@
 package com.flyang.base.proxy;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 
 import com.flyang.annotation.Presenter;
 import com.flyang.base.contract.IPresenter;
@@ -27,9 +28,11 @@ public class PresenterImple implements IProxy {
 
     private List<IPresenter> mPresenters;
     private IView mView;
+    private Context mContext;
 
-    public PresenterImple(IView view) {
+    public PresenterImple(Context context, IView view) {
         this.mView = view;
+        this.mContext = context;
         mPresenters = new ArrayList<>();
     }
 
@@ -58,7 +61,7 @@ public class PresenterImple implements IProxy {
                     if (presenter == null)
                         presenter = ReflectUtils.on(aClass).create().get();
                     checkView(presenter);
-                    presenter.onAttached(mView);
+                    presenter.onAttached(mContext, mView);
                     //代码很重要，给对象赋值
                     field.setAccessible(true);
                     field.set(mView, presenter);

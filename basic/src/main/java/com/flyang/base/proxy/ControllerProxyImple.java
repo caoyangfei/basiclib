@@ -1,5 +1,7 @@
 package com.flyang.base.proxy;
 
+import android.content.Context;
+
 import com.flyang.base.controller.BasePresenterController;
 
 
@@ -13,8 +15,8 @@ import com.flyang.base.controller.BasePresenterController;
 public class ControllerProxyImple extends PresenterImple implements ControllerProxy {
     private BasePresenterController basePresenterController;
 
-    public ControllerProxyImple(BasePresenterController basePresenterController) {
-        super(basePresenterController);
+    public ControllerProxyImple(Context context, BasePresenterController basePresenterController) {
+        super(context, basePresenterController);
         this.basePresenterController = basePresenterController;
     }
 

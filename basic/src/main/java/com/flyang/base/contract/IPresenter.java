@@ -1,6 +1,7 @@
 package com.flyang.base.contract;
 
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 
 /**
@@ -18,7 +19,7 @@ public interface IPresenter<V extends IView> {
      *
      * @param view
      */
-    void onAttached(V view);
+    void onAttached(Context context, V view);
 
 
     /**

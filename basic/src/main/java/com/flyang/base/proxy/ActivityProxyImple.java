@@ -28,7 +28,7 @@ public class ActivityProxyImple extends PresenterImple implements ActivityProxy 
     private BaseController baseController;
 
     public ActivityProxyImple(BaseActivity baseActivity) {
-        super(baseActivity);
+        super(baseActivity, baseActivity);
         this.baseActivity = baseActivity;
     }
 

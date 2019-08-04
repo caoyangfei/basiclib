@@ -39,7 +39,7 @@ public class BasePresenterController extends BaseViewController implements IView
     public void onInit() {
         super.onInit();
         if (presenterProxyImple == null)
-            presenterProxyImple = new ControllerProxyImple(this);
+            presenterProxyImple = new ControllerProxyImple(activity, this);
         presenterProxyImple.bind();
         loaderController = getLoaderController();
         loaderController.onInit();

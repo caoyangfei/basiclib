@@ -1,5 +1,6 @@
 package com.flyang.base.presenter;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.flyang.base.contract.IPresenter;
@@ -25,9 +26,11 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
     private WeakReference<V> mView;
     private CompositeDisposable mCompositeDisposable;
     private V mProxyView;
+    protected Context mContext;
 
     @Override
-    public void onAttached(V view) {
+    public void onAttached(Context context, V view) {
+        this.mContext = context;
         mView = new WeakReference<>(view);
         IViewHandler iViewHandler = new IViewHandler(view);
         mProxyView = (V) Proxy.newProxyInstance(view.getClass().getClassLoader(), view.getClass().getInterfaces(), iViewHandler);
@@ -57,6 +60,10 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
     @Override
     public V getView() {
         return mProxyView;
+    }
+
+    public Context getContext() {
+        return mContext;
     }
 
     /**
