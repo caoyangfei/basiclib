@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/defaultLoadingMoreViewLayoutContent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <FrameLayout
+        android:id="@+id/defaultLoadingMoreViewFrameLayout"
+        android:layout_width="25dp"
+        android:layout_height="25dp">
+
+        <com.flyang.view.loader.IndicatorLoadingView
+            android:id="@+id/defaultLoadingMoreViewIndicator"
+            style="@style/LoadingIndicatorView.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:Indicator_Style="CubeTransitionIndicator"
+            app:indicatorColor="@color/color_00BFFF" />
+
+        <ImageView
+            android:id="@+id/defaultLoadingMoreViewStatusIv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="3dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/defaultLoadingMoreViewStatusTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:textSize="16sp"
+        tools:text="加载中..." />
+
+</LinearLayout>

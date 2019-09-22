@@ -69,11 +69,11 @@ public class CircleLoaderController extends BaseLoaderController {
             if (isSuccess) {
                 msg = !TextUtils.isEmpty(msg) ? msg : "操作成功";
                 mLoadingView.doneLoadingAnimation(ContextCompat.getColor(activity, R.color.color_0000FF),
-                        BitmapFactory.decodeResource(activity.getResources(), R.drawable.loading_success));
+                        BitmapFactory.decodeResource(activity.getResources(), R.drawable.loading_success_basic));
             } else {
                 msg = !TextUtils.isEmpty(msg) ? msg : "加载失败";
                 mLoadingView.doneLoadingAnimation(ContextCompat.getColor(activity, R.color.color_FF7F50),
-                        BitmapFactory.decodeResource(activity.getResources(), R.drawable.loading_fail));
+                        BitmapFactory.decodeResource(activity.getResources(), R.drawable.loading_fail_basic));
             }
             setLoadingText(msg);
             backDismiss = false;

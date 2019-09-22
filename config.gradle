@@ -3,7 +3,7 @@ ext {
 
     app_name = "基础库"
     compileSdkVersion = 28
-    buildToolsVersion = "26.0.2"
+    buildToolsVersion = "28.0.3"
     minSdkVersion = 19
     targetSdkVersion = 28
     versionCode = 1
@@ -11,11 +11,14 @@ ext {
 
     isAlone = false
 
-    viewVersion = "2.1.1.2019_beta_02"
-    utilVersion = "2.1.1.2019_beta_01"
-
     apiVersion = "2.1.1.2019_beta_02"
-    annotationVersion = "2.1.1.2019_beta_04"
+    annotationVersion = "2.1.1.2019_beta_06"
+    complierVersion = "2.1.1.2019_beta_13"
+
+    utilVersion = "2.1.1.2019_beta_02"
+    viewVersion = "2.1.1.2019_beta_02"
+
+    aopVersion = "2.1.1.2019_beta_02"
 
     dep = [
             gson      : "com.google.code.gson:gson:2.8.5",
@@ -23,6 +26,8 @@ ext {
             util      : "com.flyang.common:util:$utilVersion",
             api       : "com.flyang.common:api:$apiVersion",
             annotation: "com.flyang.common:annotation:$annotationVersion",
+            aop       : "com.flyang.common:aop:$aopVersion",
+            complier  : "com.flyang.common:complier:${complierVersion}@jar"
     ]
 }
 
