@@ -56,6 +56,15 @@ public abstract class MultiItemView<T> {
         return 5;
     }
 
+     /**
+     * 如果是GridLayoutManager网格布局是,设置当前显示的条数,不设置按照默认
+     *
+     * @return
+     */
+    public int getSpanCount() {
+        return -1;
+    }
+    
     /**
      * 绑定UI和数据
      *
