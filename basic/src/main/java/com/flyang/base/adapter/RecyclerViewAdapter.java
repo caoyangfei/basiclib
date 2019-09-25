@@ -109,9 +109,10 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
                 public int getSpanSize(int position) {
                     if (isInHeadViewPos(position) || isInFootViewPos(position)
                             || isInEmptyStatus()) {
-                        return gridManager.getSpanCount();
-                    } else {
                         return 1;
+                    } else {
+                        MultiItemView multiItemView = typePool.getMultiItemView(getItemViewType(position));
+                        return multiItemView.getSpanCount() == -1 ? gridManager.getSpanCount() : multiItemView.getSpanCount();
                     }
                 }
             });
