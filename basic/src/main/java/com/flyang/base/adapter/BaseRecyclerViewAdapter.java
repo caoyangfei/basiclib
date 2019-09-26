@@ -111,7 +111,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param list
      */
     @Override
-    public void setList(List<T> list) {
+    public void setList(List list) {
         if (list != null && list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();

@@ -6,9 +6,9 @@ package com.flyang.base.adapter;
  * @ClassName ViewType
  * @date 2019/9/18
  * ------------- Description -------------
- * 页面类型
+ * 页面类型（不对外暴露，内部使用）
  */
-public final class ViewType {
+final class ViewType {
     //空页面
     public static final int EMPTY = Integer.MAX_VALUE - 10000;
     //头部
