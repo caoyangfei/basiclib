@@ -1,6 +1,7 @@
 package com.flyang.base.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -31,7 +32,7 @@ import java.util.Map;
  * <p>
  * MVP中P层
  * <p>
- * {@link BasePresenter#onAttached(IView)}关联P和V层，
+ * {@link BasePresenter#onAttached(Context, IView)}关联P和V层，
  * 在Presenter中结果回来以后调用传递给Activity
  * <p>
  * 此基类包含presenter和controller和默认加载框
