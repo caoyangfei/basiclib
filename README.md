@@ -2,6 +2,11 @@
 
 
 ## 1. Features
+    1.MVP模式
+    2.包含各种样式加载框
+    3.侧滑删除
+    4.封装Base Recycleview Adapter,可以滑动删除item，拖拽移动item
+## 2. User
   配置方式
   -------  
         //配置下边三个可以实现，路由，注解获取控件，点击事件必须要配置，因为basic中初始化了注解控件
@@ -29,7 +34,13 @@
         implementation ""com.github.caoyangfei.aptlib:aop:1.1.1.2019_03"
         api 'org.aspectj:aspectjrt:1.8.14'
  
-## 2. Skills
+## 3. Skills
 #### 工具类AND基础Base库
 * [Base库](./doc/basic_base.md)
 
+## 4. Thank
+* [CymChad][BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
+* [LidongWen][MultiTypeAdapter](https://github.com/LidongWen/MultiTypeAdapter)
+* [north2016][T-MVP](https://github.com/north2016/T-MVP)
+* [bingoogolapple][BGASwipeBackLayout-Android](https://github.com/bingoogolapple/BGASwipeBackLayout-Android)
+ 等等很多框架的思想
