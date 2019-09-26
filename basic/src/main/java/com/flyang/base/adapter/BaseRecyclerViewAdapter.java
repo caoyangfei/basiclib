@@ -6,15 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 
+import com.flyang.base.adapter.animation.AnimationConstant;
+import com.flyang.base.adapter.animation.BaseAnimation;
 import com.flyang.base.adapter.pool.MultiTypePool;
-import com.flyang.base.adapter.view.BaseAnimation;
 import com.flyang.base.adapter.view.BaseLoadMoreView;
-import com.flyang.base.adapter.view.DefaultAlphaInAnim;
 import com.flyang.base.adapter.view.DefaultLoadMoreView;
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
 import com.flyang.base.listener.OnLoadListener;
 import com.flyang.basic.R;
-import com.flyang.util.log.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
     protected List<T> mDataList = new ArrayList<>();
 
     //布局缓存池
-    protected MultiTypePool typePool;
+    protected MultiTypePool multiTypePool;
 
     //空数据占位View
     protected View mEmptyView;
@@ -85,7 +84,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
 
     public BaseRecyclerViewAdapter(Context context, List<T> datas) {
         this.mContext = context;
-        typePool = new MultiTypePool();
+        multiTypePool = new MultiTypePool();
         if (datas != null && datas.size() > 0) {
             mDataList.addAll(datas);
         }
@@ -107,7 +106,20 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
     }
 
     /**
-     * 添加数据
+     * 设置数据
+     *
+     * @param list
+     */
+    @Override
+    public void setList(List<T> list) {
+        if (list != null && list.size() > 0) {
+            mDataList.addAll(list);
+            notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * 添加一条数据
      *
      * @param t
      */
@@ -157,7 +169,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param index 数据在list的索引
      */
     public void remove(int index) {
-        if (index > getHeadCounts() && mDataList.size() > index) {
+        if (index >= getHeadCounts() && mDataList.size() > index) {
             mDataList.remove(index - getHeadCounts());
             notifyItemRemoved(index);
         }
@@ -180,6 +192,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
     @Override
     public void clear() {
         mDataList.clear();
+        notifyDataSetChanged();
     }
 
     /**
@@ -192,9 +205,14 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
         return mDataList;
     }
 
-    //查询某个数据
+    /**
+     * 查询其中位置数据
+     *
+     * @param position
+     * @return
+     */
     @Override
-    public T queryDataInPosition(int position) {
+    public T getItem(int position) {
         T data = null;
         int realIndex = position - getHeadCounts();
         if (realIndex < mDataList.size()) {
@@ -228,7 +246,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
             return mFooterViews.keyAt(position - getListSize() - getHeadCounts() - getEmptyViewCounts());
         } else {
             T item = mDataList.get(position);
-            return typePool.getItemViewType(item, position);
+            return multiTypePool.getItemViewType(item, position);
         }
     }
 
@@ -346,10 +364,25 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
     /**
      * 开启子item展示动画
      *
+     * @param animationType 自定义动画
+     */
+    public void openLoadAnimation(int animationType) {
+        mAnimation = AnimationConstant.getAnimationType(animationType);
+        if (mAnimation != null) {
+            isEnableAnimation = true;
+        }
+    }
+
+    /**
+     * 开启子item展示动画
+     *
      * @param animation 自定义动画
      */
-    public void setEnableShowAnim(BaseAnimation animation) {
-        mAnimation = animation;
+    public void openLoadAnimation(BaseAnimation animation) {
+        if (animation != null) {
+            this.isEnableAnimation = true;
+            this.mAnimation = animation;
+        }
     }
 
     /**
@@ -423,6 +456,8 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
 
     /**
      * 是不是加载更多完毕后显示底部
+     * <p>
+     * 默认为true,加载完成后显示底部
      *
      * @param footerLast
      */
@@ -457,7 +492,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * 获取HeadView的数量
      */
     public int getHeadCounts() {
-        return isHeaderEnable() ? mHeaderViews.size() : 0;
+        return (isHeaderEnable() && !isInEmptyStatus()) ? mHeaderViews.size() : 0;
     }
 
     /**
@@ -470,14 +505,14 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * </P>
      */
     public int getFootCounts() {
-        return isFooterEnable() && (!isFooterLast || !hasMoreData) ? mFooterViews.size() : 0;
+        return (isFooterEnable() && !isInEmptyStatus() && (!isFooterLast || !hasMoreData)) ? mFooterViews.size() : 0;
     }
 
     /**
      * 获取加载更多的数量
      */
     protected int getLoadMoreCounts() {
-        return isLoadMoreEnable() ? 1 : 0;
+        return (isLoadMoreEnable() && !isInEmptyStatus()) ? 1 : 0;
     }
 
     /**
@@ -506,10 +541,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      *
      * @return
      */
-    protected boolean isItemAnimEnable() {
-        if (mAnimation == null) {
-            mAnimation = new DefaultAlphaInAnim();
-        }
+    public boolean isItemAnimEnable() {
         return isEnableAnimation;
     }
 
@@ -562,20 +594,6 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
 
     }
 
-    /**
-     * 设置数据
-     *
-     * @param newDataList
-     * @param isRefresh   是否是刷新
-     */
-    //TODO 不使用任何的加载更多，直接设置数据
-    public void notifyDateChanged(final List newDataList, boolean isRefresh) {
-        if (isRefresh) {
-            refreshList(newDataList);
-        } else {
-            addList(newDataList);
-        }
-    }
 
     /**
      * 通知加载更多
@@ -587,7 +605,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
     }
 
     /**
-     * 通知加载更多，直接调用这个自己设置是否有更多
+     * 通知加载更多
      *
      * @param newDataList 新增加的数据
      * @param hasMoreData 是否还有更多数据
@@ -602,10 +620,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
                 @Override
                 public void run() {
                     //添加数据
-                    if (newDataList != null && newDataList.size() > 0) {
-                        mDataList.addAll(newDataList);
-                        notifyDataSetChanged();
-                    }
+                    setList(newDataList);
                     mLoadMoreLock.unlock();
                     //刷新UI
                     //因为延迟加载，有可能导致LoadMoreView已经为空，需要判断
@@ -620,7 +635,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
                 }
             }, 200);
         } else {
-            LogUtils.tag("RecycleAdapter").e("Did't enable loading more,please call enableLoadMore()");
+            setList(newDataList);
         }
     }
 
@@ -628,6 +643,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * 通知加载更多没有更多数据
      */
     public void notifyLoadMoreHasNoMoreData() {
+        if (mLoadMoreLayout == null) return;
         mLoadMoreLock.lock();
         mLoadMoreLayout.handleNoMoreData();
         mLoadMoreLock.unlock();
@@ -637,46 +653,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * 通知加载更多失败
      */
     public void notifyLoadMoreFail() {
+        if (mLoadMoreLayout == null) return;
         mLoadMoreLayout.handleLoadFail();
-    }
-
-    /**
-     * 使用场景
-     * 同时满足以下条件
-     * 1.不使用BaseRecyclerViewAdapter上拉加载更多，使用第三方上拉加载更多
-     * 2.有添加底部布局文件
-     * 3.全部加载完毕后显示底部布局
-     * <p>
-     * 默认启用添加底部
-     *
-     * @param newDataList
-     * @param hasMoreData 是否还有更多数据
-     */
-    public void notifyThirstLoadMoreDateChanged(final List newDataList, boolean hasMoreData) {
-        notifyThirstLoadMoreDateChanged(newDataList, true, hasMoreData);
-    }
-
-    /**
-     * 使用场景
-     * 同时满足以下条件
-     * 1.不使用BaseRecyclerViewAdapter上拉加载更多，使用第三方上拉加载更多
-     * 2.有添加底部布局文件
-     * 3.全部加载完毕后显示底部布局
-     *
-     * @param newDataList
-     * @param isEnableFooter 是否添加底部（和全局是否添加底部不同，使用此方法不用考虑全局的添加底部）
-     * @param hasMoreData    是否还有更多数据
-     */
-    public void notifyThirstLoadMoreDateChanged(final List newDataList, boolean isEnableFooter, boolean hasMoreData) {
-        if (isLoadMoreEnable()) {
-            LogUtils.tag("RecycleAdapter").e("BaseRecyclerViewAdapter pull up load more please call notifyLoadMoreSuccess()");
-            return;
-        }
-        if (isEnableFooter && mFooterViews != null && mFooterViews.size() > 0) {
-            this.isEnableFooter = !isFooterLast || !hasMoreData;
-        } else {
-            this.isEnableFooter = isEnableFooter;
-        }
-        addList(newDataList);
     }
 }

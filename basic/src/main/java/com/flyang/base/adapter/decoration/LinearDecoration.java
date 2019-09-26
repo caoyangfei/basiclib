@@ -21,7 +21,6 @@ import android.view.View;
  * ------------- Description -------------
  * <p>
  * for LinearLayoutMananger
- * </p>
  * RecyclerView的分割线
  */
 public class LinearDecoration extends RecyclerView.ItemDecoration {

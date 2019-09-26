@@ -1,12 +1,10 @@
 package com.flyang.demo;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.flyang.annotation.apt.BindView;
-import com.flyang.base.adapter.DraggableController;
 import com.flyang.base.adapter.MultiItemView;
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
 
@@ -16,33 +14,33 @@ import com.flyang.base.adapter.viewholder.CommonViewHolder;
  * @date 2019/9/22
  * ------------- Description -------------
  */
-public class TestItemView extends MultiItemView<String> {
-    @BindView("iv")
-    ImageView iv;
-    @BindView("tv")
-    TextView tv;
+public class TestItem2View extends MultiItemView<String> {
 
-    public TestItemView() {
-    }
+    @BindView("textview")
+    TextView textview;
 
     @NonNull
     @Override
     public int getLayoutId() {
-        return R.layout.item_section_content;
+        return R.layout.item_text;
     }
 
     @Override
     public boolean isForViewType(String item, int postion) {
         if (postion % 4 == 2) {
-            return false;
+            return super.isForViewType(item, postion);
         }
-        return super.isForViewType(item, postion);
+        return false;
+    }
+
+    @Override
+    public int getSpanCount() {
+        return 2;
     }
 
     @Override
     public void onBindView(@NonNull CommonViewHolder holder, @NonNull String item, int position) {
         super.onBindView(holder, item, position);
-        tv.setText(item);
+        textview.setText("标题:" + item);
     }
-
 }

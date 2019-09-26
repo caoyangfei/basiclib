@@ -2,6 +2,13 @@ package com.flyang.base.listener;
 
 import android.view.View;
 
+/**
+ * @author caoyangfei
+ * @ClassName OnItemChildViewClickListener
+ * @date 2019/9/19
+ * ------------- Description -------------
+ * 子控件点击监听
+ */
 public interface OnItemChildViewClickListener {
     /**
      * item 内子控件点击事件监听回调

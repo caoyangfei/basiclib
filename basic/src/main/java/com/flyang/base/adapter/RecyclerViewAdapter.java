@@ -39,8 +39,16 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
     }
 
 
-    public <T> RecyclerViewAdapter register(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T> multiItemView) {
-        typePool.addItemView(clazz, multiItemView);
+    /**
+     * 添加金多样式的item
+     *
+     * @param clazz
+     * @param multiItemView
+     * @param <T>
+     * @return
+     */
+    public <T> RecyclerViewAdapter addMultiItem(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T> multiItemView) {
+        multiTypePool.addItemView(clazz, multiItemView);
         return this;
     }
 
@@ -66,8 +74,8 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
         } else if (viewType >= ViewType.FOOTER && mFooterViews != null && mFooterViews.get(viewType) != null) {
             return CommonViewHolder.createViewHolder(mContext, mFooterViews.get(viewType));
         } else {
-            MultiItemView multiItemView = typePool.getMultiItemView(viewType);
-            typePool.setMaxRecycledViews(parent, viewType);
+            MultiItemView multiItemView = multiTypePool.getMultiItemView(viewType);
+            multiTypePool.setMaxRecycledViews(parent, viewType);
             if (multiItemView.isAddParent()) {
                 return CommonViewHolder.createViewHolder(mContext, parent, multiItemView.getLayoutId());
             } else {
@@ -91,10 +99,8 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
             return;
         }
         T item = mDataList.get(position);
-        MultiItemView binder = typePool.getMultiItemView(holder.getItemViewType());
+        MultiItemView binder = multiTypePool.getMultiItemView(holder.getItemViewType());
         binder.onBindView(holder, item, position);
-        //设置动画
-        startItemAnim(holder, position);
     }
 
     @Override
@@ -104,15 +110,17 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
         if (manager instanceof GridLayoutManager) {
             final GridLayoutManager gridManager = ((GridLayoutManager) manager);
+            final GridLayoutManager.SpanSizeLookup defSpanSizeLookup = gridManager.getSpanSizeLookup();
             gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
+                    //返回的是你这一行占几个的位置,比如:设置GridLayoutManager设置3,返回3就是占一行
                     if (isInHeadViewPos(position) || isInFootViewPos(position)
-                            || isInEmptyStatus()) {
-                        return 1;
+                            || isInEmptyStatus() || isInLoadMorePos(position)) {
+                        return gridManager.getSpanCount();
                     } else {
-                        MultiItemView multiItemView = typePool.getMultiItemView(getItemViewType(position));
-                        return multiItemView.getSpanCount() == -1 ? gridManager.getSpanCount() : multiItemView.getSpanCount();
+                        MultiItemView multiItemView = multiTypePool.getMultiItemView(getItemViewType(position));
+                        return multiItemView.getSpanCount() == -1 ? defSpanSizeLookup.getSpanSize(position) : multiItemView.getSpanCount();
                     }
                 }
             });
@@ -134,8 +142,10 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
                 p.setFullSpan(true);
             }
         } else {
+            //设置动画
+            startItemAnim(holder, holder.getLayoutPosition());
             if (holder.getLayoutPosition() < getItemCount()) {
-                typePool.getMultiItemView(typePool.getItemViewType(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition())).onViewAttachedToWindow(holder);
+                multiTypePool.getMultiItemView(multiTypePool.getItemViewType(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition())).onViewAttachedToWindow(holder);
             }
         }
     }

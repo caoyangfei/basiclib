@@ -6,7 +6,7 @@ package com.flyang.base.adapter;
  * @ClassName ViewType
  * @date 2019/9/18
  * ------------- Description -------------
- * 类型
+ * 页面类型
  */
 public final class ViewType {
     //空页面

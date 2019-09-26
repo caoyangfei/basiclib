@@ -22,7 +22,6 @@ import android.view.View;
  * ------------- Description -------------
  * <p>
  * for GridLayoutMananger和StaggeredGridLayoutManager
- * </p>
  * RecyclerView的分割线
  */
 public class GridAndStaggeredDecoration extends RecyclerView.ItemDecoration {

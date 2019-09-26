@@ -32,8 +32,6 @@ public abstract class BaseLoadMoreView extends RelativeLayout {
     //加载更多监听
     protected OnLoadListener mListener;
 
-    protected int page = 1;
-
     public BaseLoadMoreView(Context context) {
         super(context);
         setWillNotDraw(false);
@@ -104,8 +102,7 @@ public abstract class BaseLoadMoreView extends RelativeLayout {
             }
             setLoadingUI();
             if (mListener != null) {
-                page++;
-                mListener.onLoadRequest(page);
+                mListener.onLoadRequest();
             }
             mLayoutContent.setOnClickListener(null);
         } else if (status == STATUS_SUCCESS) {
@@ -122,7 +119,6 @@ public abstract class BaseLoadMoreView extends RelativeLayout {
                 }
             });
         } else if (status == STATUS_NOMOREDATA) {
-            page = 0;
             //没有更多数据
             setNoMoreDataUI();
         }

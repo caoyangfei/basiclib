@@ -13,6 +13,8 @@ public interface IListAdapter<T> {
 
     void refreshList(List<T> list);
 
+    void setList(List<T> list);
+
     void addData(T t);
 
     void addData(int position, T t);
@@ -27,5 +29,5 @@ public interface IListAdapter<T> {
 
     List<T> getList();
 
-    T queryDataInPosition(int position);
+    T getItem(int position);
 }

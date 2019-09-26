@@ -8,5 +8,5 @@ package com.flyang.base.listener;
  * 加载或刷新监听监听
  */
 public interface OnLoadListener {
-    void onLoadRequest(int page);
+    void onLoadRequest();
 }

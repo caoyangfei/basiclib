@@ -1,13 +1,18 @@
-package com.flyang.base.adapter.view;
+package com.flyang.base.adapter.animation;
 
 import android.animation.Animator;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
+
 /**
- * 子布局展现时的动画基类
- * [具体实现请参照类RcvAlphaInAnim]
+ * @author caoyangfei
+ * @ClassName BaseAnimation
+ * @date 2019/9/21
+ * ------------- Description -------------
+ * 动画基类,使用参照
+ * {@link ScaleInAnimation}
  */
 public abstract class BaseAnimation {
     //动画加速器：默认为LinearInterpolator
@@ -33,13 +38,13 @@ public abstract class BaseAnimation {
     /**
      * 子类实现此方法决定动画类型
      */
-    public abstract Animator[] getAnimator(View v);
+    public abstract Animator[] getAnimator(View view);
 
     /**
      * 开始动画
      */
-    public void startAnim(View v) {
-        Animator[] animators = getAnimator(v);
+    public void startAnim(View view) {
+        Animator[] animators = getAnimator(view);
         for (Animator animator : animators) {
             animator.setDuration(mAnimDuration);
             animator.setInterpolator(mInterpolator);

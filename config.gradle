@@ -11,23 +11,44 @@ ext {
 
     isAlone = false
 
-    apiVersion = "2.1.1.2019_beta_02"
-    annotationVersion = "2.1.1.2019_beta_06"
-    complierVersion = "2.1.1.2019_beta_13"
+    //nexus
+//    apiVersion = "2.1.1.2019_beta_02"
+//    annotationVersion = "2.1.1.2019_beta_06"
+//    complierVersion = "2.1.1.2019_beta_13"
+//
+//    utilVersion = "2.1.1.2019_beta_02"
+//    viewVersion = "2.1.1.2019_beta_02"
+//
+//    aopVersion = "2.1.1.2019_beta_02"
+//
+//    dep = [
+//            gson      : "com.google.code.gson:gson:2.8.5",
+//            view      : "com.flyang.common:view:$viewVersion",
+//            util      : "com.flyang.common:util:$utilVersion",
+//            api       : "com.flyang.common:api:$apiVersion",
+//            annotation: "com.flyang.common:annotation:$annotationVersion",
+//            aop       : "com.flyang.common:aop:$aopVersion",
+//            complier  : "com.flyang.common:complier:${complierVersion}@jar"
+//    ]
 
-    utilVersion = "2.1.1.2019_beta_02"
-    viewVersion = "2.1.1.2019_beta_02"
+    //github
+    apiVersion = "1.1.1.2019_03"
+    annotationVersion = "1.1.1.2019_03"
+    complierVersion = "1.1.1.2019_03"
 
-    aopVersion = "2.1.1.2019_beta_02"
+    utilVersion = "1.1.1.2019_02"
+    viewVersion = "1.1.1.2019_03"
+
+    aopVersion = "1.1.1.2019_03"
 
     dep = [
             gson      : "com.google.code.gson:gson:2.8.5",
-            view      : "com.flyang.common:view:$viewVersion",
-            util      : "com.flyang.common:util:$utilVersion",
-            api       : "com.flyang.common:api:$apiVersion",
-            annotation: "com.flyang.common:annotation:$annotationVersion",
-            aop       : "com.flyang.common:aop:$aopVersion",
-            complier  : "com.flyang.common:complier:${complierVersion}@jar"
+            view      : "com.github.caoyangfei:viewlib:$viewVersion",
+            util      : "com.github.caoyangfei:utillib:$utilVersion",
+            api       : "com.github.caoyangfei.aptlib:api:$apiVersion",
+            annotation: "com.github.caoyangfei.aptlib:annotation:$annotationVersion",
+            aop       : "com.github.caoyangfei.aptlib:aop:$aopVersion",
+            complier  : "com.github.caoyangfei.aptlib:complier:${complierVersion}@jar"
     ]
 }
 
