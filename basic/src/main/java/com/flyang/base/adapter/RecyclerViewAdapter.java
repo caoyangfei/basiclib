@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
 import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 import com.flyang.util.data.PreconditionUtils;
@@ -25,7 +26,7 @@ import java.util.List;
  * @ClassName RecyclerViewAdapter
  * @date 2019/9/19
  * ------------- Description -------------
- * 对外RecyclerViewAdapter
+ * 对外RecyclerViewAdapter对应使用{@link RecyclerViewHolder}
  */
 public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
 

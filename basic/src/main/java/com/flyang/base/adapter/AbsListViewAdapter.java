@@ -27,7 +27,7 @@ import java.util.List;
  * ------------- Description -------------
  * AbsListViewAdapter公共adapter
  * <p>
- * 使用控件{@link GridView,ListView }
+ * 使用控件{@link GridView,ListView }对应使用{@link AbsListViewHolder}
  * 基类AbsListViewAdapter,子项设置动画
  */
 public class AbsListViewAdapter<T, V extends CommonViewHolder> extends BaseAdapter implements IListAdapter<T> {
@@ -67,7 +67,7 @@ public class AbsListViewAdapter<T, V extends CommonViewHolder> extends BaseAdapt
      * @param multiItemView
      * @return
      */
-    public <T, V extends CommonViewHolder>  AbsListViewAdapter addMultiItem(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T, V> multiItemView) {
+    public <T, V extends CommonViewHolder> AbsListViewAdapter addMultiItem(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T, V> multiItemView) {
         multiTypePool.addItemView(clazz, multiItemView, SECTION_LABEL);
         return this;
     }
