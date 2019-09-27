@@ -35,7 +35,7 @@ public class MainActivity extends BasePresenterActivity {
         switch (view.getId()) {
             case R.id.btn1:
                 LogUtils.d("测试打印日记");
-                Intent intent = new Intent(this, TestActivity.class);
+                Intent intent = new Intent(this, RecycleViewActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn2:
@@ -50,7 +50,10 @@ public class MainActivity extends BasePresenterActivity {
                             }
                         });
                 break;
-
+            case R.id.btn3:
+                Intent listIntent = new Intent(this, ListViewActivity.class);
+                startActivity(listIntent);
+                break;
         }
 
     }

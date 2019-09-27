@@ -31,13 +31,13 @@ public class TestItemView extends MultiItemView<String> {
         return R.layout.item_section_content;
     }
 
-    @Override
-    public boolean isForViewType(String item, int postion) {
-        if (postion % 4 == 2) {
-            return false;
-        }
-        return super.isForViewType(item, postion);
-    }
+//    @Override
+//    public boolean isForViewType(String item, int postion) {
+//        if (postion % 4 == 2) {
+//            return false;
+//        }
+//        return super.isForViewType(item, postion);
+//    }
 
     @Override
     public void onBindView(@NonNull CommonViewHolder holder, @NonNull String item, int position) {

@@ -51,11 +51,22 @@ public final class MultiTypePool {
      * @param <T>
      */
     public <T> void addItemView(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T> multiItemView) {
+        addItemView(clazz, multiItemView, ViewType.SECTION_LABEL);
+    }
+
+    /**
+     * 添加子条目布局
+     *
+     * @param clazz
+     * @param multiItemView
+     * @param <T>
+     */
+    public <T> void addItemView(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T> multiItemView, int type) {
         CopyOnWriteArrayList<MultiItemView> list = calssItemViewListMap.get(clazz);
         if (list == null) {
             list = new CopyOnWriteArrayList<>();
         }
-        int itemType = itemTypeViewMap.size() + ViewType.SECTION_LABEL;
+        int itemType = itemTypeViewMap.size() + type;
         if (multiItemView.haveChild()) {
             list.addAll(multiItemView.getChildList());
             for (MultiItemView<T> tMultiItemView : multiItemView.getChildList()) {
@@ -101,13 +112,22 @@ public final class MultiTypePool {
     }
 
     /**
+     * 获取类型数量
+     *
+     * @return
+     */
+    public int getMultiItemViewSize() {
+        return itemTypeViewMap.size();
+    }
+
+    /**
      * 设置缓存最大值，默认5
      *
      * @param recyclerView
      * @param itemType
      */
     public void setMaxRecycledViews(ViewGroup recyclerView, int itemType) {
-        if (!itemMaxRecycleCount.containsKey(itemType)) {
+        if (recyclerView instanceof RecyclerView && !itemMaxRecycleCount.containsKey(itemType)) {
             MultiItemView multiItemView = itemTypeViewMap.get(itemType);
             itemMaxRecycleCount.put(itemType, multiItemView.getMaxRecycleCount());
             ((RecyclerView) recyclerView).getRecycledViewPool().setMaxRecycledViews(itemType, multiItemView.getMaxRecycleCount());

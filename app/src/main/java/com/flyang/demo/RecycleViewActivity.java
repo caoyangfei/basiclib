@@ -37,7 +37,7 @@ import io.reactivex.functions.Consumer;
  * @date 2019/6/30
  * ------------- Description -------------
  */
-public class TestActivity extends BasePresenterActivity {
+public class RecycleViewActivity extends BasePresenterActivity {
     @BindView("recycleview")
     RecyclerView recyclerView;
 
@@ -115,7 +115,7 @@ public class TestActivity extends BasePresenterActivity {
 
             @Override
             public void onItemSwipeMoving(Canvas canvas, RecyclerView.ViewHolder viewHolder, float dX, float dY, boolean isCurrentlyActive) {
-                canvas.drawColor(ContextCompat.getColor(TestActivity.this, R.color.color_3CB371));
+                canvas.drawColor(ContextCompat.getColor(RecycleViewActivity.this, R.color.color_3CB371));
 //                canvas.drawText("Just some text", 0, 40, paint);
             }
         };

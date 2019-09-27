@@ -1,5 +1,8 @@
 package com.flyang.base.adapter;
 
+import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -10,24 +13,81 @@ import java.util.List;
  * adapter接口
  */
 public interface IListAdapter<T> {
+    /**
+     * 刷新数据(清空旧数据,添加新数据)
+     *
+     * @param list
+     */
+    void refreshList(@NonNull List<T> list);
 
-    void refreshList(List<T> list);
+    /**
+     * 设置数据(全部刷新)
+     *
+     * @param list
+     */
+    void setList(@NonNull List<T> list);
 
-    void setList(List<T> list);
+    /**
+     * 添加一条数据
+     *
+     * @param t
+     */
+    void addData(@NonNull T t);
 
-    void addData(T t);
+    /**
+     * position添加一条数据
+     *
+     * @param t
+     */
+    void addData(@IntRange(from = 0) int position, @NonNull T t);
 
-    void addData(int position, T t);
+    /**
+     * 添加数据集合
+     * RecycleView,添加数据局部刷新
+     * ListView和setList(List<T> list)效果相同
+     *
+     * @param list
+     */
+    void addList(@NonNull List<T> list);
 
-    void addList(List<T> list);
+    /**
+     * 移除一项数据
+     *
+     * @param index 数据在list的索引
+     */
+    void remove(@IntRange(from = 0) int index);
 
-    void remove(int index);
+    /**
+     * 移除一项数据
+     *
+     * @param t 数据实体
+     */
+    void remove(@NonNull T t);
 
-    void remove(T t);
-
+    /**
+     * 清空数据
+     */
     void clear();
 
+    /**
+     * 获取数据集合
+     *
+     * @return
+     */
     List<T> getList();
 
-    T getItem(int position);
+    /**
+     * 获取position位置数据
+     *
+     * @param position
+     * @return
+     */
+    T getItem(@IntRange(from = 0) int position);
+
+    /**
+     * 获取数据长度
+     *
+     * @return
+     */
+    int getListSize();
 }

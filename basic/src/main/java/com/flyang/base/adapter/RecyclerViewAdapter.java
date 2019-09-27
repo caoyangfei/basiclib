@@ -34,10 +34,9 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
         super(context);
     }
 
-    public RecyclerViewAdapter(Context context, List<T> datas) {
-        super(context, datas);
+    public RecyclerViewAdapter(Context context, List<T> dates) {
+        super(context, dates);
     }
-
 
     /**
      * 添加金多样式的item

@@ -26,9 +26,9 @@ public class TestItem2View extends MultiItemView<String> {
     }
 
     @Override
-    public boolean isForViewType(String item, int postion) {
-        if (postion % 4 == 2) {
-            return super.isForViewType(item, postion);
+    public boolean isForViewType(String item, int position) {
+        if (position % 4 == 2) {
+            return super.isForViewType(item, position);
         }
         return false;
     }

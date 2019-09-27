@@ -46,10 +46,10 @@ public abstract class MultiItemView<T> {
      * 是否显示(单数据多布局时用来判断什么时候显示哪个布局)
      *
      * @param item
-     * @param postion
+     * @param position
      * @return
      */
-    public boolean isForViewType(T item, int postion) {
+    public boolean isForViewType(T item, int position) {
         return true;
     }
 
@@ -109,7 +109,7 @@ public abstract class MultiItemView<T> {
      * @param multiItemView
      * @return
      */
-    public MultiItemView<T> addChildeItemView(MultiItemView<T> multiItemView) {
+    public MultiItemView<T> addChildeItemView(@NonNull MultiItemView<T> multiItemView) {
         list.add(multiItemView);
         return this;
     }
@@ -154,6 +154,11 @@ public abstract class MultiItemView<T> {
             onItemChildViewClickListener.onItemChildViewClick(childView, holder.getAdapterPosition(), action, obj);
     }
 
+    /**
+     * 拖动控制器
+     *
+     * @param draggableController
+     */
     public void setDraggableController(DraggableController draggableController) {
         this.draggableController = draggableController;
     }

@@ -1,6 +1,7 @@
 package com.flyang.base.adapter;
 
 import android.content.Context;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
@@ -16,6 +17,7 @@ import com.flyang.base.listener.OnLoadListener;
 import com.flyang.basic.R;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -79,14 +81,14 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
     protected OnLoadListener mLoadListener;
 
     public BaseRecyclerViewAdapter(Context context) {
-        this(context, null);
+        this(context, new LinkedList<>());
     }
 
-    public BaseRecyclerViewAdapter(Context context, List<T> datas) {
+    public BaseRecyclerViewAdapter(Context context, @NonNull List<T> dates) {
         this.mContext = context;
         multiTypePool = new MultiTypePool();
-        if (datas != null && datas.size() > 0) {
-            mDataList.addAll(datas);
+        if (dates.size() > 0) {
+            mDataList.addAll(dates);
         }
     }
 
@@ -96,10 +98,10 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param list
      */
     @Override
-    public void refreshList(List list) {
+    public void refreshList(@NonNull List<T> list) {
         mDataList.clear();
         mAnimLastPosition = -1;
-        if (list != null && list.size() > 0) {
+        if (list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
         }
@@ -111,8 +113,8 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param list
      */
     @Override
-    public void setList(List list) {
-        if (list != null && list.size() > 0) {
+    public void setList(@NonNull List<T> list) {
+        if (list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
         }
@@ -124,36 +126,25 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param t
      */
     @Override
-    public void addData(T t) {
+    public void addData(@NonNull T t) {
         addData(getHeadCounts() + getListSize(), t);
     }
 
-    /**
-     * 添加一条数据
-     *
-     * @param position 添加的位置，需要考虑HeadView的数量
-     * @param t        数据
-     */
+
+    //TODO 添加一条数据,只更新插入数据,position插入的位置,不包含头部
     @Override
-    public void addData(int position, T t) {
-        if (t != null) {
-            if (isInEmptyStatus()) {
-                notifyItemRemoved(mEmptyViewPosition);
-            }
-            mDataList.add(position - getHeadCounts(), t);
-            notifyItemInserted(position);
+    public void addData(@IntRange(from = 0) int position, @NonNull T t) {
+        if (isInEmptyStatus()) {
+            notifyItemRemoved(mEmptyViewPosition);
         }
+        mDataList.add(position, t);
+        notifyItemInserted(position + getHeadCounts());
     }
 
-    /**
-     * 添加数据集合
-     *
-     * @param list
-     */
     //TODO 只更新添加的部分
     @Override
-    public void addList(List list) {
-        if (list != null && list.size() > 0) {
+    public void addList(@NonNull List<T> list) {
+        if (list.size() > 0) {
             if (isInEmptyStatus()) {
                 notifyItemRemoved(mEmptyViewPosition);
             }
@@ -163,25 +154,16 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
         }
     }
 
-    /**
-     * 移除一项数据
-     *
-     * @param index 数据在list的索引
-     */
-    public void remove(int index) {
-        if (index >= getHeadCounts() && mDataList.size() > index) {
-            mDataList.remove(index - getHeadCounts());
+    //TODO 删除一条数据,index删除的数据位置,不包含头部在内
+    public void remove(@IntRange(from = 0) int index) {
+        if (mDataList.size() > index) {
+            mDataList.remove(index + getHeadCounts());
             notifyItemRemoved(index);
         }
     }
 
-    /**
-     * 移除一项数据
-     *
-     * @param t 数据实体
-     */
     @Override
-    public void remove(T t) {
+    public void remove(@NonNull T t) {
         int p = mDataList.indexOf(t);
         if (mDataList.remove(t)) {
             int position = p + getHeadCounts();
@@ -195,24 +177,13 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
         notifyDataSetChanged();
     }
 
-    /**
-     * 数据集合
-     *
-     * @return
-     */
     @NonNull
     public List<T> getList() {
         return mDataList;
     }
 
-    /**
-     * 查询其中位置数据
-     *
-     * @param position
-     * @return
-     */
     @Override
-    public T getItem(int position) {
+    public T getItem(@IntRange(from = 0) int position) {
         T data = null;
         int realIndex = position - getHeadCounts();
         if (realIndex < mDataList.size()) {
@@ -221,7 +192,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
         return data;
     }
 
-    protected int getListSize() {
+    public int getListSize() {
         return mDataList.size();
     }
 
@@ -562,7 +533,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * 判断当前是否符合空数据状态
      */
     public boolean isInEmptyStatus() {
-        if (!isEnableEmpty) return isEnableEmpty;
+        if (!isEnableEmpty) return false;
         if (mEmptyViewId == 0 && mEmptyView == null) {
             mEmptyViewId = R.layout.empty_default;
         }

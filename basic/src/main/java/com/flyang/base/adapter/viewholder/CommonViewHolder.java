@@ -29,7 +29,7 @@ import android.widget.TextView;
  * 公共的ViewHolder
  */
 public class CommonViewHolder extends RecyclerView.ViewHolder {
-    private SparseArray<View> mViews;
+    private SparseArray<View> mViews;//稀疏数组节省内存,折半查找,执行效率比HashMap对象映射慢一点,影响不大
     private View mConvertView;
     private Context mContext;
 
@@ -37,7 +37,7 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         mContext = context;
         mConvertView = itemView;
-        mViews = new SparseArray();
+        mViews = new SparseArray<>();
     }
 
     public static CommonViewHolder createViewHolder(Context context, View itemView) {
