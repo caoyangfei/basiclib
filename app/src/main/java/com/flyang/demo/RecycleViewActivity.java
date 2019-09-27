@@ -18,9 +18,11 @@ import com.flyang.base.adapter.animation.AnimationConstant;
 import com.flyang.base.adapter.decoration.GridAndStaggeredDecoration;
 import com.flyang.base.controller.loader.IndicatorLoaderController;
 import com.flyang.base.controller.loader.ShapeLoadingController;
+import com.flyang.base.listener.OnItemChildViewClickListener;
 import com.flyang.base.listener.OnItemDragListener;
 import com.flyang.base.listener.OnItemSwipeListener;
 import com.flyang.base.listener.OnLoadListener;
+import com.flyang.util.log.LogUtils;
 import com.flyang.view.inter.Loader;
 import com.flyang.view.loader.indicator.IndicatorStyle;
 
@@ -41,7 +43,7 @@ public class RecycleViewActivity extends BasePresenterActivity {
     @BindView("recycleview")
     RecyclerView recyclerView;
 
-    private LinkedList<String> strings;
+    private LinkedList strings;
     private RecyclerViewAdapter recyclerViewAdapter;
 
     private int page = 0;
@@ -67,8 +69,14 @@ public class RecycleViewActivity extends BasePresenterActivity {
     @Override
     protected void initData() {
         super.initData();
-        strings = new LinkedList<>();
-        for (int i = 0; i < 10; i++) {
+        strings = new LinkedList();
+        for (int i = 0; i < 5; i++) {
+            strings.add("条目" + i);
+        }
+        for (int i = 0; i < 5; i++) {
+            strings.add(100 + i);
+        }
+        for (int i = 0; i < 5; i++) {
             strings.add("条目" + i);
         }
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
@@ -92,7 +100,14 @@ public class RecycleViewActivity extends BasePresenterActivity {
         });
         DraggableController mDraggableController = new DraggableController(recyclerViewAdapter);
         TestItemView testItemView = new TestItemView();
-        recyclerViewAdapter.addMultiItem(String.class, testItemView).addMultiItem(String.class, new TestItem2View());
+        testItemView.setOnItemChildViewClickListener(new OnItemChildViewClickListener<String>() {
+            @Override
+            public void onItemChildViewClick(View childView, int position, int action, String s) {
+                LogUtils.e("测试点击事件===>" + position + "===>" + s);
+            }
+        });
+        recyclerViewAdapter.addMultiItem(String.class, new TestItem2View());
+        recyclerViewAdapter.addMultiItem(Integer.class, new TestItem3View());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.refreshList(strings);
         testItemView.setDraggableController(mDraggableController);

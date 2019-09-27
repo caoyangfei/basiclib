@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.flyang.api.bind.FacadeBind;
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
+import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 import com.flyang.base.listener.OnItemChildViewClickListener;
 
 import java.util.ArrayList;
@@ -19,14 +20,10 @@ import java.util.List;
  * ------------- Description -------------
  * item实现基类
  */
-public abstract class MultiItemView<T> {
-    private List<MultiItemView<T>> list = new ArrayList<>();
-    private OnItemChildViewClickListener onItemChildViewClickListener;
+public abstract class MultiItemView<T, V extends CommonViewHolder> {
+    private List<MultiItemView<T, V>> list = new ArrayList<>();
+    private OnItemChildViewClickListener<T> onItemChildViewClickListener;
     private DraggableController draggableController;//拖动控制器
-    private int position = -1;
-    private T item;
-
-    protected CommonViewHolder holder;
 
     public MultiItemView() {
 
@@ -90,36 +87,33 @@ public abstract class MultiItemView<T> {
      * @param item
      * @param position
      */
-    public void onBindView(@NonNull final CommonViewHolder holder, @NonNull T item, int position) {
-        this.holder = holder;
-        this.position = position;
-        this.item = item;
-        init();
+    public void onBindData(@NonNull final V holder, @NonNull T item, int position) {
+        init(holder, item, position);
     }
 
     /**
      * 初始化
      */
-    private void init() {
+    private void init(@NonNull final V holder, @NonNull T item, int position) {
         //绑定运行时注解
-        FacadeBind.bind(this, holder.itemView);
-        if (draggableController != null) {
-            draggableController.initView(holder);
+        FacadeBind.bind(this, holder.getConvertView());
+        if (draggableController != null && holder instanceof RecyclerViewHolder) {
+            draggableController.initView(((RecyclerViewHolder) holder));
         }
-        initView();
-        initListener();
+        initView(holder, item, position);
+        initListener(holder, item, position);
     }
 
     /**
      * 初始化view
      */
-    protected void initView() {
+    protected void initView(@NonNull final V holder, @NonNull T item, int position) {
     }
 
     /**
      * 初始化监听
      */
-    protected void initListener() {
+    protected void initListener(@NonNull final V holder, @NonNull T item, int position) {
     }
 
     /**
@@ -128,7 +122,7 @@ public abstract class MultiItemView<T> {
      * @param multiItemView
      * @return
      */
-    public MultiItemView<T> addChildeItemView(@NonNull MultiItemView<T> multiItemView) {
+    public MultiItemView<T, V> addChildeItemView(@NonNull MultiItemView<T, V> multiItemView) {
         list.add(multiItemView);
         return this;
     }
@@ -145,7 +139,7 @@ public abstract class MultiItemView<T> {
             return true;
     }
 
-    public List<MultiItemView<T>> getChildList() {
+    public List<MultiItemView<T, V>> getChildList() {
         return list;
     }
 
@@ -157,7 +151,7 @@ public abstract class MultiItemView<T> {
      *
      * @param onItemChildViewClickListener
      */
-    public void setOnItemChildViewClickListener(OnItemChildViewClickListener onItemChildViewClickListener) {
+    public void setOnItemChildViewClickListener(OnItemChildViewClickListener<T> onItemChildViewClickListener) {
         this.onItemChildViewClickListener = onItemChildViewClickListener;
     }
 
@@ -167,9 +161,9 @@ public abstract class MultiItemView<T> {
      * @param childView 事件子控件
      * @param action    活动类型
      */
-    protected void onItemChildViewClick(View childView, int action) {
+    protected void onItemChildViewClick(View childView, int action, int position, T t) {
         if (onItemChildViewClickListener != null)
-            onItemChildViewClickListener.onItemChildViewClick(childView, position, action, item);
+            onItemChildViewClickListener.onItemChildViewClick(childView, position, action, t);
     }
 
     /**

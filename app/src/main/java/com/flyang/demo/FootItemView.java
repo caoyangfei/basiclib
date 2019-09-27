@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.flyang.annotation.apt.BindView;
 import com.flyang.base.adapter.MultiItemView;
-import com.flyang.base.adapter.viewholder.CommonViewHolder;
+import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 
 /**
  * @author yangfei.cao
@@ -13,7 +13,7 @@ import com.flyang.base.adapter.viewholder.CommonViewHolder;
  * @date 2019/9/22
  * ------------- Description -------------
  */
-public class FootItemView extends MultiItemView<String> {
+public class FootItemView extends MultiItemView<String,RecyclerViewHolder> {
     @BindView("textview")
     TextView textview;
 
@@ -24,8 +24,8 @@ public class FootItemView extends MultiItemView<String> {
     }
 
     @Override
-    public void onBindView(@NonNull CommonViewHolder holder, @NonNull String item, int position) {
-        super.onBindView(holder, item, position);
+    public void onBindData(@NonNull RecyclerViewHolder holder, @NonNull String item, int position) {
+        super.onBindData(holder, item, position);
 //        holder.setText(R.id.textview, item);
         textview.setText("这是底部");
     }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
+import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 import com.flyang.util.data.PreconditionUtils;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
  * ------------- Description -------------
  * 对外RecyclerViewAdapter
  */
-public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
+public class RecyclerViewAdapter extends BaseRecyclerViewAdapter {
 
     protected @Nullable
     LayoutInflater inflater;
@@ -35,7 +36,7 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
         super(context);
     }
 
-    public RecyclerViewAdapter(Context context, List<T> dates) {
+    public RecyclerViewAdapter(Context context, List dates) {
         super(context, dates);
     }
 
@@ -44,17 +45,16 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
      *
      * @param clazz
      * @param multiItemView
-     * @param <T>
      * @return
      */
-    public <T> RecyclerViewAdapter addMultiItem(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T> multiItemView) {
+    public <T, V extends CommonViewHolder> RecyclerViewAdapter addMultiItem(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T, V> multiItemView) {
         multiTypePool.addItemView(clazz, multiItemView);
         return this;
     }
 
 
     @Override
-    public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         PreconditionUtils.checkArgument(viewType != -1, "请检查MultiItemView,没找到匹配的Item View");
         if (inflater == null) {
             inflater = LayoutInflater.from(mContext);
@@ -62,25 +62,25 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
         //ViewType大小数序：EMPTY  > HEADER > FOOTER  > LOAD_MORE > SECTION_LABEL
         if (viewType == ViewType.EMPTY) {
             if (mEmptyView != null) {
-                return CommonViewHolder.createViewHolder(mContext, mEmptyView);
+                return RecyclerViewHolder.createViewHolder(mContext, mEmptyView);
             } else {
-                CommonViewHolder viewHolder = CommonViewHolder.createViewHolder(mContext, parent, mEmptyViewId);
+                RecyclerViewHolder viewHolder = RecyclerViewHolder.createViewHolder(mContext, parent, mEmptyViewId);
                 mEmptyView = viewHolder.getConvertView();
                 return viewHolder;
             }
         } else if (viewType >= ViewType.HEADER && mHeaderViews != null && mHeaderViews.get(viewType) != null) {
-            return CommonViewHolder.createViewHolder(mContext, mHeaderViews.get(viewType));
+            return RecyclerViewHolder.createViewHolder(mContext, mHeaderViews.get(viewType));
         } else if (viewType == ViewType.LOAD_MORE && isLoadMoreEnable()) {
-            return CommonViewHolder.createViewHolder(mContext, mLoadMoreLayout);
+            return RecyclerViewHolder.createViewHolder(mContext, mLoadMoreLayout);
         } else if (viewType >= ViewType.FOOTER && mFooterViews != null && mFooterViews.get(viewType) != null) {
-            return CommonViewHolder.createViewHolder(mContext, mFooterViews.get(viewType));
+            return RecyclerViewHolder.createViewHolder(mContext, mFooterViews.get(viewType));
         } else {
             MultiItemView multiItemView = multiTypePool.getMultiItemView(viewType);
             multiTypePool.setMaxRecycledViews(parent, viewType);
             if (multiItemView.isAddParent()) {
-                return CommonViewHolder.createViewHolder(mContext, parent, multiItemView.getLayoutId());
+                return RecyclerViewHolder.createViewHolder(mContext, parent, multiItemView.getLayoutId());
             } else {
-                return CommonViewHolder.createViewHolder(mContext, null, multiItemView.getLayoutId());
+                return RecyclerViewHolder.createViewHolder(mContext, null, multiItemView.getLayoutId());
             }
         }
 
@@ -89,7 +89,7 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
 
     @SuppressLint("CheckResult")
     @Override
-    public void onBindViewHolder(final CommonViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
         if (isInEmptyStatus()) {
             onBindEmptyView(holder, position);
             return;
@@ -99,9 +99,9 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
             mLoadMoreLayout.handleLoadMoreRequest();
             return;
         }
-        T item = mDataList.get(position);
+        Object item = mDataList.get(position);
         MultiItemView binder = multiTypePool.getMultiItemView(holder.getItemViewType());
-        binder.onBindView(holder, item, position);
+        binder.onBindData(holder, item, position);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
     }
 
     @Override
-    public void onViewAttachedToWindow(CommonViewHolder holder) {
+    public void onViewAttachedToWindow(RecyclerViewHolder holder) {
         super.onViewAttachedToWindow(holder);
         // 根据是不是空页面，头部，底部，设置显示数量
         if (isInHeadViewPos(holder.getLayoutPosition())
@@ -157,7 +157,7 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
      * @param holder
      * @param position
      */
-    public void onBindEmptyView(@NonNull final CommonViewHolder holder, int position) {
+    public void onBindEmptyView(@NonNull final RecyclerViewHolder holder, int position) {
 
     }
 

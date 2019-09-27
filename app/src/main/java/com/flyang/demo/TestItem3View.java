@@ -13,7 +13,7 @@ import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
  * @date 2019/9/22
  * ------------- Description -------------
  */
-public class TestItem2View extends MultiItemView<String, RecyclerViewHolder> {
+public class TestItem3View extends MultiItemView<Integer, RecyclerViewHolder> {
 
     @BindView("textview")
     TextView textview;
@@ -25,7 +25,7 @@ public class TestItem2View extends MultiItemView<String, RecyclerViewHolder> {
     }
 
     @Override
-    public boolean isForViewType(String item, int position) {
+    public boolean isForViewType(Integer item, int position) {
         return true;
     }
 
@@ -36,7 +36,7 @@ public class TestItem2View extends MultiItemView<String, RecyclerViewHolder> {
     }
 
     @Override
-    public void onBindData(@NonNull RecyclerViewHolder holder, @NonNull String item, int position) {
+    public void onBindData(@NonNull RecyclerViewHolder holder, @NonNull Integer item, int position) {
         super.onBindData(holder, item, position);
         textview.setText("标题:" + item);
     }

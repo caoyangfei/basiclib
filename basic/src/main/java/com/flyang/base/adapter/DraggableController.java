@@ -9,7 +9,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.flyang.base.adapter.viewholder.CommonViewHolder;
+import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 import com.flyang.base.listener.IDraggableListener;
 import com.flyang.base.listener.OnItemDragListener;
 import com.flyang.base.listener.OnItemSwipeListener;
@@ -44,7 +44,7 @@ public class DraggableController implements IDraggableListener {
         mAdapter = adapter;
     }
 
-    public void initView(CommonViewHolder holder) {
+    public void initView(RecyclerViewHolder holder) {
         int position = holder.getLayoutPosition();
         if (mItemTouchHelper != null && itemDragEnabled && !mAdapter.isInLoadMorePos(position) && !mAdapter.isInHeadViewPos(position)
                 && !mAdapter.isInEmptyStatus() && !mAdapter.isInFootViewPos(position)) {

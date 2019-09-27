@@ -9,14 +9,14 @@ import android.view.View;
  * ------------- Description -------------
  * 子控件点击监听
  */
-public interface OnItemChildViewClickListener {
+public interface OnItemChildViewClickListener<T> {
     /**
      * item 内子控件点击事件监听回调
      *
      * @param childView 子控件
      * @param position  索引
      * @param action    活动类型
-     * @param obj       额外数据
+     * @param t       额外数据
      */
-    void onItemChildViewClick(View childView, int position, int action, Object obj);
+    void onItemChildViewClick(View childView, int position, int action, T t);
 }

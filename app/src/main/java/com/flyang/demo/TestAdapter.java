@@ -5,15 +5,15 @@ import android.support.annotation.NonNull;
 
 import com.flyang.base.adapter.MultiItemView;
 import com.flyang.base.adapter.RecyclerViewAdapter;
-import com.flyang.base.adapter.viewholder.CommonViewHolder;
+import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 
-public class TestAdapter extends RecyclerViewAdapter<String> {
+public class TestAdapter extends RecyclerViewAdapter {
     public TestAdapter(Context context) {
         super(context);
         addMultiItem(String.class, new MyView());
     }
 
-    public class MyView extends MultiItemView<String> {
+    public class MyView extends MultiItemView<String, AbsListViewHolder> {
         @NonNull
         @Override
         public int getLayoutId() {
@@ -21,14 +21,13 @@ public class TestAdapter extends RecyclerViewAdapter<String> {
         }
 
         @Override
-        protected void initListener() {
-            super.initListener();
-            String item = getItem(holder.getLayoutPosition());
+        protected void initListener(@NonNull AbsListViewHolder holder, @NonNull String item, int position) {
+            super.initListener(holder, item, position);
         }
 
         @Override
-        public void onBindView(@NonNull CommonViewHolder holder, @NonNull String item, int position) {
-            super.onBindView(holder, item, position);
+        public void onBindData(@NonNull AbsListViewHolder holder, @NonNull String item, int position) {
+            super.onBindData(holder, item, position);
 
         }
     }

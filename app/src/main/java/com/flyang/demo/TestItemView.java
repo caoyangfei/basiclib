@@ -1,15 +1,13 @@
 package com.flyang.demo;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.flyang.annotation.apt.BindView;
-import com.flyang.base.adapter.DraggableController;
 import com.flyang.base.adapter.MultiItemView;
-import com.flyang.base.adapter.viewholder.CommonViewHolder;
+import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 
 /**
  * @author yangfei.cao
@@ -17,7 +15,7 @@ import com.flyang.base.adapter.viewholder.CommonViewHolder;
  * @date 2019/9/22
  * ------------- Description -------------
  */
-public class TestItemView extends MultiItemView<String> {
+public class TestItemView extends MultiItemView<String, AbsListViewHolder> {
     @BindView("iv")
     ImageView iv;
     @BindView("tv")
@@ -33,32 +31,25 @@ public class TestItemView extends MultiItemView<String> {
     }
 
     @Override
-    protected void initListener() {
-        super.initListener();
+    public boolean isForViewType(String item, int position) {
+        return true;
+    }
+
+    @Override
+    protected void initListener(@NonNull AbsListViewHolder holder, @NonNull String item, int position) {
+        super.initListener(holder, item, position);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemChildViewClick(v, 0);
+                onItemChildViewClick(v, 0, position, item);
             }
         });
-//        holder.getConvertView().setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onItemChildViewClick(v, 0);
-//            }
-//        });
     }
-//    @Override
-//    public boolean isForViewType(String item, int postion) {
-//        if (postion % 4 == 2) {
-//            return false;
-//        }
-//        return super.isForViewType(item, postion);
-//    }
+
 
     @Override
-    public void onBindView(@NonNull CommonViewHolder holder, @NonNull String item, int position) {
-        super.onBindView(holder, item, position);
+    public void onBindData(@NonNull AbsListViewHolder holder, @NonNull String item, int position) {
+        super.onBindData(holder, item, position);
         tv.setText(item);
     }
 

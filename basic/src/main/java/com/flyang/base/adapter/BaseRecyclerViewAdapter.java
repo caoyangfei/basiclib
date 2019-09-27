@@ -13,6 +13,7 @@ import com.flyang.base.adapter.pool.MultiTypePool;
 import com.flyang.base.adapter.view.BaseLoadMoreView;
 import com.flyang.base.adapter.view.DefaultLoadMoreView;
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
+import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 import com.flyang.base.listener.OnLoadListener;
 import com.flyang.basic.R;
 
@@ -31,12 +32,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * BaseRecyclerViewAdapter公共adapter
  * 放入数据操作，空页面，头部，底部，动画
  */
-abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> implements IListAdapter<T> {
+abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> implements IListAdapter {
     //上下文
     protected Context mContext;
 
     //数据源
-    protected List<T> mDataList = new ArrayList<>();
+    protected List mDataList = new ArrayList<>();
 
     //布局缓存池
     protected MultiTypePool multiTypePool;
@@ -84,7 +85,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
         this(context, new LinkedList<>());
     }
 
-    public BaseRecyclerViewAdapter(Context context, List<T> dates) {
+    public BaseRecyclerViewAdapter(Context context, List dates) {
         this.mContext = context;
         multiTypePool = new MultiTypePool();
         if (dates != null && dates.size() > 0) {
@@ -98,7 +99,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param list
      */
     @Override
-    public void refreshList(List<T> list) {
+    public void refreshList(List list) {
         mDataList.clear();
         mAnimLastPosition = -1;
         if (list != null && list.size() > 0) {
@@ -113,7 +114,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param list
      */
     @Override
-    public void setList(List<T> list) {
+    public void setList(List list) {
         if (list != null && list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
@@ -126,14 +127,14 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param t
      */
     @Override
-    public void addData(@NonNull T t) {
+    public void addData(@NonNull Object t) {
         addData(getHeadCounts() + getListSize(), t);
     }
 
 
     //TODO 添加一条数据,只更新插入数据,position插入的位置,不包含头部
     @Override
-    public void addData(@IntRange(from = 0) int position, @NonNull T t) {
+    public void addData(@IntRange(from = 0) int position, @NonNull Object t) {
         if (isInEmptyStatus()) {
             notifyItemRemoved(mEmptyViewPosition);
         }
@@ -143,7 +144,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
 
     //TODO 只更新添加的部分
     @Override
-    public void addList(List<T> list) {
+    public void addList(List list) {
         if (list != null && list.size() > 0) {
             if (isInEmptyStatus()) {
                 notifyItemRemoved(mEmptyViewPosition);
@@ -163,7 +164,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
     }
 
     @Override
-    public void remove(@NonNull T t) {
+    public void remove(@NonNull Object t) {
         int p = mDataList.indexOf(t);
         if (mDataList.remove(t)) {
             int position = p + getHeadCounts();
@@ -178,13 +179,13 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
     }
 
     @NonNull
-    public List<T> getList() {
+    public List getList() {
         return mDataList;
     }
 
     @Override
-    public T getItem(@IntRange(from = 0) int position) {
-        T data = null;
+    public Object getItem(@IntRange(from = 0) int position) {
+        Object data = null;
         int realIndex = position - getHeadCounts();
         if (realIndex < mDataList.size()) {
             data = mDataList.get(realIndex);
@@ -216,7 +217,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
         } else if (isInFootViewPos(position)) {
             return mFooterViews.keyAt(position - getListSize() - getHeadCounts() - getEmptyViewCounts());
         } else {
-            T item = mDataList.get(position);
+            Object item = mDataList.get(position);
             return multiTypePool.getItemViewType(item, position);
         }
     }
@@ -522,7 +523,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param holder
      * @param position
      */
-    protected void startItemAnim(CommonViewHolder holder, int position) {
+    protected void startItemAnim(RecyclerViewHolder holder, int position) {
         if (isItemAnimEnable() && position > mAnimLastPosition) {
             mAnimLastPosition = position;
             mAnimation.startAnim(holder.itemView);

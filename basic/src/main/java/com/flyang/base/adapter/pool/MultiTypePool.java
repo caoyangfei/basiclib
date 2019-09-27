@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import com.flyang.base.adapter.MultiItemView;
 import com.flyang.base.adapter.ViewType;
+import com.flyang.base.adapter.viewholder.CommonViewHolder;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -48,9 +49,8 @@ public final class MultiTypePool {
      *
      * @param clazz
      * @param multiItemView
-     * @param <T>
      */
-    public <T> void addItemView(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T> multiItemView) {
+    public <T, V extends CommonViewHolder> void addItemView(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T, V> multiItemView) {
         addItemView(clazz, multiItemView, ViewType.SECTION_LABEL);
     }
 
@@ -59,9 +59,8 @@ public final class MultiTypePool {
      *
      * @param clazz
      * @param multiItemView
-     * @param <T>
      */
-    public <T> void addItemView(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T> multiItemView, int type) {
+    public <T, V extends CommonViewHolder> void addItemView(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T, V> multiItemView, int type) {
         CopyOnWriteArrayList<MultiItemView> list = calssItemViewListMap.get(clazz);
         if (list == null) {
             list = new CopyOnWriteArrayList<>();
@@ -69,7 +68,7 @@ public final class MultiTypePool {
         int itemType = itemTypeViewMap.size() + type;
         if (multiItemView.haveChild()) {
             list.addAll(multiItemView.getChildList());
-            for (MultiItemView<T> tMultiItemView : multiItemView.getChildList()) {
+            for (MultiItemView<T, V> tMultiItemView : multiItemView.getChildList()) {
                 itemTypeViewMap.put(itemType, tMultiItemView);
                 itemViewTypeMap.put(tMultiItemView, itemType);
                 itemType++;

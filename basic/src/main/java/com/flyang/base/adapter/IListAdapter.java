@@ -12,43 +12,43 @@ import java.util.List;
  * ------------- Description -------------
  * adapter接口
  */
-public interface IListAdapter<T> {
+public interface IListAdapter {
     /**
      * 刷新数据(清空旧数据,添加新数据)
      *
      * @param list
      */
-    void refreshList(List<T> list);
+    void refreshList(List list);
 
     /**
      * 设置数据(全部刷新)
      *
      * @param list
      */
-    void setList(List<T> list);
+    void setList(List list);
 
     /**
      * 添加一条数据
      *
-     * @param t
+     * @param o
      */
-    void addData(@NonNull T t);
+    void addData(@NonNull Object o);
 
     /**
      * position添加一条数据
      *
-     * @param t
+     * @param o
      */
-    void addData(@IntRange(from = 0) int position, @NonNull T t);
+    void addData(@IntRange(from = 0) int position, @NonNull Object o);
 
     /**
      * 添加数据集合
      * RecycleView,添加数据局部刷新
-     * ListView和setList(List<T> list)效果相同
+     * ListView和setList(List list)效果相同
      *
      * @param list
      */
-    void addList(List<T> list);
+    void addList(List list);
 
     /**
      * 移除一项数据
@@ -60,9 +60,9 @@ public interface IListAdapter<T> {
     /**
      * 移除一项数据
      *
-     * @param t 数据实体
+     * @param o 数据实体
      */
-    void remove(@NonNull T t);
+    void remove(@NonNull Object o);
 
     /**
      * 清空数据
@@ -74,7 +74,7 @@ public interface IListAdapter<T> {
      *
      * @return
      */
-    List<T> getList();
+    List getList();
 
     /**
      * 获取position位置数据
@@ -82,7 +82,7 @@ public interface IListAdapter<T> {
      * @param position
      * @return
      */
-    T getItem(@IntRange(from = 0) int position);
+    Object getItem(@IntRange(from = 0) int position);
 
     /**
      * 获取数据长度

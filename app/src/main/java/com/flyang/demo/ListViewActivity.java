@@ -12,7 +12,9 @@ import com.flyang.annotation.apt.BindView;
 import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.adapter.AbsListViewAdapter;
 import com.flyang.base.adapter.animation.AnimationConstant;
+import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 import com.flyang.base.listener.OnItemChildViewClickListener;
+import com.flyang.util.log.LogUtils;
 
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +27,7 @@ public class ListViewActivity extends BasePresenterActivity {
     @BindView("listView")
     ListView listView;
     private LinkedList strings;
-    private AbsListViewAdapter<String> adapter;
+    private AbsListViewAdapter adapter;
 
     @Override
     protected int getLayoutID() {
@@ -57,12 +59,12 @@ public class ListViewActivity extends BasePresenterActivity {
         for (int i = 0; i < 10; i++) {
             strings.add("条目" + i);
         }
-        adapter = new AbsListViewAdapter<>(this);
+        adapter = new AbsListViewAdapter(this);
         TestItemView testItemView = new TestItemView();
-        testItemView.setOnItemChildViewClickListener(new OnItemChildViewClickListener() {
+        testItemView.setOnItemChildViewClickListener(new OnItemChildViewClickListener<String>() {
             @Override
-            public void onItemChildViewClick(View childView, int position, int action, Object obj) {
-
+            public void onItemChildViewClick(View childView, int position, int action, String s) {
+                LogUtils.e("测试点击事件===>" + position + "===>" + s);
             }
         });
         adapter.addMultiItem(String.class, testItemView).addMultiItem(String.class, testItemView);
