@@ -10,7 +10,6 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.flyang.base.adapter.RecyclerViewAdapter;
-import com.flyang.base.adapter.viewholder.CommonViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

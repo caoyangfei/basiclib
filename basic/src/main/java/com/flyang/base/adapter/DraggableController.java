@@ -9,7 +9,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MotionEvent;
 import android.view.View;
 
-
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
 import com.flyang.base.listener.IDraggableListener;
 import com.flyang.base.listener.OnItemDragListener;

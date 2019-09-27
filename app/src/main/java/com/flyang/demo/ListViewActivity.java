@@ -43,7 +43,7 @@ public class ListViewActivity extends BasePresenterActivity {
         for (int i = 0; i < 10; i++) {
             strings.add("条目" + i);
         }
-        adapter = new AbsListViewAdapter<String>(this);
+        adapter = new AbsListViewAdapter<>(this);
         TestItemView testItemView = new TestItemView();
         adapter.addMultiItem(String.class, testItemView).addMultiItem(String.class, testItemView);
         adapter.openLoadAnimation(AnimationConstant.SLIDEIN_RIGHT);
