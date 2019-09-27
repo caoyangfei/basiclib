@@ -84,10 +84,10 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
         this(context, new LinkedList<>());
     }
 
-    public BaseRecyclerViewAdapter(Context context, @NonNull List<T> dates) {
+    public BaseRecyclerViewAdapter(Context context, List<T> dates) {
         this.mContext = context;
         multiTypePool = new MultiTypePool();
-        if (dates.size() > 0) {
+        if (dates != null && dates.size() > 0) {
             mDataList.addAll(dates);
         }
     }
@@ -98,10 +98,10 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param list
      */
     @Override
-    public void refreshList(@NonNull List<T> list) {
+    public void refreshList(List<T> list) {
         mDataList.clear();
         mAnimLastPosition = -1;
-        if (list.size() > 0) {
+        if (list != null && list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
         }
@@ -113,8 +113,8 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
      * @param list
      */
     @Override
-    public void setList(@NonNull List<T> list) {
-        if (list.size() > 0) {
+    public void setList(List<T> list) {
+        if (list != null && list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
         }
@@ -143,8 +143,8 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommonVie
 
     //TODO 只更新添加的部分
     @Override
-    public void addList(@NonNull List<T> list) {
-        if (list.size() > 0) {
+    public void addList(List<T> list) {
+        if (list != null && list.size() > 0) {
             if (isInEmptyStatus()) {
                 notifyItemRemoved(mEmptyViewPosition);
             }

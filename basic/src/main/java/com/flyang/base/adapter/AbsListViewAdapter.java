@@ -5,6 +5,7 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -51,10 +52,10 @@ public class AbsListViewAdapter<T> extends BaseAdapter implements IListAdapter<T
         this(context, new LinkedList<>());
     }
 
-    public AbsListViewAdapter(Context context, @NonNull List<T> dates) {
+    public AbsListViewAdapter(Context context, List<T> dates) {
         this.mContext = context;
         multiTypePool = new MultiTypePool();
-        if (dates.size() > 0) {
+        if (dates != null && dates.size() > 0) {
             mDataList.addAll(dates);
         }
     }
@@ -73,18 +74,18 @@ public class AbsListViewAdapter<T> extends BaseAdapter implements IListAdapter<T
     }
 
     @Override
-    public void refreshList(@NonNull List<T> list) {
+    public void refreshList(List<T> list) {
         mDataList.clear();
         mAnimLastPosition = -1;
-        if (list.size() > 0) {
+        if (list != null && list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
         }
     }
 
     @Override
-    public void setList(@NonNull List<T> list) {
-        if (list.size() > 0) {
+    public void setList(List<T> list) {
+        if (list != null && list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
         }
@@ -103,8 +104,8 @@ public class AbsListViewAdapter<T> extends BaseAdapter implements IListAdapter<T
 
     //TODO 刷新全部
     @Override
-    public void addList(@NonNull List<T> list) {
-        if (list.size() > 0) {
+    public void addList(List<T> list) {
+        if (list != null && list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
         }

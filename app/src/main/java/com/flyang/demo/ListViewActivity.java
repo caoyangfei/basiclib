@@ -5,12 +5,14 @@ import android.app.Activity;
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.flyang.annotation.apt.BindView;
 import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.adapter.AbsListViewAdapter;
 import com.flyang.base.adapter.animation.AnimationConstant;
+import com.flyang.base.listener.OnItemChildViewClickListener;
 
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +39,18 @@ public class ListViewActivity extends BasePresenterActivity {
     }
 
     @Override
+    protected void initListener() {
+        super.initListener();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+            }
+        });
+
+    }
+
+    @Override
     protected void initData() {
         super.initData();
         strings = new LinkedList<>();
@@ -45,6 +59,12 @@ public class ListViewActivity extends BasePresenterActivity {
         }
         adapter = new AbsListViewAdapter<>(this);
         TestItemView testItemView = new TestItemView();
+        testItemView.setOnItemChildViewClickListener(new OnItemChildViewClickListener() {
+            @Override
+            public void onItemChildViewClick(View childView, int position, int action, Object obj) {
+
+            }
+        });
         adapter.addMultiItem(String.class, testItemView).addMultiItem(String.class, testItemView);
         adapter.openLoadAnimation(AnimationConstant.SLIDEIN_RIGHT);
 

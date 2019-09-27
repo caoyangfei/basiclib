@@ -2,6 +2,7 @@ package com.flyang.demo;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +32,22 @@ public class TestItemView extends MultiItemView<String> {
         return R.layout.item_section_content;
     }
 
+    @Override
+    protected void initListener() {
+        super.initListener();
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemChildViewClick(v, 0);
+            }
+        });
+//        holder.getConvertView().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onItemChildViewClick(v, 0);
+//            }
+//        });
+    }
 //    @Override
 //    public boolean isForViewType(String item, int postion) {
 //        if (postion % 4 == 2) {

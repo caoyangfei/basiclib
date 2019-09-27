@@ -22,8 +22,11 @@ import java.util.List;
 public abstract class MultiItemView<T> {
     private List<MultiItemView<T>> list = new ArrayList<>();
     private OnItemChildViewClickListener onItemChildViewClickListener;
-    private CommonViewHolder holder;
     private DraggableController draggableController;//拖动控制器
+    private int position = -1;
+    private T item;
+
+    protected CommonViewHolder holder;
 
     public MultiItemView() {
 
@@ -88,13 +91,29 @@ public abstract class MultiItemView<T> {
      * @param position
      */
     public void onBindView(@NonNull final CommonViewHolder holder, @NonNull T item, int position) {
+        this.holder = holder;
+        this.position = position;
+        this.item = item;
+        init();
+    }
+
+    /**
+     * 初始化
+     */
+    private void init() {
+        //绑定运行时注解
+        FacadeBind.bind(this, holder.itemView);
         if (draggableController != null) {
             draggableController.initView(holder);
         }
-        //绑定运行时注解
-        FacadeBind.bind(this, holder.itemView);
+        initView();
         initListener();
-        this.holder = holder;
+    }
+
+    /**
+     * 初始化view
+     */
+    protected void initView() {
     }
 
     /**
@@ -147,11 +166,10 @@ public abstract class MultiItemView<T> {
      *
      * @param childView 事件子控件
      * @param action    活动类型
-     * @param obj       额外数据
      */
-    protected void onItemChildViewClick(View childView, int action, Object obj) {
+    protected void onItemChildViewClick(View childView, int action) {
         if (onItemChildViewClickListener != null)
-            onItemChildViewClickListener.onItemChildViewClick(childView, holder.getAdapterPosition(), action, obj);
+            onItemChildViewClickListener.onItemChildViewClick(childView, position, action, item);
     }
 
     /**

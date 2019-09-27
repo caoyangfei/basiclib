@@ -18,14 +18,14 @@ public interface IListAdapter<T> {
      *
      * @param list
      */
-    void refreshList(@NonNull List<T> list);
+    void refreshList(List<T> list);
 
     /**
      * 设置数据(全部刷新)
      *
      * @param list
      */
-    void setList(@NonNull List<T> list);
+    void setList(List<T> list);
 
     /**
      * 添加一条数据
@@ -48,7 +48,7 @@ public interface IListAdapter<T> {
      *
      * @param list
      */
-    void addList(@NonNull List<T> list);
+    void addList(List<T> list);
 
     /**
      * 移除一项数据

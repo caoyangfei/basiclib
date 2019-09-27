@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
+import com.flyang.util.data.PreconditionUtils;
 
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
 
     @Override
     public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        PreconditionUtils.checkArgument(viewType != -1, "请检查MultiItemView,没找到匹配的Item View");
         if (inflater == null) {
             inflater = LayoutInflater.from(mContext);
         }

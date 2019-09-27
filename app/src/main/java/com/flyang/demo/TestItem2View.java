@@ -33,6 +33,8 @@ public class TestItem2View extends MultiItemView<String> {
         return false;
     }
 
+
+
     @Override
     public int getSpanCount() {
         return 2;
