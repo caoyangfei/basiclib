@@ -24,11 +24,6 @@ public class TestItem3View extends MultiItemView<Integer, RecyclerViewHolder> {
         return R.layout.item_text;
     }
 
-    @Override
-    public boolean isForViewType(Integer item, int position) {
-        return true;
-    }
-
 
     @Override
     public int getSpanCount() {

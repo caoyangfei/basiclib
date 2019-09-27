@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.flyang.annotation.apt.BindView;
 import com.flyang.base.adapter.MultiItemView;
+import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 
 /**
@@ -13,7 +14,7 @@ import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
  * @date 2019/9/22
  * ------------- Description -------------
  */
-public class TestItem2View extends MultiItemView<String, RecyclerViewHolder> {
+public class TestItem2View extends MultiItemView<String, AbsListViewHolder> {
 
     @BindView("textview")
     TextView textview;
@@ -26,6 +27,9 @@ public class TestItem2View extends MultiItemView<String, RecyclerViewHolder> {
 
     @Override
     public boolean isForViewType(String item, int position) {
+        if (position % 4 == 2) {
+            return super.isForViewType(item, position);
+        }
         return true;
     }
 
@@ -36,7 +40,7 @@ public class TestItem2View extends MultiItemView<String, RecyclerViewHolder> {
     }
 
     @Override
-    public void onBindData(@NonNull RecyclerViewHolder holder, @NonNull String item, int position) {
+    public void onBindData(@NonNull AbsListViewHolder holder, @NonNull String item, int position) {
         super.onBindData(holder, item, position);
         textview.setText("标题:" + item);
     }

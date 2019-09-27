@@ -106,7 +106,7 @@ public class RecycleViewActivity extends BasePresenterActivity {
                 LogUtils.e("测试点击事件===>" + position + "===>" + s);
             }
         });
-        recyclerViewAdapter.addMultiItem(String.class, new TestItem2View());
+        recyclerViewAdapter.addMultiItem(String.class, testItemView);
         recyclerViewAdapter.addMultiItem(Integer.class, new TestItem3View());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.refreshList(strings);

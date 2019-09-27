@@ -60,7 +60,7 @@ public class ListViewActivity extends BasePresenterActivity {
             strings.add("条目" + i);
         }
         adapter = new AbsListViewAdapter(this);
-        TestItemView testItemView = new TestItemView();
+        TestItem2View testItemView = new TestItem2View();
         testItemView.setOnItemChildViewClickListener(new OnItemChildViewClickListener<String>() {
             @Override
             public void onItemChildViewClick(View childView, int position, int action, String s) {

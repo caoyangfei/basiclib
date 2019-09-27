@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.flyang.annotation.apt.BindView;
 import com.flyang.base.adapter.MultiItemView;
 import com.flyang.base.adapter.viewholder.AbsListViewHolder;
+import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 
 /**
  * @author yangfei.cao
@@ -15,7 +16,7 @@ import com.flyang.base.adapter.viewholder.AbsListViewHolder;
  * @date 2019/9/22
  * ------------- Description -------------
  */
-public class TestItemView extends MultiItemView<String, AbsListViewHolder> {
+public class TestItemView extends MultiItemView<String, RecyclerViewHolder> {
     @BindView("iv")
     ImageView iv;
     @BindView("tv")
@@ -31,12 +32,7 @@ public class TestItemView extends MultiItemView<String, AbsListViewHolder> {
     }
 
     @Override
-    public boolean isForViewType(String item, int position) {
-        return true;
-    }
-
-    @Override
-    protected void initListener(@NonNull AbsListViewHolder holder, @NonNull String item, int position) {
+    protected void initListener(@NonNull RecyclerViewHolder holder, @NonNull String item, int position) {
         super.initListener(holder, item, position);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +44,7 @@ public class TestItemView extends MultiItemView<String, AbsListViewHolder> {
 
 
     @Override
-    public void onBindData(@NonNull AbsListViewHolder holder, @NonNull String item, int position) {
+    public void onBindData(@NonNull RecyclerViewHolder holder, @NonNull String item, int position) {
         super.onBindData(holder, item, position);
         tv.setText(item);
     }
