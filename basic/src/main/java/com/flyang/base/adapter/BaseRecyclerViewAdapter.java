@@ -32,12 +32,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * BaseRecyclerViewAdapter公共adapter
  * 放入数据操作，空页面，头部，底部，动画
  */
-abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> implements IListAdapter {
+abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> implements IListAdapter<T> {
     //上下文
     protected Context mContext;
 
     //数据源
-    protected List mDataList = new ArrayList<>();
+    protected List<T> mDataList = new ArrayList<>();
 
     //布局缓存池
     protected MultiTypePool multiTypePool;
@@ -85,7 +85,7 @@ abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         this(context, new LinkedList<>());
     }
 
-    public BaseRecyclerViewAdapter(Context context, List dates) {
+    public BaseRecyclerViewAdapter(Context context, List<T> dates) {
         this.mContext = context;
         multiTypePool = new MultiTypePool();
         if (dates != null && dates.size() > 0) {
@@ -99,7 +99,7 @@ abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
      * @param list
      */
     @Override
-    public void refreshList(List list) {
+    public void refreshList(List<T> list) {
         mDataList.clear();
         mAnimLastPosition = -1;
         if (list != null && list.size() > 0) {
@@ -114,7 +114,7 @@ abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
      * @param list
      */
     @Override
-    public void setList(List list) {
+    public void setList(List<T> list) {
         if (list != null && list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
@@ -127,14 +127,14 @@ abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
      * @param t
      */
     @Override
-    public void addData(@NonNull Object t) {
+    public void addData(@NonNull T t) {
         addData(getHeadCounts() + getListSize(), t);
     }
 
 
     //TODO 添加一条数据,只更新插入数据,position插入的位置,不包含头部
     @Override
-    public void addData(@IntRange(from = 0) int position, @NonNull Object t) {
+    public void addData(@IntRange(from = 0) int position, @NonNull T t) {
         if (isInEmptyStatus()) {
             notifyItemRemoved(mEmptyViewPosition);
         }
@@ -144,7 +144,7 @@ abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     //TODO 只更新添加的部分
     @Override
-    public void addList(List list) {
+    public void addList(List<T> list) {
         if (list != null && list.size() > 0) {
             if (isInEmptyStatus()) {
                 notifyItemRemoved(mEmptyViewPosition);
@@ -164,7 +164,7 @@ abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public void remove(@NonNull Object t) {
+    public void remove(@NonNull T t) {
         int p = mDataList.indexOf(t);
         if (mDataList.remove(t)) {
             int position = p + getHeadCounts();
@@ -179,13 +179,13 @@ abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @NonNull
-    public List getList() {
+    public List<T> getList() {
         return mDataList;
     }
 
     @Override
-    public Object getItem(@IntRange(from = 0) int position) {
-        Object data = null;
+    public T getItem(@IntRange(from = 0) int position) {
+        T data = null;
         int realIndex = position - getHeadCounts();
         if (realIndex < mDataList.size()) {
             data = mDataList.get(realIndex);
@@ -217,7 +217,7 @@ abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
         } else if (isInFootViewPos(position)) {
             return mFooterViews.keyAt(position - getListSize() - getHeadCounts() - getEmptyViewCounts());
         } else {
-            Object item = mDataList.get(position);
+            T item = mDataList.get(position);
             return multiTypePool.getItemViewType(item, position);
         }
     }

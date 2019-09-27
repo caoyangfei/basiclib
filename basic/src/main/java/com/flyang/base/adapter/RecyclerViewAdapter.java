@@ -27,7 +27,7 @@ import java.util.List;
  * ------------- Description -------------
  * 对外RecyclerViewAdapter
  */
-public class RecyclerViewAdapter extends BaseRecyclerViewAdapter {
+public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
 
     protected @Nullable
     LayoutInflater inflater;
@@ -36,7 +36,7 @@ public class RecyclerViewAdapter extends BaseRecyclerViewAdapter {
         super(context);
     }
 
-    public RecyclerViewAdapter(Context context, List dates) {
+    public RecyclerViewAdapter(Context context, List<T> dates) {
         super(context, dates);
     }
 
@@ -99,7 +99,7 @@ public class RecyclerViewAdapter extends BaseRecyclerViewAdapter {
             mLoadMoreLayout.handleLoadMoreRequest();
             return;
         }
-        Object item = mDataList.get(position);
+        T item = mDataList.get(position);
         MultiItemView binder = multiTypePool.getMultiItemView(holder.getItemViewType());
         binder.onBindData(holder, item, position);
     }

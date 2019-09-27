@@ -30,13 +30,13 @@ import java.util.List;
  * 使用控件{@link GridView,ListView }
  * 基类AbsListViewAdapter,子项设置动画
  */
-public class AbsListViewAdapter extends BaseAdapter implements IListAdapter {
+public class AbsListViewAdapter<T, V extends CommonViewHolder> extends BaseAdapter implements IListAdapter<T> {
 
     //条目布局
     public static int SECTION_LABEL = 0;
 
     protected Context mContext;
-    protected List mDataList = new ArrayList<>();
+    protected List<T> mDataList = new ArrayList<>();
 
     //布局缓存池
     protected MultiTypePool multiTypePool;
@@ -52,7 +52,7 @@ public class AbsListViewAdapter extends BaseAdapter implements IListAdapter {
         this(context, new LinkedList<>());
     }
 
-    public AbsListViewAdapter(Context context, List dates) {
+    public AbsListViewAdapter(Context context, List<T> dates) {
         this.mContext = context;
         multiTypePool = new MultiTypePool();
         if (dates != null && dates.size() > 0) {
@@ -67,13 +67,13 @@ public class AbsListViewAdapter extends BaseAdapter implements IListAdapter {
      * @param multiItemView
      * @return
      */
-    public <T, V extends CommonViewHolder> AbsListViewAdapter addMultiItem(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T, V> multiItemView) {
+    public <T, V extends CommonViewHolder>  AbsListViewAdapter addMultiItem(@NonNull Class<? extends T> clazz, @NonNull MultiItemView<T, V> multiItemView) {
         multiTypePool.addItemView(clazz, multiItemView, SECTION_LABEL);
         return this;
     }
 
     @Override
-    public void refreshList(List list) {
+    public void refreshList(List<T> list) {
         mDataList.clear();
         mAnimLastPosition = -1;
         if (list != null && list.size() > 0) {
@@ -83,7 +83,7 @@ public class AbsListViewAdapter extends BaseAdapter implements IListAdapter {
     }
 
     @Override
-    public void setList(List list) {
+    public void setList(List<T> list) {
         if (list != null && list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
@@ -91,19 +91,19 @@ public class AbsListViewAdapter extends BaseAdapter implements IListAdapter {
     }
 
     @Override
-    public void addData(@NonNull Object t) {
+    public void addData(@NonNull T t) {
         addData(getCount(), t);
     }
 
     @Override
-    public void addData(@IntRange(from = 0) int position, @NonNull Object t) {
+    public void addData(@IntRange(from = 0) int position, @NonNull T t) {
         mDataList.add(position, t);
         notifyDataSetChanged();
     }
 
     //TODO 刷新全部
     @Override
-    public void addList(List list) {
+    public void addList(List<T> list) {
         if (list != null && list.size() > 0) {
             mDataList.addAll(list);
             notifyDataSetChanged();
@@ -120,7 +120,7 @@ public class AbsListViewAdapter extends BaseAdapter implements IListAdapter {
     }
 
     @Override
-    public void remove(@NonNull Object t) {
+    public void remove(@NonNull T t) {
         if (mDataList.remove(t)) {
             notifyDataSetChanged();
         }
@@ -138,7 +138,7 @@ public class AbsListViewAdapter extends BaseAdapter implements IListAdapter {
     }
 
     @Override
-    public Object getItem(@IntRange(from = 0) int position) {
+    public T getItem(@IntRange(from = 0) int position) {
         return mDataList.get(position);
     }
 
@@ -200,7 +200,7 @@ public class AbsListViewAdapter extends BaseAdapter implements IListAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        Object item = mDataList.get(position);
+        T item = mDataList.get(position);
         return multiTypePool.getItemViewType(item, position);
     }
 
