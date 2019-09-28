@@ -6,9 +6,9 @@ buildscript {
 //        maven {
 //            url("http://127.0.0.1:8081/repository/basic_beta/")
 //        }
+        maven { url 'https://jitpack.io' }
         google()
         jcenter()
-        maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.1'
@@ -25,9 +25,9 @@ allprojects {
 //        maven {
 //            url("http://127.0.0.1:8081/repository/basic_beta/")
 //        }
+        maven { url 'https://jitpack.io' }
         google()
         jcenter()
-        maven { url 'https://jitpack.io' }
     }
 }
 

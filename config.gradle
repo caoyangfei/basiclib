@@ -11,13 +11,13 @@ ext {
 
     isAlone = false
 
-    //nexus
+    //本地
 //    apiVersion = "2.1.1.2019_beta_02"
 //    annotationVersion = "2.1.1.2019_beta_06"
 //    complierVersion = "2.1.1.2019_beta_13"
 //
 //    utilVersion = "2.1.1.2019_beta_02"
-//    viewVersion = "2.1.1.2019_beta_02"
+//    viewVersion = "2.1.1.2019_beta_04"
 //
 //    aopVersion = "2.1.1.2019_beta_02"
 //
