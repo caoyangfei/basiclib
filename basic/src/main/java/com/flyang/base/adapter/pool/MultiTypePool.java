@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.flyang.base.adapter.MultiItemView;
 import com.flyang.base.adapter.ViewType;
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
+import com.flyang.util.data.PreconditionUtils;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -107,6 +108,7 @@ public final class MultiTypePool {
      * @return
      */
     public MultiItemView getMultiItemView(int itemViewType) {
+        PreconditionUtils.checkArgument(itemViewType != -1, "请检查MultiItemView isForViewType()方法,没找到匹配的ItemView");
         return itemTypeViewMap.get(itemViewType);
     }
 

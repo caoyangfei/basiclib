@@ -1,9 +1,6 @@
 package com.flyang.demo;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.support.annotation.LayoutRes;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,7 +9,6 @@ import com.flyang.annotation.apt.BindView;
 import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.adapter.AbsListViewAdapter;
 import com.flyang.base.adapter.animation.AnimationConstant;
-import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 import com.flyang.base.listener.OnItemChildViewClickListener;
 import com.flyang.util.log.LogUtils;
 
@@ -56,18 +52,22 @@ public class ListViewActivity extends BasePresenterActivity {
     protected void initData() {
         super.initData();
         strings = new LinkedList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
+            strings.add(100 + i);
+            strings.add("条目" + i);
+        }
+        for (int i = 0; i < 5; i++) {
             strings.add("条目" + i);
         }
         adapter = new AbsListViewAdapter(this);
-        TestItem2View testItemView = new TestItem2View();
+        ListItemStrView testItemView = new ListItemStrView();
         testItemView.setOnItemChildViewClickListener(new OnItemChildViewClickListener<String>() {
             @Override
             public void onItemChildViewClick(View childView, int position, int action, String s) {
                 LogUtils.e("测试点击事件===>" + position + "===>" + s);
             }
         });
-        adapter.addMultiItem(String.class, testItemView).addMultiItem(String.class, testItemView);
+        adapter.addMultiItem(String.class, testItemView).addMultiItem(Integer.class, new ListItemIntView());
         adapter.openLoadAnimation(AnimationConstant.SLIDEIN_RIGHT);
 
         listView.setAdapter(adapter);

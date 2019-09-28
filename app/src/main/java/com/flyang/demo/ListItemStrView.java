@@ -1,12 +1,12 @@
 package com.flyang.demo;
 
 import android.support.annotation.NonNull;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.flyang.annotation.apt.BindView;
 import com.flyang.base.adapter.MultiItemView;
 import com.flyang.base.adapter.viewholder.AbsListViewHolder;
-import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 
 /**
  * @author yangfei.cao
@@ -14,25 +14,18 @@ import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
  * @date 2019/9/22
  * ------------- Description -------------
  */
-public class TestItem2View extends MultiItemView<String, AbsListViewHolder> {
+public class ListItemStrView extends MultiItemView<String, AbsListViewHolder> {
 
-    @BindView("textview")
-    TextView textview;
+    @BindView("itemContentIv")
+    ImageView itemContentIv;
+    @BindView("itemContentTv")
+    TextView itemContentTv;
 
     @NonNull
     @Override
     public int getLayoutId() {
-        return R.layout.item_text;
+        return R.layout.item_content;
     }
-
-    @Override
-    public boolean isForViewType(String item, int position) {
-        if (position % 4 == 2) {
-            return super.isForViewType(item, position);
-        }
-        return true;
-    }
-
 
     @Override
     public int getSpanCount() {
@@ -42,6 +35,6 @@ public class TestItem2View extends MultiItemView<String, AbsListViewHolder> {
     @Override
     public void onBindData(@NonNull AbsListViewHolder holder, @NonNull String item, int position) {
         super.onBindData(holder, item, position);
-        textview.setText("标题:" + item);
+        itemContentTv.setText("内容:" + item);
     }
 }

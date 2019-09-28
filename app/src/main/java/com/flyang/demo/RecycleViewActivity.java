@@ -71,10 +71,8 @@ public class RecycleViewActivity extends BasePresenterActivity {
         super.initData();
         strings = new LinkedList();
         for (int i = 0; i < 5; i++) {
-            strings.add("条目" + i);
-        }
-        for (int i = 0; i < 5; i++) {
             strings.add(100 + i);
+            strings.add("条目" + i);
         }
         for (int i = 0; i < 5; i++) {
             strings.add("条目" + i);
@@ -99,18 +97,18 @@ public class RecycleViewActivity extends BasePresenterActivity {
             }
         });
         DraggableController mDraggableController = new DraggableController(recyclerViewAdapter);
-        TestItemView testItemView = new TestItemView();
-        testItemView.setOnItemChildViewClickListener(new OnItemChildViewClickListener<String>() {
+        RecyclerItemStrView recyclerItemStrView = new RecyclerItemStrView();
+        recyclerItemStrView.setOnItemChildViewClickListener(new OnItemChildViewClickListener<String>() {
             @Override
             public void onItemChildViewClick(View childView, int position, int action, String s) {
                 LogUtils.e("测试点击事件===>" + position + "===>" + s);
             }
         });
-        recyclerViewAdapter.addMultiItem(String.class, testItemView);
-        recyclerViewAdapter.addMultiItem(Integer.class, new TestItem3View());
+        recyclerViewAdapter.addMultiItem(String.class, recyclerItemStrView);
+        recyclerViewAdapter.addMultiItem(Integer.class, new RecyclerItemIntView());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.refreshList(strings);
-        testItemView.setDraggableController(mDraggableController);
+        recyclerItemStrView.setDraggableController(mDraggableController);
 
         OnItemSwipeListener onItemSwipeListener = new OnItemSwipeListener() {
             @Override
@@ -142,7 +140,7 @@ public class RecycleViewActivity extends BasePresenterActivity {
 
         mDraggableController.enableSwipeItem();
         mDraggableController.setOnItemSwipeListener(onItemSwipeListener);
-        mDraggableController.enableDragItem(mItemTouchHelper, R.id.drag);
+        mDraggableController.enableDragItem(mItemTouchHelper);
         OnItemDragListener listener = new OnItemDragListener() {
             @Override
             public void onItemDragStart(RecyclerView.ViewHolder viewHolder, int pos) {

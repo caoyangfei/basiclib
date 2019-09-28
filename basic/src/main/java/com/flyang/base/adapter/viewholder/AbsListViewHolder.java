@@ -1,26 +1,12 @@
 package com.flyang.base.adapter.viewholder;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.annotation.StringRes;
-import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.widget.Checkable;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.ListView;
 import android.widget.GridView;
+import android.widget.ListView;
 
 /**
  * @author caoyangfei
@@ -29,7 +15,7 @@ import android.widget.GridView;
  * ------------- Description -------------
  * 公共的AbsListViewHolder
  * <p>
- * 使用范围{@link ListView,GridView}等
+ * 使用视图{@link ListView,GridView}等
  */
 public class AbsListViewHolder implements CommonViewHolder {
     private SparseArray<View> mViews;//稀疏数组节省内存,折半查找,执行效率比HashMap对象映射慢一点,影响不大

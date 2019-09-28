@@ -29,6 +29,8 @@ import android.widget.TextView;
  * @date 2019/9/21
  * ------------- Description -------------
  * RecyclerViewHolder
+ * <p>
+ * 使用视图{@link RecyclerView}
  */
 public class RecyclerViewHolder extends RecyclerView.ViewHolder implements CommonViewHolder {
     private SparseArray<View> mViews;//稀疏数组节省内存,折半查找,执行效率比HashMap对象映射慢一点,影响不大

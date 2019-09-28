@@ -7,7 +7,7 @@
     tools:ignore="MissingDefaultResource">
 
     <TextView
-        android:id="@+id/textview"
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"

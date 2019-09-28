@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.flyang.annotation.apt.BindView;
 import com.flyang.base.adapter.MultiItemView;
-import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 
 /**
@@ -16,25 +15,25 @@ import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
  * @date 2019/9/22
  * ------------- Description -------------
  */
-public class TestItemView extends MultiItemView<String, RecyclerViewHolder> {
-    @BindView("iv")
-    ImageView iv;
-    @BindView("tv")
-    TextView tv;
+public class RecyclerItemStrView extends MultiItemView<String, RecyclerViewHolder> {
+    @BindView("itemContentIv")
+    ImageView itemContentIv;
+    @BindView("itemContentTv")
+    TextView itemContentTv;
 
-    public TestItemView() {
+    public RecyclerItemStrView() {
     }
 
     @NonNull
     @Override
     public int getLayoutId() {
-        return R.layout.item_section_content;
+        return R.layout.item_content;
     }
 
     @Override
     protected void initListener(@NonNull RecyclerViewHolder holder, @NonNull String item, int position) {
         super.initListener(holder, item, position);
-        iv.setOnClickListener(new View.OnClickListener() {
+        itemContentIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onItemChildViewClick(v, 0, position, item);
@@ -46,7 +45,7 @@ public class TestItemView extends MultiItemView<String, RecyclerViewHolder> {
     @Override
     public void onBindData(@NonNull RecyclerViewHolder holder, @NonNull String item, int position) {
         super.onBindData(holder, item, position);
-        tv.setText(item);
+        itemContentTv.setText("内容" + item);
     }
 
 }

@@ -4,11 +4,14 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.GridView;
+import android.widget.ListView;
 
 import com.flyang.api.bind.FacadeBind;
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
 import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 import com.flyang.base.listener.OnItemChildViewClickListener;
+import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,10 @@ import java.util.List;
  * @date 2019/9/19
  * ------------- Description -------------
  * item实现基类
+ * <p>
+ * ViewHolder类型
+ * {@link AbsListViewHolder}使用视图{@link ListView,GridView}
+ * {@link RecyclerViewHolder}使用视图{@link RecyclerView}
  */
 public abstract class MultiItemView<T, V extends CommonViewHolder> {
     private List<MultiItemView<T, V>> list = new ArrayList<>();

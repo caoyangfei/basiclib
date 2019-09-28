@@ -30,7 +30,7 @@ import java.util.List;
  * 使用控件{@link GridView,ListView }对应使用{@link AbsListViewHolder}
  * 基类AbsListViewAdapter,子项设置动画
  */
-public class AbsListViewAdapter<T, V extends CommonViewHolder> extends BaseAdapter implements IListAdapter<T> {
+public class AbsListViewAdapter<T> extends BaseAdapter implements IListAdapter<T> {
 
     //条目布局
     public static int SECTION_LABEL = 0;
@@ -217,7 +217,6 @@ public class AbsListViewAdapter<T, V extends CommonViewHolder> extends BaseAdapt
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         int viewType = getItemViewType(position);
-        PreconditionUtils.checkArgument(viewType != -1, "请检查MultiItemView,没找到匹配的Item View");
         AbsListViewHolder itemViewHolder = null;
         MultiItemView multiItemView = multiTypePool.getMultiItemView(viewType);
         if (convertView != null) {
