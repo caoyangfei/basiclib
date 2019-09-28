@@ -89,7 +89,7 @@ public class RecycleViewActivity extends BasePresenterActivity {
             @Override
             public void onLoadRequest() {
                 page++;
-                if (page >= 1) {
+                if (page >= 3) {
                     recyclerViewAdapter.notifyLoadMoreDateChanged(null);
                 } else {
                     recyclerViewAdapter.notifyLoadMoreDateChanged(strings);
