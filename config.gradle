@@ -12,6 +12,7 @@ ext {
     isAlone = false
 
     //本地
+//    isNexus = true
 //    apiVersion = "2.1.1.2019_beta_02"
 //    annotationVersion = "2.1.1.2019_beta_06"
 //    complierVersion = "2.1.1.2019_beta_13"
