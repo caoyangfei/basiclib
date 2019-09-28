@@ -27,12 +27,12 @@ public class RecyclerItemIntView extends MultiItemView<Integer, RecyclerViewHold
 
     @Override
     public int getSpanCount() {
-        return 2;
+        return 1;
     }
 
     @Override
     public void onBindData(@NonNull RecyclerViewHolder holder, @NonNull Integer item, int position) {
         super.onBindData(holder, item, position);
-        textView.setText("标题:" + item);
+        textView.setText("这是Integer类型:" + item);
     }
 }

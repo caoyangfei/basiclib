@@ -24,6 +24,11 @@ public class RecyclerItemStrView extends MultiItemView<String, RecyclerViewHolde
     public RecyclerItemStrView() {
     }
 
+    @Override
+    public int getSpanCount() {
+        return 2;
+    }
+
     @NonNull
     @Override
     public int getLayoutId() {
@@ -45,7 +50,7 @@ public class RecyclerItemStrView extends MultiItemView<String, RecyclerViewHolde
     @Override
     public void onBindData(@NonNull RecyclerViewHolder holder, @NonNull String item, int position) {
         super.onBindData(holder, item, position);
-        itemContentTv.setText("内容" + item);
+        itemContentTv.setText("这是String类型：" + item);
     }
 
 }

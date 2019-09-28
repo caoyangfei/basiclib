@@ -32,6 +32,6 @@ public class ListItemIntView extends MultiItemView<Integer, AbsListViewHolder> {
     @Override
     public void onBindData(@NonNull AbsListViewHolder holder, @NonNull Integer item, int position) {
         super.onBindData(holder, item, position);
-        textView.setText("标题:" + item);
+        textView.setText("这是Integer类型:" + item);
     }
 }

@@ -35,6 +35,6 @@ public class ListItemStrView extends MultiItemView<String, AbsListViewHolder> {
     @Override
     public void onBindData(@NonNull AbsListViewHolder holder, @NonNull String item, int position) {
         super.onBindData(holder, item, position);
-        itemContentTv.setText("内容:" + item);
+        itemContentTv.setText("这是String类型:" + item);
     }
 }

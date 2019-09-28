@@ -122,6 +122,9 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
                         return gridManager.getSpanCount();
                     } else {
                         MultiItemView multiItemView = multiTypePool.getMultiItemView(getItemViewType(position));
+                        //TODO 此处抛异常处理,防止设置超过没生效使用者发现不了问题
+                        PreconditionUtils.checkArgument(multiItemView.getSpanCount() < gridManager.getSpanCount()
+                                , "设置的条目占位数：" + multiItemView.getSpanCount() + "===不允许大于一行最多显示数：" + gridManager.getSpanCount());
                         return multiItemView.getSpanCount() == -1 ? defSpanSizeLookup.getSpanSize(position) : multiItemView.getSpanCount();
                     }
                 }
