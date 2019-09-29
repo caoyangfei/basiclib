@@ -8,11 +8,10 @@ import android.util.SparseArray;
 import android.view.View;
 
 import com.flyang.base.adapter.animation.AnimationConstant;
-import com.flyang.base.adapter.animation.BaseAnimation;
+import com.flyang.base.adapter.animation.scroll.BaseAnimation;
 import com.flyang.base.adapter.pool.MultiTypePool;
 import com.flyang.base.adapter.view.BaseLoadMoreView;
 import com.flyang.base.adapter.view.DefaultLoadMoreView;
-import com.flyang.base.adapter.viewholder.CommonViewHolder;
 import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 import com.flyang.base.listener.OnLoadListener;
 import com.flyang.basic.R;

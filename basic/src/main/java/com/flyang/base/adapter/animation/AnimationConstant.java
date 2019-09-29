@@ -2,9 +2,23 @@ package com.flyang.base.adapter.animation;
 
 import android.support.annotation.IntDef;
 
+import com.flyang.base.adapter.animation.scroll.AlphaInAnimation;
+import com.flyang.base.adapter.animation.scroll.BaseAnimation;
+import com.flyang.base.adapter.animation.scroll.ScaleInAnimation;
+import com.flyang.base.adapter.animation.scroll.SlideInBottomAnimation;
+import com.flyang.base.adapter.animation.scroll.SlideInLeftAnimation;
+import com.flyang.base.adapter.animation.scroll.SlideInRightAnimation;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+/**
+ * @author caoyangfei
+ * @ClassName AnimationConstant
+ * @date 2019/9/21
+ * ------------- Description -------------
+ * scroll动画
+ */
 public class AnimationConstant {
     //透明渐变
     public static final int ALPHAIN = 0x00000001;

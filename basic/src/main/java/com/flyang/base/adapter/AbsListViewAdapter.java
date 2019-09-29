@@ -10,11 +10,10 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import com.flyang.base.adapter.animation.AnimationConstant;
-import com.flyang.base.adapter.animation.BaseAnimation;
+import com.flyang.base.adapter.animation.scroll.BaseAnimation;
 import com.flyang.base.adapter.pool.MultiTypePool;
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
 import com.flyang.base.adapter.viewholder.AbsListViewHolder;
-import com.flyang.util.data.PreconditionUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

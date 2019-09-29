@@ -1,4 +1,4 @@
-package com.flyang.base.adapter.animation;
+package com.flyang.base.adapter.animation.scroll;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;

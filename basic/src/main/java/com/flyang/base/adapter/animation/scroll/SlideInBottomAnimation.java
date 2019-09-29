@@ -1,4 +1,4 @@
-package com.flyang.base.adapter.animation;
+package com.flyang.base.adapter.animation.scroll;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -7,17 +7,17 @@ import android.view.View;
 
 /**
  * @author caoyangfei
- * @ClassName SlideInLeftAnimation
+ * @ClassName SlideInBottomAnimation
  * @date 2019/9/21
  * ------------- Description -------------
- * 左侧滑入动画
+ * 底部滑入动画
  */
-public class SlideInLeftAnimation extends BaseAnimation {
+public class SlideInBottomAnimation extends BaseAnimation {
 
     @Override
     public Animator[] getAnimator(View view) {
         return new Animator[]{
-                ObjectAnimator.ofFloat(view, "translationX", -view.getRootView().getWidth(), 0)
+                ObjectAnimator.ofFloat(view, "translationY", view.getMeasuredHeight(), 0)
         };
     }
 }
