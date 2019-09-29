@@ -109,6 +109,15 @@ public class AbsListViewAdapter<T> extends BaseAdapter implements IListAdapter<T
         }
     }
 
+    //TODO 添加在指定位置
+    @Override
+    public void addList(int position, List<T> list) {
+        if (list != null && list.size() > 0) {
+            mDataList.addAll(position, list);
+            notifyDataSetChanged();
+        }
+    }
+
     //TODO 删除一条数据
     @Override
     public void remove(@IntRange(from = 0) int index) {
@@ -121,6 +130,13 @@ public class AbsListViewAdapter<T> extends BaseAdapter implements IListAdapter<T
     @Override
     public void remove(@NonNull T t) {
         if (mDataList.remove(t)) {
+            notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void remove(List<T> list) {
+        if (mDataList.removeAll(list)) {
             notifyDataSetChanged();
         }
     }

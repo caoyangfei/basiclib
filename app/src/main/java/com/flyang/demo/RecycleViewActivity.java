@@ -3,7 +3,6 @@ package com.flyang.demo;
 import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -12,10 +11,10 @@ import android.view.View;
 import com.flyang.annotation.apt.BindView;
 import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.adapter.DraggableController;
-import com.flyang.base.adapter.callback.DragAndSwipeItemCallback;
 import com.flyang.base.adapter.RecyclerViewAdapter;
 import com.flyang.base.adapter.animation.AnimationConstant;
-import com.flyang.base.adapter.decoration.GridAndStaggeredDecoration;
+import com.flyang.base.adapter.animation.AnimationItemConstant;
+import com.flyang.base.adapter.callback.DragAndSwipeItemCallback;
 import com.flyang.base.controller.loader.IndicatorLoaderController;
 import com.flyang.base.controller.loader.ShapeLoadingController;
 import com.flyang.base.listener.OnItemChildViewClickListener;
@@ -47,6 +46,7 @@ public class RecycleViewActivity extends BasePresenterActivity {
     private RecyclerViewAdapter recyclerViewAdapter;
 
     private int page = 0;
+    boolean isAdd = false;
 
     @Override
     protected int getLayoutID() {
@@ -77,8 +77,8 @@ public class RecycleViewActivity extends BasePresenterActivity {
         for (int i = 0; i < 5; i++) {
             strings.add("条目" + i);
         }
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        recyclerView.addItemDecoration(new GridAndStaggeredDecoration(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerView.addItemDecoration(new GridAndStaggeredDecoration(this));
 
         recyclerViewAdapter = new RecyclerViewAdapter(this);
         View foorView = recyclerViewAdapter.getViewByLayout(R.layout.item_foot);
@@ -98,15 +98,29 @@ public class RecycleViewActivity extends BasePresenterActivity {
         });
         DraggableController mDraggableController = new DraggableController(recyclerViewAdapter);
         RecyclerItemStrView recyclerItemStrView = new RecyclerItemStrView();
+
+        LinkedList<String> str = new LinkedList<>();
+        for (int i = 0; i < 5; i++) {
+            str.add("添加的" + i);
+        }
         recyclerItemStrView.setOnItemChildViewClickListener(new OnItemChildViewClickListener<String>() {
             @Override
             public void onItemChildViewClick(View childView, int position, int action, String s) {
                 LogUtils.e("测试点击事件===>" + position + "===>" + s);
+                if (!isAdd) {
+                    recyclerViewAdapter.addList(position, str);
+                } else {
+                    recyclerViewAdapter.remove(str);
+                }
+                isAdd = !isAdd;
             }
         });
         recyclerViewAdapter.addMultiItem(String.class, recyclerItemStrView);
         recyclerViewAdapter.addMultiItem(Integer.class, new RecyclerItemIntView());
         recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setItemAnimator(AnimationItemConstant.getAnimationType(AnimationItemConstant.FadeInLeft));
+        recyclerView.getItemAnimator().setAddDuration(500);
+        recyclerView.getItemAnimator().setRemoveDuration(500);
         recyclerViewAdapter.refreshList(strings);
         recyclerItemStrView.setDraggableController(mDraggableController);
 

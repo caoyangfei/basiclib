@@ -154,11 +154,23 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
         }
     }
 
+    //TODO 只更新添加的部分
+    @Override
+    public void addList(@IntRange(from = 0) int position, List<T> list) {
+        if (list != null && list.size() > 0) {
+            if (isInEmptyStatus()) {
+                notifyItemRemoved(mEmptyViewPosition);
+            }
+            mDataList.addAll(position, list);
+            notifyItemRangeInserted(position + getHeadCounts() + 1, list.size());
+        }
+    }
+
     //TODO 删除一条数据,index删除的数据位置,不包含头部在内
     public void remove(@IntRange(from = 0) int index) {
         if (mDataList.size() > index) {
             mDataList.remove(index + getHeadCounts());
-            notifyItemRemoved(index);
+            notifyItemRemoved(index + getHeadCounts());
         }
     }
 
@@ -166,8 +178,18 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
     public void remove(@NonNull T t) {
         int p = mDataList.indexOf(t);
         if (mDataList.remove(t)) {
-            int position = p + getHeadCounts();
-            notifyItemRemoved(position);
+            notifyItemRemoved(p + getHeadCounts());
+        }
+    }
+
+    //TODO 删除数据集合,index删除的数据位置,不包含头部在内
+    @Override
+    public void remove(@NonNull List<T> list) {
+        if (mDataList.size() > list.size() && list.size() > 0) {
+            int position = mDataList.indexOf(list.get(0));
+            if (mDataList.removeAll(list)) {
+                notifyItemRangeRemoved(position + getHeadCounts() + 1, list.size());
+            }
         }
     }
 

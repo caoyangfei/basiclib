@@ -51,6 +51,17 @@ public interface IListAdapter<T> {
     void addList(List<T> list);
 
     /**
+     * 添加数据集合从指定位置
+     * <p>
+     * RecycleView,添加数据局部刷新
+     * ListView和setList(List<T> list)效果相同
+     *
+     * @param list
+     */
+
+    void addList(@IntRange(from = 0) int position, List<T> list);
+
+    /**
      * 移除一项数据
      *
      * @param index 数据在list的索引
@@ -63,6 +74,13 @@ public interface IListAdapter<T> {
      * @param t 数据实体
      */
     void remove(@NonNull T t);
+
+    /**
+     * 从某个位置移除数据集合
+     *
+     * @param list 数据集合
+     */
+    void remove(List<T> list);
 
     /**
      * 清空数据
