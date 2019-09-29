@@ -25,7 +25,7 @@ import android.view.animation.Interpolator;
  * @ClassName LandingItemAnimator
  * @date 2019/9/21
  * ------------- Description -------------
- * 降落
+ * 缩放进入
  */
 public class LandingItemAnimator extends FlexibleItemAnimator {
 

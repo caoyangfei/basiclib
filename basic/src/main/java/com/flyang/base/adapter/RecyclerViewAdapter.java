@@ -7,13 +7,13 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
 import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 import com.flyang.util.data.PreconditionUtils;
@@ -32,6 +32,7 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
 
     protected @Nullable
     LayoutInflater inflater;
+    private RecyclerView mRecyclerView;
 
     public RecyclerViewAdapter(Context context) {
         super(context);
@@ -108,6 +109,7 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
         //判断是不是空页面，头部，底部，设置每行数量
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
         if (manager instanceof GridLayoutManager) {
@@ -147,12 +149,51 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
                 p.setFullSpan(true);
             }
         } else {
+            int lastVisiblePosition = findLastVisibleItemPosition();
             //设置动画
-            startItemAnim(holder, holder.getLayoutPosition());
+            startItemAnim(holder, holder.getLayoutPosition(),holder.getLayoutPosition() >= lastVisiblePosition);
             if (holder.getLayoutPosition() < getItemCount()) {
                 multiTypePool.getMultiItemView(multiTypePool.getItemViewType(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition())).onViewAttachedToWindow(holder);
             }
         }
+    }
+
+    /**
+     * 查询是不是最后一个
+     *
+     * @return
+     * @hide 不对外开放
+     */
+    private int findLastVisibleItemPosition() {
+        PreconditionUtils.checkNotNull(mRecyclerView, "mRecyclerView对象为空");
+        RecyclerView.LayoutManager layoutManager = mRecyclerView.getLayoutManager();
+        if (layoutManager instanceof StaggeredGridLayoutManager) {
+            StaggeredGridLayoutManager staggeredGLM = (StaggeredGridLayoutManager) layoutManager;
+            int position = staggeredGLM.findLastVisibleItemPositions(null)[0];
+            for (int i = 1; i < getSpanCount(); i++) {
+                int nextPosition = staggeredGLM.findLastVisibleItemPositions(null)[i];
+                if (nextPosition > position) {
+                    position = nextPosition;
+                }
+            }
+            return position;
+        } else {
+            return ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+        }
+    }
+
+    /**
+     * @return
+     * @hide 不对外开放
+     */
+    private int getSpanCount() {
+        RecyclerView.LayoutManager layoutManager = mRecyclerView.getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            return ((GridLayoutManager) layoutManager).getSpanCount();
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+            return ((StaggeredGridLayoutManager) layoutManager).getSpanCount();
+        }
+        return 1;
     }
 
     /**

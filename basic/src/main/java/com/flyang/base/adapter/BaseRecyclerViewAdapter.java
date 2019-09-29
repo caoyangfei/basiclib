@@ -522,9 +522,10 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
      * @param holder
      * @param position
      */
-    protected void startItemAnim(RecyclerViewHolder holder, int position) {
+    protected void startItemAnim(RecyclerViewHolder holder, int position, boolean forward) {
         if (isItemAnimEnable() && position > mAnimLastPosition) {
             mAnimLastPosition = position;
+            mAnimation.setForward(forward);
             mAnimation.startAnim(holder.itemView);
         }
     }

@@ -24,7 +24,7 @@ import android.view.animation.Interpolator;
  * @ClassName ScaleInItemAnimator
  * @date 2019/9/21
  * ------------- Description -------------
- * 鳞片进入
+ * 慢慢变大渐入
  */
 public class ScaleInItemAnimator extends FlexibleItemAnimator {
 

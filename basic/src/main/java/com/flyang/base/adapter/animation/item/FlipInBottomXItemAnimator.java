@@ -24,7 +24,7 @@ import android.view.animation.Interpolator;
  * @ClassName FlipInBottomXItemAnimator
  * @date 2019/9/21
  * ------------- Description -------------
- * 底部翻入
+ * 底部延X轴翻转
  */
 public class FlipInBottomXItemAnimator extends FlexibleItemAnimator {
 

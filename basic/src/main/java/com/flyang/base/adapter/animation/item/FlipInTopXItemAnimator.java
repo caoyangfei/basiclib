@@ -24,7 +24,7 @@ import android.view.animation.Interpolator;
  * @ClassName FlipInTopXItemAnimator
  * @date 2019/9/21
  * ------------- Description -------------
- * 顶部翻入
+ * 顶部部延X轴翻转
  */
 public class FlipInTopXItemAnimator extends FlexibleItemAnimator {
 

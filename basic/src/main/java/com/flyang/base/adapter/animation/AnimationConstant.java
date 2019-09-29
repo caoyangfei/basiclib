@@ -8,6 +8,8 @@ import com.flyang.base.adapter.animation.scroll.ScaleInAnimation;
 import com.flyang.base.adapter.animation.scroll.SlideInBottomAnimation;
 import com.flyang.base.adapter.animation.scroll.SlideInLeftAnimation;
 import com.flyang.base.adapter.animation.scroll.SlideInRightAnimation;
+import com.flyang.base.adapter.animation.scroll.SlideInTopAnimation;
+import com.flyang.base.adapter.animation.scroll.SlideInTopBottomAnimation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -24,14 +26,18 @@ public class AnimationConstant {
     public static final int ALPHAIN = 0x00000001;
     //滑入
     public static final int SCALEIN = 0x00000002;
+    //顶部进入
+    public static final int SLIDEIN_TOP = 0x00000003;
     //底部进入
-    public static final int SLIDEIN_BOTTOM = 0x00000003;
+    public static final int SLIDEIN_BOTTOM = 0x00000004;
     //左侧进入
-    public static final int SLIDEIN_LEFT = 0x00000004;
+    public static final int SLIDEIN_LEFT = 0x00000005;
     //右侧进入
-    public static final int SLIDEIN_RIGHT = 0x00000005;
+    public static final int SLIDEIN_RIGHT = 0x00000006;
+    //上下方向反转
+    public static final int SLIDEIN_TOP_BOTTOM = 0x00000007;
 
-    @IntDef({ALPHAIN, SCALEIN, SLIDEIN_BOTTOM, SLIDEIN_LEFT, SLIDEIN_RIGHT})
+    @IntDef({ALPHAIN, SCALEIN, SLIDEIN_TOP, SLIDEIN_BOTTOM, SLIDEIN_LEFT, SLIDEIN_RIGHT, SLIDEIN_TOP_BOTTOM})
     @Retention(RetentionPolicy.SOURCE)
     public @interface AnimationType {
     }
@@ -51,6 +57,9 @@ public class AnimationConstant {
             case SCALEIN:
                 baseAnimation = new ScaleInAnimation();
                 break;
+            case SLIDEIN_TOP:
+                baseAnimation = new SlideInTopAnimation();
+                break;
             case SLIDEIN_BOTTOM:
                 baseAnimation = new SlideInBottomAnimation();
                 break;
@@ -59,6 +68,9 @@ public class AnimationConstant {
                 break;
             case SLIDEIN_RIGHT:
                 baseAnimation = new SlideInRightAnimation();
+                break;
+            case SLIDEIN_TOP_BOTTOM:
+                baseAnimation = new SlideInTopBottomAnimation();
                 break;
             default:
                 break;

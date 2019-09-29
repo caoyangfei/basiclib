@@ -18,8 +18,10 @@ public abstract class BaseAnimation {
     //动画加速器：默认为LinearInterpolator
     protected Interpolator mInterpolator = new LinearInterpolator();
 
-    //动画持续时间：默认为300ms
-    protected long mAnimDuration = 300;
+    //动画持续时间：默认为500ms
+    protected long mAnimDuration = 500;
+
+    protected boolean isForward;
 
     /**
      * 设置动画加速器
@@ -33,6 +35,15 @@ public abstract class BaseAnimation {
      */
     public void setAnimDuration(long animDuration) {
         this.mAnimDuration = animDuration;
+    }
+
+    /**
+     * 设置是否反转方向
+     *
+     * @param forward
+     */
+    public void setForward(boolean forward) {
+        isForward = forward;
     }
 
     /**
@@ -51,4 +62,6 @@ public abstract class BaseAnimation {
             animator.start();
         }
     }
+
+
 }
