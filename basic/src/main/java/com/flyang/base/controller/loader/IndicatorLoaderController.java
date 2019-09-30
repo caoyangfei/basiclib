@@ -51,7 +51,7 @@ public class IndicatorLoaderController extends BaseLoaderController {
 
     @Override
     public void setLoadingTextColor(int color) {
-        if (color!=0) {
+        if (color != 0) {
             mLoadingText.setTextColor(color);
         }
     }
@@ -71,6 +71,15 @@ public class IndicatorLoaderController extends BaseLoaderController {
      */
     public void setStyle(IndicatorStyle style) {
         Indicator indicator = IndicatorFactory.create(style);
+        setStyle(indicator);
+    }
+
+    /**
+     * 设置动画样式
+     *
+     * @param indicator
+     */
+    public void setStyle(Indicator indicator) {
         mLoadingView.setIndicator(indicator);
     }
 }

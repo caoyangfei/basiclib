@@ -6,9 +6,10 @@ import android.view.View;
 import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.controller.loader.IndicatorLoaderController;
 import com.flyang.base.controller.loader.ShapeLoadingController;
+import com.flyang.expandview.loader.indicator.IndicatorFactoryExp;
+import com.flyang.expandview.loader.indicator.IndicatorStyleExp;
 import com.flyang.util.log.LogUtils;
 import com.flyang.view.inter.Loader;
-import com.flyang.view.loader.indicator.IndicatorStyle;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,7 +28,7 @@ public class MainActivity extends BasePresenterActivity {
     protected void initView() {
         super.initView();
         //                ((SpinKitLoaderController) loaderController).setStyle(SpinKitStyle.WANDERING_CUBES);
-        ((IndicatorLoaderController) loaderController).setStyle(IndicatorStyle.BallZigZagDeflectIndicator);
+        ((IndicatorLoaderController) loaderController).setStyle(IndicatorFactoryExp.create(IndicatorStyleExp.BallZigZagDeflectIndicator));
 
     }
 

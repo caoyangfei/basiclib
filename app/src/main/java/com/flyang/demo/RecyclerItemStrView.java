@@ -29,6 +29,11 @@ public class RecyclerItemStrView extends MultiItemView<String, RecyclerViewHolde
         return 2;
     }
 
+    @Override
+    public int getMaxRecycleCount() {
+        return 1;
+    }
+
     @NonNull
     @Override
     public int getLayoutId() {

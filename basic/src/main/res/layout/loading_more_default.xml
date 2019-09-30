@@ -19,7 +19,7 @@
             style="@style/LoadingIndicatorView.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:Indicator_Style="CubeTransitionIndicator"
+            app:Indicator_Style="BallGridBeatIndicator"
             app:indicatorColor="@color/color_00BFFF" />
 
         <ImageView

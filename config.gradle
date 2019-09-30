@@ -38,13 +38,16 @@ ext {
     complierVersion = "1.1.1.2019_03"
 
     utilVersion = "1.1.1.2019_02"
-    viewVersion = "1.1.1.2019_04"
+    viewVersion = "1.1.1.2019_05"
+    //控件拓展库
+    expendViewVersion = "1.1.1.2019_05"
 
     aopVersion = "1.1.1.2019_03"
 
     dep = [
             gson      : "com.google.code.gson:gson:2.8.5",
-            view      : "com.github.caoyangfei:viewlib:$viewVersion",
+            view      : "com.github.caoyangfei.viewlib:view:$viewVersion",
+            expendView: "com.github.caoyangfei.viewlib:expandview:$expendViewVersion",
             util      : "com.github.caoyangfei:utillib:$utilVersion",
             api       : "com.github.caoyangfei.aptlib:api:$apiVersion",
             annotation: "com.github.caoyangfei.aptlib:annotation:$annotationVersion",

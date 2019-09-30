@@ -31,6 +31,11 @@ public class RecyclerItemIntView extends MultiItemView<Integer, RecyclerViewHold
     }
 
     @Override
+    public int getMaxRecycleCount() {
+        return 1;
+    }
+
+    @Override
     public boolean isHeader(int position) {
         if (position == 4 || position == 8 || position == 12 || position == 16)
             return true;

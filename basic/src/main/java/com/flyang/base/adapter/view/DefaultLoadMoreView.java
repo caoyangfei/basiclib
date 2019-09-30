@@ -53,7 +53,7 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
 
     protected void refreshUI() {
         setBackgroundColor(builder.getBgColor());
-        Indicator indicator = IndicatorFactory.create(builder.getIndicatorStyle());
+        Indicator indicator = builder.getIndicator();
         mLoadingView.setIndicator(indicator);
         mStatusTv.setTextColor(builder.getTextColor());
         setBeforeLoadingUI();
@@ -107,7 +107,7 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
         //文字颜色
         private int textColor = Color.BLACK;
         //加载样式
-        private IndicatorStyle indicatorStyle = IndicatorStyle.CubeTransitionIndicator;
+        private Indicator indicator = IndicatorFactory.create(IndicatorStyle.BallGridBeatIndicator);
         //成功加载的图片
         private int successDrawableResId = R.drawable.loadmore_success;
         //失败加载的图片
@@ -153,13 +153,13 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
             return successDrawableResId;
         }
 
-        public Builder setIndicatorStyle(IndicatorStyle indicatorStyle) {
-            this.indicatorStyle = indicatorStyle;
+        public Builder setIndicator(Indicator indicator) {
+            this.indicator = indicator;
             return this;
         }
 
-        public IndicatorStyle getIndicatorStyle() {
-            return indicatorStyle;
+        public Indicator getIndicator() {
+            return indicator;
         }
 
         public Builder setFailDrawableResId(int failDrawableResId) {

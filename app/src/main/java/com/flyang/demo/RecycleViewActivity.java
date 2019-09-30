@@ -22,9 +22,10 @@ import com.flyang.base.listener.OnItemChildViewClickListener;
 import com.flyang.base.listener.OnItemDragListener;
 import com.flyang.base.listener.OnItemSwipeListener;
 import com.flyang.base.listener.OnLoadListener;
+import com.flyang.expandview.loader.indicator.IndicatorFactoryExp;
+import com.flyang.expandview.loader.indicator.IndicatorStyleExp;
 import com.flyang.util.log.LogUtils;
 import com.flyang.view.inter.Loader;
-import com.flyang.view.loader.indicator.IndicatorStyle;
 
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
@@ -57,7 +58,8 @@ public class RecycleViewActivity extends BasePresenterActivity {
     @Override
     protected void initView() {
         super.initView();
-        ((IndicatorLoaderController) loaderController).setStyle(IndicatorStyle.BallZigZagDeflectIndicator);
+        ((IndicatorLoaderController) loaderController).setStyle(IndicatorFactoryExp.create(IndicatorStyleExp.BallBeatIndicator));
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
