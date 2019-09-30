@@ -18,13 +18,17 @@ ext {
 //    complierVersion = "2.1.1.2019_beta_13"
 //
 //    utilVersion = "2.1.1.2019_beta_02"
-//    viewVersion = "2.1.1.2019_beta_04"
+//    viewVersion = "2.1.1.2019_beta_05"
+//    //控件拓展库
+//    expandViewVersion = "2.1.1.2019_beta_05"
+//
 //
 //    aopVersion = "2.1.1.2019_beta_02"
 //
 //    dep = [
 //            gson      : "com.google.code.gson:gson:2.8.5",
 //            view      : "com.flyang.common:view:$viewVersion",
+//            expandView: "com.flyang.common:expandview:$expandViewVersion",
 //            util      : "com.flyang.common:util:$utilVersion",
 //            api       : "com.flyang.common:api:$apiVersion",
 //            annotation: "com.flyang.common:annotation:$annotationVersion",
@@ -40,14 +44,14 @@ ext {
     utilVersion = "1.1.1.2019_02"
     viewVersion = "1.1.1.2019_05"
     //控件拓展库
-    expendViewVersion = "1.1.1.2019_05"
+    expandViewVersion = "1.1.1.2019_05"
 
     aopVersion = "1.1.1.2019_03"
 
     dep = [
             gson      : "com.google.code.gson:gson:2.8.5",
             view      : "com.github.caoyangfei.viewlib:view:$viewVersion",
-            expendView: "com.github.caoyangfei.viewlib:expandview:$expendViewVersion",
+            expandView: "com.github.caoyangfei.viewlib:expandview:$expandViewVersion",
             util      : "com.github.caoyangfei:utillib:$utilVersion",
             api       : "com.github.caoyangfei.aptlib:api:$apiVersion",
             annotation: "com.github.caoyangfei.aptlib:annotation:$annotationVersion",
