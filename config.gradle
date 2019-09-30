@@ -38,7 +38,7 @@ ext {
     complierVersion = "1.1.1.2019_03"
 
     utilVersion = "1.1.1.2019_02"
-    viewVersion = "1.1.1.2019_03"
+    viewVersion = "1.1.1.2019_04"
 
     aopVersion = "1.1.1.2019_03"
 

@@ -15,6 +15,7 @@ import com.flyang.base.adapter.RecyclerViewAdapter;
 import com.flyang.base.adapter.animation.AnimationConstant;
 import com.flyang.base.adapter.animation.AnimationItemConstant;
 import com.flyang.base.adapter.callback.DragAndSwipeItemCallback;
+import com.flyang.base.adapter.sticky.StickyAnyHeader;
 import com.flyang.base.controller.loader.IndicatorLoaderController;
 import com.flyang.base.controller.loader.ShapeLoadingController;
 import com.flyang.base.listener.OnItemChildViewClickListener;
@@ -169,6 +170,8 @@ public class RecycleViewActivity extends BasePresenterActivity {
             }
         };
         mDraggableController.setOnItemDragListener(listener);
+
+        StickyAnyHeader.getInstance().adapter(recyclerViewAdapter).setRecyclerView(recyclerView).togo();
     }
 
     @SuppressLint("CheckResult")

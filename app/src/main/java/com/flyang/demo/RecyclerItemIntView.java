@@ -31,6 +31,13 @@ public class RecyclerItemIntView extends MultiItemView<Integer, RecyclerViewHold
     }
 
     @Override
+    public boolean isHeader(int position) {
+        if (position == 4 || position == 8 || position == 12 || position == 16)
+            return true;
+        return super.isHeader(position);
+    }
+
+    @Override
     public void onBindData(@NonNull RecyclerViewHolder holder, @NonNull Integer item, int position) {
         super.onBindData(holder, item, position);
         textView.setText("这是Integer类型:" + item);

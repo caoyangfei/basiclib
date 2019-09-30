@@ -151,7 +151,7 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
         } else {
             int lastVisiblePosition = findLastVisibleItemPosition();
             //设置动画
-            startItemAnim(holder, holder.getLayoutPosition(),holder.getLayoutPosition() >= lastVisiblePosition);
+            startItemAnim(holder, holder.getLayoutPosition(), holder.getLayoutPosition() >= lastVisiblePosition);
             if (holder.getLayoutPosition() < getItemCount()) {
                 multiTypePool.getMultiItemView(multiTypePool.getItemViewType(mDataList.get(holder.getLayoutPosition()), holder.getLayoutPosition())).onViewAttachedToWindow(holder);
             }
@@ -214,5 +214,14 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
      */
     public View getViewByLayout(@LayoutRes int layout) {
         return LayoutInflater.from(mContext).inflate(layout, ((Activity) mContext).findViewById(android.R.id.content), false);
+    }
+
+    @Override
+    public boolean isHeader(int position) {
+        if (isInHeadViewPos(position) || isInFootViewPos(position)
+                || isInLoadMorePos(position) || isInEmptyStatus())
+            return false;
+        MultiItemView multiItemView = multiTypePool.getMultiItemView(getItemViewType(position));
+        return multiItemView.isHeader(position);
     }
 }

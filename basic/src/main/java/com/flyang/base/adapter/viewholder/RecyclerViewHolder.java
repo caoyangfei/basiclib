@@ -1,27 +1,11 @@
 package com.flyang.base.adapter.viewholder;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
-import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.widget.Checkable;
-import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
 /**
  * @author caoyangfei

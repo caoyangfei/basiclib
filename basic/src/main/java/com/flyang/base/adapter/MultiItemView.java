@@ -40,6 +40,7 @@ public abstract class MultiItemView<T, V extends CommonViewHolder> {
         this.draggableController = draggableController;
     }
 
+    /**************************** Free to implement**********************************/
     /**
      * 布局
      *
@@ -61,12 +62,13 @@ public abstract class MultiItemView<T, V extends CommonViewHolder> {
     }
 
     /**
-     * 是否添加进父，默认是
+     * 判断是不是吸顶,根据position判断
      *
+     * @param position
      * @return
      */
-    public boolean isAddParent() {
-        return true;
+    public boolean isHeader(int position) {
+        return false;
     }
 
     /**
@@ -86,6 +88,22 @@ public abstract class MultiItemView<T, V extends CommonViewHolder> {
     public int getSpanCount() {
         return -1;
     }
+
+    /**
+     * 是否添加进父布局，默认是
+     *
+     * @return
+     */
+    public boolean isAddParent() {
+        return true;
+    }
+
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+
+    }
+
+    /******************************Free to implement********************************/
+
 
     /**
      * 绑定UI和数据
@@ -115,12 +133,14 @@ public abstract class MultiItemView<T, V extends CommonViewHolder> {
      * 初始化view
      */
     protected void initView(@NonNull final V holder, @NonNull T item, int position) {
+        //Free to implement
     }
 
     /**
      * 初始化监听
      */
     protected void initListener(@NonNull final V holder, @NonNull T item, int position) {
+        //Free to implement
     }
 
     /**
@@ -138,6 +158,7 @@ public abstract class MultiItemView<T, V extends CommonViewHolder> {
      * 是否有子布局
      *
      * @return
+     * @hide
      */
     public boolean haveChild() {
         if (list.isEmpty())
@@ -150,8 +171,6 @@ public abstract class MultiItemView<T, V extends CommonViewHolder> {
         return list;
     }
 
-    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
-    }
 
     /**
      * 设置子控件点击事件

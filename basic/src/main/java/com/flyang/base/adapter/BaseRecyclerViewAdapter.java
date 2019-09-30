@@ -31,7 +31,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * BaseRecyclerViewAdapter公共adapter
  * 放入数据操作，空页面，头部，底部，动画
  */
-abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> implements IListAdapter<T> {
+abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> implements IListAdapter<T>,StickyHeaderAdapter {
     //上下文
     protected Context mContext;
 
