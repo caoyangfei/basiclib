@@ -1,6 +1,5 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyEllipsis">
     <string name="app_name">basic</string>
-
 
     <string name="basic_loadmore_init">滑到底部加载更多</string>
     <string name="basic_loadmore_loading">正在加载...</string>

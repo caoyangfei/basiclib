@@ -560,7 +560,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
     public boolean isInEmptyStatus() {
         if (!isEnableEmpty) return false;
         if (mEmptyViewId == 0 && mEmptyView == null) {
-            mEmptyViewId = R.layout.empty_default;
+            mEmptyViewId = R.layout.loading_layout_empty;
         }
         return getListSize() == 0;
     }

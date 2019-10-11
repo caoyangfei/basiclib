@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="BaseQuickAdapter_ViewHolder_support" type="id"/>
-    <item name="BaseQuickAdapter_swiping_support" type="id"/>
-    <item name="BaseQuickAdapter_dragging_support" type="id"/>
+    <item name="BaseRecycleAdapter_ViewHolder" type="id"/>
+    <item name="BaseRecycleAdapter_Swipe" type="id"/>
+    <item name="BaseRecycleAdapter_Drag" type="id"/>
 </resources>

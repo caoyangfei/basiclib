@@ -36,7 +36,7 @@
         android:layout_height="match_parent" />
 
     <include
-        layout="@layout/empty_default"
+        layout="@layout/loading_layout_empty"
         android:visibility="gone" />
 
 </LinearLayout>

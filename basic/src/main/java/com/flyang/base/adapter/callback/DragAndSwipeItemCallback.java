@@ -54,13 +54,13 @@ public class DragAndSwipeItemCallback extends ItemTouchHelper.Callback {
             if (mDraggableListener != null) {
                 mDraggableListener.onItemDragStart(viewHolder);
             }
-            viewHolder.itemView.setTag(R.id.BaseQuickAdapter_dragging_support, true);
+            viewHolder.itemView.setTag(R.id.BaseRecycleAdapter_Drag, true);
         } else if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE
                 && !isViewCreateByAdapter(viewHolder)) {
             if (mDraggableListener != null) {
                 mDraggableListener.onItemSwipeStart(viewHolder);
             }
-            viewHolder.itemView.setTag(R.id.BaseQuickAdapter_swiping_support, true);
+            viewHolder.itemView.setTag(R.id.BaseRecycleAdapter_Swipe, true);
         }
         super.onSelectedChanged(viewHolder, actionState);
     }
@@ -71,19 +71,19 @@ public class DragAndSwipeItemCallback extends ItemTouchHelper.Callback {
         if (isViewCreateByAdapter(viewHolder)) {
             return;
         }
-        if (viewHolder.itemView.getTag(R.id.BaseQuickAdapter_dragging_support) != null
-                && (Boolean) viewHolder.itemView.getTag(R.id.BaseQuickAdapter_dragging_support)) {
+        if (viewHolder.itemView.getTag(R.id.BaseRecycleAdapter_Drag) != null
+                && (Boolean) viewHolder.itemView.getTag(R.id.BaseRecycleAdapter_Drag)) {
             if (mDraggableListener != null) {
                 mDraggableListener.onItemDragEnd(viewHolder);
             }
-            viewHolder.itemView.setTag(R.id.BaseQuickAdapter_dragging_support, false);
+            viewHolder.itemView.setTag(R.id.BaseRecycleAdapter_Drag, false);
         }
-        if (viewHolder.itemView.getTag(R.id.BaseQuickAdapter_swiping_support) != null
-                && (Boolean) viewHolder.itemView.getTag(R.id.BaseQuickAdapter_swiping_support)) {
+        if (viewHolder.itemView.getTag(R.id.BaseRecycleAdapter_Swipe) != null
+                && (Boolean) viewHolder.itemView.getTag(R.id.BaseRecycleAdapter_Swipe)) {
             if (mDraggableListener != null) {
                 mDraggableListener.onItemSwipeClear(viewHolder);
             }
-            viewHolder.itemView.setTag(R.id.BaseQuickAdapter_swiping_support, false);
+            viewHolder.itemView.setTag(R.id.BaseRecycleAdapter_Swipe, false);
         }
     }
 
