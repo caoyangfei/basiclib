@@ -71,7 +71,7 @@ public class ListViewActivity extends BasePresenterActivity {
         adapter.openLoadAnimation(AnimationConstant.SLIDEIN_RIGHT);
 
         listView.setAdapter(adapter);
-        View empty = findViewById(R.id.basicEmptyLayout);
+        View empty = findViewById(R.id.loadingEmptyLayout);
         listView.setEmptyView(empty);
     }
 
