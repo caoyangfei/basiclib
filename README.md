@@ -1,5 +1,4 @@
-# basic
-
+# basic（搭建MVP框架basic组件）依赖（view，util，api，annotation）       
 
 ## 1. Features
     1.MVP模式
