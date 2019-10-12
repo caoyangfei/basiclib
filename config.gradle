@@ -18,7 +18,7 @@ ext {
 //    complierVersion = "2.1.1.2019_beta_13"
 //
 //    utilVersion = "2.1.1.2019_beta_02"
-//    viewVersion = "2.1.1.2019_beta_05"
+//    viewVersion = "2.1.1.2019_beta_09"
 //    //控件拓展库
 //    expandViewVersion = "2.1.1.2019_beta_05"
 //
@@ -42,7 +42,7 @@ ext {
     complierVersion = "1.1.1.2019_03"
 
     utilVersion = "1.1.1.2019_02"
-    viewVersion = "1.1.1.2019_06"
+    viewVersion = "1.1.1.2019_07"
     //控件拓展库
     expandViewVersion = "1.1.1.2019_05"
 
