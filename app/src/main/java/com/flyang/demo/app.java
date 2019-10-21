@@ -21,7 +21,7 @@ public class App extends Application {
         LogUtils.getLogConfig()
                 .configAllowLog(true)  // 是否在Logcat显示日志
                 .configTagPrefix("LogUtilsDemo") // 配置统一的TAG 前缀
-                .configFormatTag("%d{HH:mm:ss:SSS} %t %c{20}") // 首行显示信息(可配置日期，线程等等)
+                .configFormatTag("%d{HH:mm:ss:SSS} %t %c{-3}") // 首行显示信息(可配置日期，线程等等)
                 .configShowBorders(true) // 是否显示边框
                 .configLevel(LogLevel.TYPE_VERBOSE); // 配置可展示日志等级
 
