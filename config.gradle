@@ -48,15 +48,26 @@ ext {
 
     aopVersion = "1.1.1.2019_03"
 
+    progressVersion = "1.1.1.2019_02"
+    networkVersion = "1.1.1.2019_02"
+    imageloaderVersion = "1.1.1.2019_02"
+
     dep = [
-            gson      : "com.google.code.gson:gson:2.8.5",
-            view      : "com.github.caoyangfei.viewlib:view:$viewVersion",
-            expandView: "com.github.caoyangfei.viewlib:expandview:$expandViewVersion",
-            util      : "com.github.caoyangfei:utillib:$utilVersion",
-            api       : "com.github.caoyangfei.aptlib:api:$apiVersion",
-            annotation: "com.github.caoyangfei.aptlib:annotation:$annotationVersion",
-            aop       : "com.github.caoyangfei.aptlib:aop:$aopVersion",
-            complier  : "com.github.caoyangfei.aptlib:complier:${complierVersion}@jar"
+            gson       : "com.google.code.gson:gson:2.8.5",
+            //ui
+            view       : "com.github.caoyangfei.viewlib:view:$viewVersion",
+            expandView : "com.github.caoyangfei.viewlib:expandview:$expandViewVersion",
+            //帮助类
+            util       : "com.github.caoyangfei:utillib:$utilVersion",
+            //组件化,切片
+            api        : "com.github.caoyangfei.aptlib:api:$apiVersion",
+            annotation : "com.github.caoyangfei.aptlib:annotation:$annotationVersion",
+            complier   : "com.github.caoyangfei.aptlib:complier:${complierVersion}@jar",
+            aop        : "com.github.caoyangfei.aptlib:aop:$aopVersion",
+            //网络请求
+            progress   : "com.github.caoyangfei.netlib:progress:$progressVersion",
+            network     : "com.github.caoyangfei.netlib:network:$networkVersion",
+            imageloader: "com.github.caoyangfei.netlib:imageloader:$imageloaderVersion"
     ]
 }
 

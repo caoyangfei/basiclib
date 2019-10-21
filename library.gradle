@@ -9,6 +9,11 @@ dependencies {
     api dep.util
     api dep.view
     api dep.expandView
+    api dep.aop
+
+    api dep.progress
+    api dep.network
+    api dep.imageloader
 
     //运行时注解必用
     api 'com.google.auto.service:auto-service:1.0-rc5'

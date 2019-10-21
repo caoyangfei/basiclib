@@ -2,6 +2,8 @@ package com.flyang.demo;
 
 import android.app.Application;
 
+import com.flyang.network.FlyangHttp;
+import com.flyang.progress.ProgressManager;
 import com.flyang.util.app.ApplicationUtils;
 import com.flyang.util.log.LogUtils;
 import com.flyang.util.log.config.LogLevel;
@@ -39,5 +41,6 @@ public class App extends Application {
 //                        return true;
 //                    }
 //                }).flushAsync();
+        ProgressManager.getInstance().with(FlyangHttp.getOkHttpClientBuilder());
     }
 }
