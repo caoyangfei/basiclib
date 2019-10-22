@@ -1,4 +1,4 @@
-package com.flyang.demo;
+package com.flyang.demo.ui.item;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import com.flyang.base.adapter.MultiItemView;
 import com.flyang.base.adapter.RecyclerViewAdapter;
 import com.flyang.base.adapter.viewholder.AbsListViewHolder;
+import com.flyang.demo.R;
 
 public class TestAdapter extends RecyclerViewAdapter {
     public TestAdapter(Context context) {

@@ -1,4 +1,4 @@
-package com.flyang.demo;
+package com.flyang.demo.ui.item;
 
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.flyang.annotation.apt.BindView;
 import com.flyang.base.adapter.MultiItemView;
 import com.flyang.base.adapter.viewholder.AbsListViewHolder;
+import com.flyang.demo.R;
 
 /**
  * @author yangfei.cao

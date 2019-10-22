@@ -4,62 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.view.MainActivity">
+    tools:context=".ui.view.RecycleViewActivity">
 
-    <com.flyang.view.sticky.StickyNestedScrollView
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="Button"
-                android:text="打印日志"
+                android:onClick="onClick1"
+                android:text="北京天气"
                 tools:ignore="MissingConstraints" />
 
             <Button
                 android:id="@+id/btn2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="Button"
-                android:text="加载框"
+                android:onClick="onClick1"
+                android:text="上海天机"
                 tools:ignore="MissingConstraints" />
 
             <Button
                 android:id="@+id/btn3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="Button"
-                android:text="ListView适配器"
-                android:textAllCaps="false"
+                android:onClick="onClick1"
+                android:text="天津天气"
                 tools:ignore="MissingConstraints" />
 
             <Button
                 android:id="@+id/btn4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="Button"
-                android:text="网络请求"
-                android:textAllCaps="false"
+                android:onClick="onClick1"
+                android:text="郑州天气"
                 tools:ignore="MissingConstraints" />
 
             <Button
                 android:id="@+id/btn5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="Button"
-                android:text="加载图片"
-                android:textAllCaps="false"
+                android:onClick="onClick1"
+                android:text="上海天气"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/btn6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onClick1"
+                android:text="杭州天气"
                 tools:ignore="MissingConstraints" />
         </LinearLayout>
-    </com.flyang.view.sticky.StickyNestedScrollView>
+    </HorizontalScrollView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints">
+
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

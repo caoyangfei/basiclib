@@ -1,4 +1,4 @@
-package com.flyang.demo;
+package com.flyang.demo.ui.view;
 
 import android.annotation.SuppressLint;
 import android.view.View;
@@ -10,6 +10,9 @@ import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.adapter.AbsListViewAdapter;
 import com.flyang.base.adapter.animation.AnimationConstant;
 import com.flyang.base.listener.OnItemChildViewClickListener;
+import com.flyang.demo.ui.item.ListItemIntView;
+import com.flyang.demo.ui.item.ListItemStrView;
+import com.flyang.demo.R;
 import com.flyang.util.log.LogUtils;
 
 import java.util.LinkedList;

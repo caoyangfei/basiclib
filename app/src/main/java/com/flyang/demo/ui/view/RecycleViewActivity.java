@@ -1,4 +1,4 @@
-package com.flyang.demo;
+package com.flyang.demo.ui.view;
 
 import android.annotation.SuppressLint;
 import android.graphics.Canvas;
@@ -22,6 +22,9 @@ import com.flyang.base.listener.OnItemChildViewClickListener;
 import com.flyang.base.listener.OnItemDragListener;
 import com.flyang.base.listener.OnItemSwipeListener;
 import com.flyang.base.listener.OnLoadListener;
+import com.flyang.demo.R;
+import com.flyang.demo.ui.item.RecyclerItemIntView;
+import com.flyang.demo.ui.item.RecyclerItemStrView;
 import com.flyang.expandview.loader.indicator.IndicatorFactoryExp;
 import com.flyang.expandview.loader.indicator.IndicatorStyleExp;
 import com.flyang.util.log.LogUtils;
