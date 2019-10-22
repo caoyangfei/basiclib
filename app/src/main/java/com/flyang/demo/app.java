@@ -43,7 +43,7 @@ public class App extends com.flyang.base.App {
 //                        return true;
 //                    }
 //                }).flushAsync();
-        String url = "http://web.juhe.cn:8080";
+        String url = "https://www.apiopen.top";
         FlyangHttp.getInstance()
                 .debug(BuildConfig.DEBUG)
                 .setReadTimeOut(60 * 1000)

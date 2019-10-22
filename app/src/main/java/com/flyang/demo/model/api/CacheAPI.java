@@ -12,5 +12,5 @@ import java.util.List;
  */
 @ContractFactory(entites = {List.class})
 public interface CacheAPI {
-    void getWeather(String city);
+    void getBook();
 }

@@ -1,7 +1,7 @@
 package com.flyang.demo.presenter;
 
-import com.flyang.demo.model.bean.WeatherEntity;
-import com.flyang.demo.model.bean.WeatherResult;
+import com.flyang.demo.model.bean.BookEntity;
+import com.flyang.demo.model.bean.BookResult;
 import com.flyang.demo.model.contract.CacheAPIContract;
 import com.flyang.network.FlyangHttp;
 import com.flyang.network.cache.converter.CacheType;
@@ -25,42 +25,54 @@ import io.reactivex.Observable;
  */
 public class CachePresenter extends CacheAPIContract.Presenter {
     @Override
-    public void getWeather(String city) {
-        Observable<List<WeatherEntity>> observable = FlyangHttp.post("/environment/air/cityair")
-                .params("city", city)
-                .params("key", "7e278289eacfcf0faaf235ca89be0a34")
+    public void getBook() {
+        Observable<List<BookEntity>> observable = FlyangHttp.post("/novelApi")
                 .cacheCacheType(CacheType.Serializable)
                 .cacheMode(CacheMode.CACHEANDREMOTEDISTINCT)
                 .cacheKey(CachePresenter.class.getSimpleName())
-                .execute(new CallClazzProxy<WeatherResult<List<WeatherEntity>>, List<WeatherEntity>>(new TypeToken<List<WeatherEntity>>() {
+                .execute(new CallClazzProxy<BookResult<List<BookEntity>>, List<BookEntity>>(new TypeToken<List<BookEntity>>() {
                 }.getType()) {
                 });
-        observable.subscribe(new CallBackSubsciber<>(mContext, new SimpleCallBack<List<WeatherEntity>>() {
+        observable.subscribe(new CallBackSubsciber<>(mContext, new SimpleCallBack<List<BookEntity>>() {
             @Override
             public void onError(ApiException e) {
-                getView().getWeatherFailed(e.getMessage());
+                getView().getBookFailed(e.getMessage());
             }
 
             @Override
-            public void onSuccess(List<WeatherEntity> weatherEntities) {
-                Objects.requireNonNull(getView()).getWeatherSuccess(weatherEntities);
+            public void onSuccess(List<BookEntity> weatherEntities) {
+                Objects.requireNonNull(getView()).getBookSuccess(weatherEntities);
             }
         }));
 
 //        FlyangHttp.put("/environment/air/cityair")
 //                .params("city", city)
 //                .params("key", "7e278289eacfcf0faaf235ca89be0a34")
-//                .execute(new CallBackProxy<WeatherResult<List<WeatherEntity>>, List<WeatherEntity>>(new SimpleCallBack<List<WeatherEntity>>() {
+//                .execute(new CallBackProxy<ApiResult<List<BookEntity>>, List<BookEntity>>(new SimpleCallBack<List<BookEntity>>() {
 //                    @Override
 //                    public void onError(ApiException e) {
 //
 //                    }
 //
 //                    @Override
-//                    public void onSuccess(List<WeatherEntity> weatherEntities) {
+//                    public void onSuccess(List<BookEntity> weatherEntities) {
 //
 //                    }
 //                }) {
+//                });
+//        FlyangHttp.put("/environment/air/cityair")
+//                .params("city", city)
+//                .params("key", "7e278289eacfcf0faaf235ca89be0a34")
+//                .execute(new SimpleCallBack<List<BookEntity>>() {
+//                    @Override
+//                    public void onError(ApiException e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(List<BookEntity> bookEntities) {
+//
+//                    }
 //                });
     }
 }
