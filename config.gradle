@@ -3,7 +3,7 @@ ext {
 
     app_name = "基础库"
     compileSdkVersion = 28
-    buildToolsVersion = "28.0.3"
+    buildToolsVersion = "26.0.2"
     minSdkVersion = 19
     targetSdkVersion = 28
     versionCode = 1
@@ -13,7 +13,6 @@ ext {
 
     //本地
 //    isNexus = true  //插件中配置apt依赖的是GitHub还是nexus，默认GitHub
-//
 //    //aptlib
 //    apiVersion = "2.1.1.2019_beta_02"
 //    annotationVersion = "2.1.1.2019_beta_06"
@@ -30,21 +29,22 @@ ext {
 //    imageloaderVersion = "2.1.1.2019_beta_04"
 //
 //    dep = [
-//            gson       : "com.google.code.gson:gson:2.8.5",
+//            gson         : "com.google.code.gson:gson:2.8.5",
 //            //view
-//            view       : "com.flyang.common:view:$viewVersion",
-//            expandView : "com.flyang.common:expandview:$expandViewVersion",
+//            view         : "com.flyang.common:view:$viewVersion",
+//            expandView   : "com.flyang.common:expandview:$expandViewVersion",
 //            //util
-//            util       : "com.flyang.common:util:$utilVersion",
+//            util         : "com.flyang.common:util:$utilVersion",
 //            //apt
-//            api        : "com.flyang.common:api:$apiVersion",
-//            annotation : "com.flyang.common:annotation:$annotationVersion",
-//            aop        : "com.flyang.common:aop:$aopVersion",
-//            complier   : "com.flyang.common:complier:${complierVersion}@jar",
+//            api          : "com.flyang.common:api:$apiVersion",
+//            annotation   : "com.flyang.common:annotation:$annotationVersion",
+//            aop          : "com.flyang.common:aop:$aopVersion",
+//            complier     : "com.flyang.common:complier:${complierVersion}@jar",
 //            //net
-//            progress   : "com.flyang.common:progress:$progressVersion",
-//            network    : "com.flyang.common:network:$networkVersion",
-//            imageloader: "com.flyang.common:imageloader:$imageloaderVersion"
+//            progress     : "com.flyang.common:progress:$progressVersion",
+//            network      : "com.flyang.common:network:$networkVersion",
+//            imageloader  : "com.flyang.common:imageloader:$imageloaderVersion",
+//            adapterrxjava: 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
 //    ]
 
     //github
