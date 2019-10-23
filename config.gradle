@@ -12,28 +12,39 @@ ext {
     isAlone = false
 
     //本地
-//    isNexus = true
+//    isNexus = true  //插件中配置apt依赖的是GitHub还是nexus，默认GitHub
+//
+//    //aptlib
 //    apiVersion = "2.1.1.2019_beta_02"
 //    annotationVersion = "2.1.1.2019_beta_06"
 //    complierVersion = "2.1.1.2019_beta_13"
-//
-//    utilVersion = "2.1.1.2019_beta_02"
-//    viewVersion = "2.1.1.2019_beta_09"
-//    //控件拓展库
-//    expandViewVersion = "2.1.1.2019_beta_05"
-//
-//
 //    aopVersion = "2.1.1.2019_beta_02"
+//    //utillib
+//    utilVersion = "2.1.1.2019_beta_03"
+//    //viewlib
+//    viewVersion = "2.1.1.2019_beta_10"
+//    expandViewVersion = "2.1.1.2019_beta_10" //控件拓展库
+//    //netlib
+//    progressVersion = "2.1.1.2019_beta_03"
+//    networkVersion = "2.1.1.2019_beta_03"
+//    imageloaderVersion = "2.1.1.2019_beta_04"
 //
 //    dep = [
-//            gson      : "com.google.code.gson:gson:2.8.5",
-//            view      : "com.flyang.common:view:$viewVersion",
-//            expandView: "com.flyang.common:expandview:$expandViewVersion",
-//            util      : "com.flyang.common:util:$utilVersion",
-//            api       : "com.flyang.common:api:$apiVersion",
-//            annotation: "com.flyang.common:annotation:$annotationVersion",
-//            aop       : "com.flyang.common:aop:$aopVersion",
-//            complier  : "com.flyang.common:complier:${complierVersion}@jar"
+//            gson       : "com.google.code.gson:gson:2.8.5",
+//            //view
+//            view       : "com.flyang.common:view:$viewVersion",
+//            expandView : "com.flyang.common:expandview:$expandViewVersion",
+//            //util
+//            util       : "com.flyang.common:util:$utilVersion",
+//            //apt
+//            api        : "com.flyang.common:api:$apiVersion",
+//            annotation : "com.flyang.common:annotation:$annotationVersion",
+//            aop        : "com.flyang.common:aop:$aopVersion",
+//            complier   : "com.flyang.common:complier:${complierVersion}@jar",
+//            //net
+//            progress   : "com.flyang.common:progress:$progressVersion",
+//            network    : "com.flyang.common:network:$networkVersion",
+//            imageloader: "com.flyang.common:imageloader:$imageloaderVersion"
 //    ]
 
     //github
@@ -42,6 +53,7 @@ ext {
     complierVersion = "1.1.1.2019_03"
 
     utilVersion = "1.1.1.2019_02"
+
     viewVersion = "1.1.1.2019_07"
     //控件拓展库
     expandViewVersion = "1.1.1.2019_05"
@@ -66,7 +78,7 @@ ext {
             aop        : "com.github.caoyangfei.aptlib:aop:$aopVersion",
             //网络请求
             progress   : "com.github.caoyangfei.netlib:progress:$progressVersion",
-            network     : "com.github.caoyangfei.netlib:network:$networkVersion",
+            network    : "com.github.caoyangfei.netlib:network:$networkVersion",
             imageloader: "com.github.caoyangfei.netlib:imageloader:$imageloaderVersion"
     ]
 }
