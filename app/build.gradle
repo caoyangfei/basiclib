@@ -51,6 +51,26 @@ dependencies {
     implementation dep.api
     implementation dep.annotation
     annotationProcessor dep.complier
+
+    api dep.util
+    api dep.view
+    api dep.expandView
+    api dep.aop
+
+    api dep.progress
+    api dep.network
+    api dep.imageloader
+    api dep.adapterrxjava
+
+    //运行时注解必用
+    api 'com.google.auto.service:auto-service:1.0-rc5'
+    api 'com.squareup:javapoet:1.11.1'
+    //切片必用
+    api 'org.aspectj:aspectjrt:1.8.14'
+
+    api "io.reactivex.rxjava2:rxandroid:2.1.1"
+    api "io.reactivex.rxjava2:rxjava:2.2.10"
+    api 'org.apache.commons:commons-lang3:3.5'
 }
 
-apply from: "../library.gradle"
+//apply from: "../library.gradle"
