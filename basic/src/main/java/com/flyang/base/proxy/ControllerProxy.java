@@ -1,5 +1,7 @@
 package com.flyang.base.proxy;
 
+import com.flyang.base.Lifecycle;
+
 /**
  * @author caoyangfei
  * @ClassName FragmentPresenterProxy
@@ -8,4 +10,16 @@ package com.flyang.base.proxy;
  * Controller的Presenter代理
  */
 public interface ControllerProxy extends IProxy {
+
+    void bindController();
+
+    /**
+     * 重写此方法,寄生Controller注入宿主Controller
+     *
+     * @param key
+     * @param controller
+     */
+    default void registerController(String key, Lifecycle controller) {
+
+    }
 }

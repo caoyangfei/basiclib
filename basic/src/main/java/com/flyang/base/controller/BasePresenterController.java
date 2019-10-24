@@ -9,14 +9,19 @@ import android.view.View;
 
 import com.flyang.api.router.IRouter;
 import com.flyang.api.router.IntentRouter;
+import com.flyang.base.Lifecycle;
 import com.flyang.base.contract.IView;
 import com.flyang.base.controller.loader.SpinKitLoaderController;
 import com.flyang.base.proxy.ControllerProxyImple;
 import com.flyang.basic.R;
 import com.flyang.util.app.ActivityUtils;
 import com.flyang.util.view.SnackbarUtils;
+import com.flyang.annotation.Presenter;
+import com.flyang.annotation.Controller;
 
 import java.util.Map;
+
+//import com.flyang.annotation.Presenter;
 
 /**
  * @author caoyangfei
@@ -24,31 +29,34 @@ import java.util.Map;
  * @date 2019/6/29
  * ------------- Description -------------
  * 绑定presenter的controller
+ * <p>
+ * 继承BasePresenterController的才能使用
+ * {@link Presenter,Controller}注解
  */
-public class BasePresenterController extends BaseViewController implements IView {
 
+public class BasePresenterController extends BaseViewController implements IView {
 
     private ControllerProxyImple presenterProxyImple;
     private BaseLoaderController loaderController;
 
     public BasePresenterController(FragmentActivity activity, View rootView) {
         super(activity, rootView);
-    }
-
-    @Override
-    public void onInit() {
-        super.onInit();
         if (presenterProxyImple == null)
-            presenterProxyImple = new ControllerProxyImple(activity, this);
-        presenterProxyImple.bind();
-        loaderController = getLoaderController();
-        loaderController.onInit();
-    }
+            presenterProxyImple = new ControllerProxyImple(activity, this) {
+                @Override
+                public <T> T getInstance(Class clazz) {
+                    return BasePresenterController.this.getInstance(clazz);
+                }
 
-    @Override
-    public void initView() {
-        super.initView();
-        loaderController.initView();
+                @Override
+                public void registerController(String key, Lifecycle controller) {
+                    BasePresenterController.this.registerController(key, controller);
+                }
+            };
+        presenterProxyImple.bind();
+        //绑定寄生Controller到宿主Controller内
+        presenterProxyImple.bindController();
+        loaderController = getLoaderController();
     }
 
     /**
@@ -58,6 +66,7 @@ public class BasePresenterController extends BaseViewController implements IView
      */
     protected BaseLoaderController getLoaderController() {
         SpinKitLoaderController spinKitLoaderController = new SpinKitLoaderController(activity, rootView.get());
+        registerController(SpinKitLoaderController.class.getSimpleName(), spinKitLoaderController);
         return spinKitLoaderController;
     }
 

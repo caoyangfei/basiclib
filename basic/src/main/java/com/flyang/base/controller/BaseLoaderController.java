@@ -83,12 +83,6 @@ public abstract class BaseLoaderController extends BaseViewController implements
 
     abstract protected int getViewID();
 
-    protected View getRootView() {
-        if (rootView != null && rootView.get() != null) {
-            return rootView.get();
-        }
-        return null;
-    }
 
     @Override
     public void showLoader(String s) {

@@ -28,6 +28,9 @@ public class BaseViewController extends BaseController {
         FacadeBind.bind(rootView);
     }
 
+    public View getRootView() {
+        return rootView.get();
+    }
 
     public void setResultCallBackLisenter(ResultCallBackLisenter resultCallBackLisenter) {
         this.mResultCallBackLisenter = resultCallBackLisenter;
