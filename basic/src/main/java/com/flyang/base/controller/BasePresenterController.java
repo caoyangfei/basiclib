@@ -21,8 +21,6 @@ import com.flyang.annotation.Controller;
 
 import java.util.Map;
 
-//import com.flyang.annotation.Presenter;
-
 /**
  * @author caoyangfei
  * @ClassName BasePresenterController
