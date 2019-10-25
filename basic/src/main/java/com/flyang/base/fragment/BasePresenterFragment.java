@@ -48,13 +48,13 @@ public abstract class BasePresenterFragment extends BaseFragment {
     @Override
     protected void onInit() {
         super.onInit();
-        initPresenter();
+        initBind();
         loaderController = getLoaderController();
         lifecycleManage.onInit();
     }
 
     @SuppressLint("CheckResult")
-    protected void initPresenter() {
+    protected void initBind() {
         if (presenterProxyImple == null)
             presenterProxyImple = new FragmentProxyImple(this) {
 
@@ -68,7 +68,7 @@ public abstract class BasePresenterFragment extends BaseFragment {
                     BasePresenterFragment.this.registerController(key, controller);
                 }
             };
-        presenterProxyImple.bind();
+        presenterProxyImple.bindPresenter();
         presenterProxyImple.bindController();
     }
 

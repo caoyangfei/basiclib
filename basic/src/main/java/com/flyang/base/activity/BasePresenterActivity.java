@@ -56,13 +56,13 @@ public abstract class BasePresenterActivity extends BaseActivity {
     @Override
     protected void onInit() {
         super.onInit();
-        initPresenter();
+        initBind();
         loaderController = getLoaderController();
         lifecycleManage.onInit();
     }
 
     @SuppressLint("CheckResult")
-    protected void initPresenter() {
+    protected void initBind() {
         if (presenterProxyImple == null)
             presenterProxyImple = new ActivityProxyImple(this) {
                 @Override
@@ -75,7 +75,7 @@ public abstract class BasePresenterActivity extends BaseActivity {
                     return BasePresenterActivity.this.getInstance(clazz);
                 }
             };
-        presenterProxyImple.bind();
+        presenterProxyImple.bindPresenter();
         presenterProxyImple.bindController();
     }
 

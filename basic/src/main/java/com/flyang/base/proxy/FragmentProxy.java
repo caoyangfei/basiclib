@@ -11,6 +11,9 @@ import com.flyang.base.Lifecycle;
  */
 public interface FragmentProxy extends IProxy {
 
+    /**
+     * 绑定Controller
+     */
     void bindController();
 
     /**

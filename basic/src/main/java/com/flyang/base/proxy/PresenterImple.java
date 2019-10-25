@@ -38,7 +38,7 @@ public class PresenterImple implements IProxy {
 
     @SuppressLint("CheckResult")
     @Override
-    public void bind() {
+    public void bindPresenter() {
         Field[] fields = mView.getClass().getDeclaredFields();
         if (fields.length == 0) return;
 

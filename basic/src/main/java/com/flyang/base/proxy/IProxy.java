@@ -9,9 +9,9 @@ package com.flyang.base.proxy;
  */
 public interface IProxy {
     /**
-     * 绑定
+     * 绑定Presenter
      */
-    void bind();
+    void bindPresenter();
 
     /**
      * 获取生成的单利

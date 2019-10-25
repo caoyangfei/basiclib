@@ -51,7 +51,7 @@ public class BasePresenterController extends BaseViewController implements IView
                     BasePresenterController.this.registerController(key, controller);
                 }
             };
-        presenterProxyImple.bind();
+        presenterProxyImple.bindPresenter();
         //绑定寄生Controller到宿主Controller内
         presenterProxyImple.bindController();
         loaderController = getLoaderController();
