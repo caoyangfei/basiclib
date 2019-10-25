@@ -54,9 +54,9 @@ ext {
 
     utilVersion = "1.1.1.2019_02"
 
-    viewVersion = "1.1.1.2019_07"
+    viewVersion = "1.1.1.2019_09"
     //控件拓展库
-    expandViewVersion = "1.1.1.2019_05"
+    expandViewVersion = "1.1.1.2019_09"
 
     aopVersion = "1.1.1.2019_03"
 
