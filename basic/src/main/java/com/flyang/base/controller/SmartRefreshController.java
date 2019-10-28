@@ -15,11 +15,11 @@ import com.flyang.view.layout.refresh.listener.OnMultiListener;
  * ------------- Description -------------
  * 刷新的controller
  */
-public class SmartRefreshController extends BasePresenterController implements OnMultiListener {
+public class SmartRefreshController<TModel> extends BasePresenterController implements OnMultiListener {
     @BindView("smartRefreshLayout")
     RefreshLayout refreshLayout;
 
-    IListAdapter listAdapter;
+    IListAdapter<TModel> listAdapter;
 
     public SmartRefreshController(FragmentActivity activity, View rootView, IListAdapter listAdapter) {
         super(activity, rootView);

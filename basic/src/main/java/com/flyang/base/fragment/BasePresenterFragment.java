@@ -49,6 +49,7 @@ public abstract class BasePresenterFragment extends BaseFragment {
     protected void onInit() {
         super.onInit();
         initBind();
+        onRegisterController();
         loaderController = getLoaderController();
         lifecycleManage.onInit();
     }
@@ -70,6 +71,12 @@ public abstract class BasePresenterFragment extends BaseFragment {
             };
         presenterProxyImple.bindPresenter();
         presenterProxyImple.bindController();
+    }
+
+    /**
+     * 拓展Controller注册
+     */
+    protected void onRegisterController() {
     }
 
     /**

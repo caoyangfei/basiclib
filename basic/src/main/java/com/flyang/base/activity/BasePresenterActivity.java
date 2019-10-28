@@ -57,6 +57,7 @@ public abstract class BasePresenterActivity extends BaseActivity {
     protected void onInit() {
         super.onInit();
         initBind();
+        onRegisterController();
         loaderController = getLoaderController();
         lifecycleManage.onInit();
     }
@@ -77,6 +78,12 @@ public abstract class BasePresenterActivity extends BaseActivity {
             };
         presenterProxyImple.bindPresenter();
         presenterProxyImple.bindController();
+    }
+
+    /**
+     * 拓展Controller注册
+     */
+    protected void onRegisterController() {
     }
 
     /**

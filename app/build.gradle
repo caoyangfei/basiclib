@@ -48,6 +48,7 @@ dependencies {
 
 
     implementation project(':basic')
+//    implementation dep.basic
     implementation dep.api
     implementation dep.annotation
     annotationProcessor dep.complier
