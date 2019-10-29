@@ -21,6 +21,7 @@ public class SmartRefreshController<TModel> extends BasePresenterController impl
 
     IListAdapter<TModel> listAdapter;
 
+
     public SmartRefreshController(FragmentActivity activity, View rootView, IListAdapter listAdapter) {
         super(activity, rootView);
         this.listAdapter = listAdapter;
@@ -33,12 +34,12 @@ public class SmartRefreshController<TModel> extends BasePresenterController impl
     }
 
 
-//    /**
+    //    /**
 //     * 数据加载完成时调用
 //     *
 //     * @param list
 //     */
-//    public void refreshComplete(List list) {
+//    pu blic void refreshComplete(List list) {
 //        ++pageIndex;//页码计数加1
 //        if (listAdapter != null) {
 //            if (pageIndex == 1 || !isLoadMoreEnable) {
