@@ -108,4 +108,9 @@ public interface IListAdapter<T> {
      * @return
      */
     int getListSize();
+
+    /**
+     * 刷新适配器
+     */
+    void notifyDataSetChanged();
 }
