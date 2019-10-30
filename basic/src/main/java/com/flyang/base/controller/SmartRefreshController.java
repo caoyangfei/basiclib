@@ -8,6 +8,8 @@ import com.flyang.base.adapter.IListAdapter;
 import com.flyang.view.layout.refresh.inter.RefreshLayout;
 import com.flyang.view.layout.refresh.listener.OnMultiListener;
 
+import java.util.List;
+
 /**
  * @author yangfei.cao
  * @ClassName SmartRefreshController
@@ -21,6 +23,7 @@ public class SmartRefreshController<TModel> extends BasePresenterController impl
 
     IListAdapter<TModel> listAdapter;
 
+    protected int pageIndex = 0;
 
     public SmartRefreshController(FragmentActivity activity, View rootView, IListAdapter listAdapter) {
         super(activity, rootView);
@@ -34,14 +37,14 @@ public class SmartRefreshController<TModel> extends BasePresenterController impl
     }
 
 
-    //    /**
-//     * 数据加载完成时调用
-//     *
-//     * @param list
-//     */
-//    pu blic void refreshComplete(List list) {
-//        ++pageIndex;//页码计数加1
-//        if (listAdapter != null) {
+    /**
+     * 数据加载完成时调用
+     *
+     * @param list
+     */
+    public void refreshComplete(List list) {
+        ++pageIndex;//页码计数加1
+        if (listAdapter != null) {
 //            if (pageIndex == 1 || !isLoadMoreEnable) {
 //                listAdapter.setList(list);
 //                switchAdapter();
@@ -54,6 +57,6 @@ public class SmartRefreshController<TModel> extends BasePresenterController impl
 //                listAdapter.addList(list);
 //                listAdapter.notifyDataSetChanged();
 //            }
-//        }
-//    }
+        }
+    }
 }

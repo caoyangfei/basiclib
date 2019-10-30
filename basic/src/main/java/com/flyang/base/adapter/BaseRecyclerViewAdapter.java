@@ -15,6 +15,7 @@ import com.flyang.base.adapter.view.DefaultLoadMoreView;
 import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 import com.flyang.base.listener.OnLoadListener;
 import com.flyang.basic.R;
+import com.flyang.util.data.PreconditionUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -344,7 +345,14 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
      * @param view
      */
     public void setLoadMoreLayout(BaseLoadMoreView view) {
+        PreconditionUtils.checkNotNull(view, "加载更多不允许为空");
         this.mLoadMoreLayout = view;
+        if (isLoadMoreEnable()) {
+            mLoadMoreLayout.handleLoadInit();
+            if (mLoadListener != null) {
+                mLoadMoreLayout.setOnLoadMoreListener(mLoadListener);
+            }
+        }
     }
 
     /**
@@ -568,14 +576,14 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
     /**
      * 某个位置是否处于HeadView的位置内
      */
-    protected boolean isInHeadViewPos(int position) {
+    public boolean isInHeadViewPos(int position) {
         return position < getHeadCounts();
     }
 
     /**
      * 某个位置是否处于FootView的位置内
      */
-    protected boolean isInFootViewPos(int position) {
+    public boolean isInFootViewPos(int position) {
         return position >= getListSize() + getHeadCounts() + getEmptyViewCounts() &&
                 position < getListSize() + getHeadCounts() + getEmptyViewCounts() + getFootCounts();
 
@@ -584,7 +592,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
     /**
      * 某个位置是否处于LoadMore的位置内
      */
-    protected boolean isInLoadMorePos(int position) {
+    public boolean isInLoadMorePos(int position) {
         return isLoadMoreEnable() &&
                 position == getListSize() + getHeadCounts() + getEmptyViewCounts() + getFootCounts();
 

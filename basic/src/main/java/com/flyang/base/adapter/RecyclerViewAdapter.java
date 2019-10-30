@@ -198,12 +198,14 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
 
     /**
      * Empty页面回调
+     * <p>
+     * 此方法中可监听空页面点击事件
+     * {@link com.flyang.base.listener.OnEmptyViewClickListener}
      *
      * @param holder
      * @param position
      */
     public void onBindEmptyView(@NonNull final RecyclerViewHolder holder, int position) {
-
     }
 
     /**

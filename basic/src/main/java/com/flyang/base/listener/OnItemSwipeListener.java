@@ -3,12 +3,16 @@ package com.flyang.base.listener;
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 
+import com.flyang.base.adapter.DraggableController;
+
 /**
  * @author caoyangfei
  * @ClassName OnItemSwipeListener
  * @date 2019/9/19
  * ------------- Description -------------
  * 滑动删除监听
+ * <p>
+ * {@link DraggableController#setOnItemSwipeListener(OnItemSwipeListener)}
  */
 public interface OnItemSwipeListener {
     //滑动开始

@@ -2,12 +2,16 @@ package com.flyang.base.listener;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.flyang.base.adapter.DraggableController;
+
 /**
  * @author caoyangfei
  * @ClassName OnItemDragListener
  * @date 2019/9/19
  * ------------- Description -------------
  * 拖拽监听
+ * <p>
+ * {@link DraggableController#setOnItemDragListener(OnItemDragListener)}
  */
 public interface OnItemDragListener {
     //拖拽开始
