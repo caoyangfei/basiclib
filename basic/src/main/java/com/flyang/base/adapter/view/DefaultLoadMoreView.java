@@ -112,15 +112,15 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
         //失败加载的图片
         private int failDrawableResId = R.drawable.default_loadmore_fail;
         //未触发状态的文字
-        private int initMessageResId = R.string.basic_loadmore_init;
+        private int initMessageResId = R.string.default_loadmore_init;
         //加载中的文字
-        private int loadingMessageResId = R.string.basic_loadmore_loading;
+        private int loadingMessageResId = R.string.default_loadmore_loading;
         //加载失败的文字
-        private int failMessageResId = R.string.basic_loadmore_fail;
+        private int failMessageResId = R.string.default_loadmore_fail;
         //加载成功的文字
-        private int successMessageResId = R.string.basic_loadmore_success;
+        private int successMessageResId = R.string.default_loadmore_success;
         //没有更多数据的文字
-        private int noMoreDataMessageResId = R.string.basic_loadmore_nomoredata;
+        private int noMoreDataMessageResId = R.string.default_loadmore_nomoredata;
 
         public Builder() {
         }
