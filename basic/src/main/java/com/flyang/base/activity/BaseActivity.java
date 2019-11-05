@@ -9,12 +9,12 @@ import android.view.View;
 
 import com.flyang.api.bind.FacadeBind;
 import com.flyang.base.contract.IView;
+import com.flyang.base.view.manager.SwipeBackManager;
+import com.flyang.base.view.inter.Delegate;
 import com.flyang.basic.R;
 import com.flyang.util.app.ActivityUtils;
 import com.flyang.util.view.AdaptScreenUtils;
 import com.flyang.util.view.KeyboardUtils;
-import com.flyang.view.inter.Delegate;
-import com.flyang.view.layout.manager.SwipeBackManager;
 
 /**
  * @author yangfei.cao
@@ -98,7 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
         // 设置是否是微信滑动返回样式。默认值为 true
         mSwipeBackManager.setIsWeChatStyle(true);
         // 设置阴影资源 id。默认值为 R.drawable.bga_sbl_shadow
-        mSwipeBackManager.setShadowResId(R.drawable.swipeback_shadow_bg_view);
+        mSwipeBackManager.setShadowResId(R.drawable.swipeback_shadow_bg);
         // 设置是否显示滑动返回的阴影效果。默认值为 true
         mSwipeBackManager.setIsNeedShowShadow(true);
         // 设置阴影区域的透明度是否根据滑动的距离渐变。默认值为 true

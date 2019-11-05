@@ -54,13 +54,13 @@ public class DragAndSwipeItemCallback extends ItemTouchHelper.Callback {
             if (mDraggableListener != null) {
                 mDraggableListener.onItemDragStart(viewHolder);
             }
-            viewHolder.itemView.setTag(R.id.BaseRecycleAdapter_Drag, true);
+            viewHolder.itemView.setTag(R.id.recycleAdapterDrag, true);
         } else if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE
                 && !isViewCreateByAdapter(viewHolder)) {
             if (mDraggableListener != null) {
                 mDraggableListener.onItemSwipeStart(viewHolder);
             }
-            viewHolder.itemView.setTag(R.id.BaseRecycleAdapter_Swipe, true);
+            viewHolder.itemView.setTag(R.id.recycleAdapterSwipe, true);
         }
         super.onSelectedChanged(viewHolder, actionState);
     }
@@ -71,19 +71,19 @@ public class DragAndSwipeItemCallback extends ItemTouchHelper.Callback {
         if (isViewCreateByAdapter(viewHolder)) {
             return;
         }
-        if (viewHolder.itemView.getTag(R.id.BaseRecycleAdapter_Drag) != null
-                && (Boolean) viewHolder.itemView.getTag(R.id.BaseRecycleAdapter_Drag)) {
+        if (viewHolder.itemView.getTag(R.id.recycleAdapterDrag) != null
+                && (Boolean) viewHolder.itemView.getTag(R.id.recycleAdapterDrag)) {
             if (mDraggableListener != null) {
                 mDraggableListener.onItemDragEnd(viewHolder);
             }
-            viewHolder.itemView.setTag(R.id.BaseRecycleAdapter_Drag, false);
+            viewHolder.itemView.setTag(R.id.recycleAdapterDrag, false);
         }
-        if (viewHolder.itemView.getTag(R.id.BaseRecycleAdapter_Swipe) != null
-                && (Boolean) viewHolder.itemView.getTag(R.id.BaseRecycleAdapter_Swipe)) {
+        if (viewHolder.itemView.getTag(R.id.recycleAdapterSwipe) != null
+                && (Boolean) viewHolder.itemView.getTag(R.id.recycleAdapterSwipe)) {
             if (mDraggableListener != null) {
                 mDraggableListener.onItemSwipeClear(viewHolder);
             }
-            viewHolder.itemView.setTag(R.id.BaseRecycleAdapter_Swipe, false);
+            viewHolder.itemView.setTag(R.id.recycleAdapterSwipe, false);
         }
     }
 

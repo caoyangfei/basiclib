@@ -4,16 +4,16 @@ import android.content.Intent;
 import android.view.View;
 
 import com.flyang.base.activity.BasePresenterActivity;
-import com.flyang.base.controller.loader.IndicatorLoaderController;
-import com.flyang.base.controller.loader.ShapeLoadingController;
+import com.flyang.base.controller.ShapeLoadingController;
+import com.flyang.base.view.inter.Loader;
 import com.flyang.demo.R;
+import com.flyang.demo.controller.IndicatorLoaderController;
 import com.flyang.demo.ui.view.net.CacheActivity;
 import com.flyang.demo.ui.view.net.ImageActivity;
 import com.flyang.expandview.loader.indicator.IndicatorFactoryExp;
 import com.flyang.expandview.loader.indicator.IndicatorStyleExp;
 import com.flyang.util.app.ActivityUtils;
 import com.flyang.util.log.LogUtils;
-import com.flyang.view.inter.Loader;
 
 import java.util.concurrent.TimeUnit;
 
@@ -72,6 +72,7 @@ public class MainActivity extends BasePresenterActivity {
                 break;
 
             case R.id.btn5:
+
                 ActivityUtils.startActivity(ImageActivity.class);
                 break;
         }

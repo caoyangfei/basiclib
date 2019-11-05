@@ -1,14 +1,16 @@
-package com.flyang.base.adapter.view;
+package com.flyang.demo;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.flyang.basic.R;
-
+import com.flyang.base.adapter.view.BaseLoadMoreView;
+import com.flyang.view.loader.IndicatorLoadingView;
+import com.flyang.view.loader.indicator.Indicator;
+import com.flyang.view.loader.indicator.IndicatorFactory;
+import com.flyang.view.loader.indicator.IndicatorStyle;
 
 /**
  * @author caoyangfei
@@ -19,7 +21,7 @@ import com.flyang.basic.R;
  */
 public class DefaultLoadMoreView extends BaseLoadMoreView {
     private View mStatusLayout;
-    private ProgressBar mLoadingView;
+    private IndicatorLoadingView mLoadingView;
     private ImageView mStatusImg;
     private TextView mStatusTv;
     private Builder builder;
@@ -38,23 +40,22 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
 
     @Override
     protected int layoutId() {
-        return R.layout.default_adapter_loading_more;
+        return R.layout.loading_more;
     }
 
     @Override
     protected void initView() {
-        mStatusLayout = findViewById(R.id.defaultLoadingMoreViewLayoutContent);
-        mLoadingView = findViewById(R.id.defaultLoadingMoreViewProgress);
-        mStatusImg = findViewById(R.id.defaultLoadingMoreViewStatusIv);
-        mStatusTv = findViewById(R.id.defaultLoadingMoreViewStatusTv);
+        mStatusLayout = findViewById(R.id.loadingMoreViewLayoutContent);
+        mLoadingView = findViewById(R.id.loadingMoreViewIndicator);
+        mStatusImg = findViewById(R.id.loadingMoreViewStatusIv);
+        mStatusTv = findViewById(R.id.loadingMoreViewStatusTv);
     }
 
     protected void refreshUI() {
         setBackgroundColor(builder.getBgColor());
-        mLoadingView.setIndeterminateDrawable(getContext().getResources()
-                .getDrawable(builder != null ?
-                        builder.getProgressDrawableResId() : R.drawable.default_loading_more_pgcircle));
-        mStatusTv.setTextColor(builder != null ? builder.getTextColor() : Color.BLACK);
+        Indicator indicator = builder.getIndicator();
+        mLoadingView.setIndicator(indicator);
+        mStatusTv.setTextColor(builder.getTextColor());
         setBeforeLoadingUI();
     }
 
@@ -105,8 +106,8 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
         private int bgColor = Color.WHITE;
         //文字颜色
         private int textColor = Color.BLACK;
-        //ProgressBar的圆圈
-        private int progressDrawableResId = R.drawable.default_loading_more_pgcircle;
+        //加载样式
+        private Indicator indicator = IndicatorFactory.create(IndicatorStyle.BallGridBeatIndicator);
         //成功加载的图片
         private int successDrawableResId = R.drawable.default_loadmore_success;
         //失败加载的图片
@@ -139,14 +140,6 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
             return this;
         }
 
-        public int getProgressDrawableResId() {
-            return progressDrawableResId;
-        }
-
-        public void setProgressDrawableResId(int progressDrawableResId) {
-            this.progressDrawableResId = progressDrawableResId;
-        }
-
         public int getTextColor() {
             return textColor;
         }
@@ -160,6 +153,14 @@ public class DefaultLoadMoreView extends BaseLoadMoreView {
             return successDrawableResId;
         }
 
+        public Builder setIndicator(Indicator indicator) {
+            this.indicator = indicator;
+            return this;
+        }
+
+        public Indicator getIndicator() {
+            return indicator;
+        }
 
         public Builder setFailDrawableResId(int failDrawableResId) {
             this.failDrawableResId = failDrawableResId;

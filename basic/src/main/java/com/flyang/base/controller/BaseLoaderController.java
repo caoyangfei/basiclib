@@ -12,8 +12,7 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import com.flyang.base.activity.BasePresenterActivity;
-import com.flyang.base.controller.loader.SpinKitLoaderController;
-import com.flyang.view.inter.Loader;
+import com.flyang.base.view.inter.Loader;
 
 /**
  * @author caoyangfei
@@ -23,7 +22,7 @@ import com.flyang.view.inter.Loader;
  * 加载基类
  * <p>
  * 自定义加载样式
- * 重写此类，仿照{@link SpinKitLoaderController}
+ * 重写此类，仿照{@link ShapeLoadingController}
  * 然后在activity重写{@link BasePresenterActivity#getLoaderController()}
  */
 public abstract class BaseLoaderController extends BaseViewController implements Loader {

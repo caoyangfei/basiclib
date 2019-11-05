@@ -13,13 +13,13 @@ import com.flyang.api.router.IntentRouter;
 import com.flyang.base.Lifecycle;
 import com.flyang.base.LifecycleManage;
 import com.flyang.base.contract.IView;
-import com.flyang.base.controller.loader.SpinKitLoaderController;
+import com.flyang.base.controller.ShapeLoadingController;
 import com.flyang.base.presenter.BasePresenter;
 import com.flyang.base.proxy.FragmentProxyImple;
+import com.flyang.base.view.inter.Loader;
 import com.flyang.basic.R;
 import com.flyang.util.app.ActivityUtils;
 import com.flyang.util.view.SnackbarUtils;
-import com.flyang.view.inter.Loader;
 
 import java.util.Map;
 import java.util.Objects;
@@ -136,9 +136,9 @@ public abstract class BasePresenterFragment extends BaseFragment {
      * @return
      */
     protected Loader getLoaderController() {
-        SpinKitLoaderController spinKitLoaderController = new SpinKitLoaderController(getActivity(), rootView);
-        registerController(SpinKitLoaderController.class.getSimpleName(), spinKitLoaderController);
-        return spinKitLoaderController;
+        ShapeLoadingController shapeLoadingController = new ShapeLoadingController(getActivity(), rootView);
+        registerController(ShapeLoadingController.class.getSimpleName(), shapeLoadingController);
+        return shapeLoadingController;
     }
 
     /**

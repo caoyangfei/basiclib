@@ -6,6 +6,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="styleLoadingLayout">@style/LoadingLayoutStyle</item>
     </style>
 
+
+    <style name="LoadingLayoutStyle" parent="LoadingLayout.Style">
+        <item name="llEmptyImage">@drawable/loading_empty_view</item>
+        <item name="llErrorImage">@drawable/loading_error_view</item>
+        <item name="llLoadingResId">@layout/common_loading</item>
+    </style>
 </resources>

@@ -7,17 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
+import com.flyang.annotation.Controller;
+import com.flyang.annotation.Presenter;
 import com.flyang.api.router.IRouter;
 import com.flyang.api.router.IntentRouter;
 import com.flyang.base.Lifecycle;
 import com.flyang.base.contract.IView;
-import com.flyang.base.controller.loader.SpinKitLoaderController;
 import com.flyang.base.proxy.ControllerProxyImple;
 import com.flyang.basic.R;
 import com.flyang.util.app.ActivityUtils;
 import com.flyang.util.view.SnackbarUtils;
-import com.flyang.annotation.Presenter;
-import com.flyang.annotation.Controller;
 
 import java.util.Map;
 
@@ -63,9 +62,9 @@ public class BasePresenterController extends BaseViewController implements IView
      * @return
      */
     protected BaseLoaderController getLoaderController() {
-        SpinKitLoaderController spinKitLoaderController = new SpinKitLoaderController(activity, rootView.get());
-        registerController(SpinKitLoaderController.class.getSimpleName(), spinKitLoaderController);
-        return spinKitLoaderController;
+        ShapeLoadingController shapeLoadingController = new ShapeLoadingController(activity, rootView.get());
+        registerController(ShapeLoadingController.class.getSimpleName(), shapeLoadingController);
+        return shapeLoadingController;
     }
 
     //处理Presenter中的View效果

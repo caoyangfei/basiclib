@@ -1,12 +1,12 @@
-package com.flyang.base.controller.loader;
+package com.flyang.demo.controller;
 
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.flyang.base.controller.BaseLoaderController;
+import com.flyang.base.view.ShapeLoadingView;
 import com.flyang.basic.R;
 import com.flyang.util.data.StringUtils;
-import com.flyang.view.loader.ShapeLoadingView;
 
 /**
  * @author yangfei.cao

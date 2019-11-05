@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="BaseRecycleAdapter_ViewHolder" type="id"/>
-    <item name="BaseRecycleAdapter_Swipe" type="id"/>
-    <item name="BaseRecycleAdapter_Drag" type="id"/>
+    <item name="recycleAdapterViewHolder" type="id"/>
+    <item name="recycleAdapterSwipe" type="id"/>
+    <item name="recycleAdapterDrag" type="id"/>
 </resources>

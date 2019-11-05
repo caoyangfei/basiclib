@@ -25,6 +25,19 @@ android {
 
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            //资源文件分包
+            res.srcDirs =
+                    [
+                            'src/main/res/layout/loading',
+                            'src/main/res/layout',
+                            'src/main/res'
+                    ]
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -75,7 +88,7 @@ dependencies {
 
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
     implementation "io.reactivex.rxjava2:rxjava:2.2.10"
-    implementation dep.view
+
     implementation dep.util
     implementation dep.api
     implementation dep.annotation

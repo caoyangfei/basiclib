@@ -51,7 +51,7 @@ public class DraggableController implements IDraggableListener {
             if (hasToggleView()) {
                 View toggleView = holder.getView(mToggleViewId);
                 if (toggleView != null) {
-                    toggleView.setTag(R.id.BaseRecycleAdapter_ViewHolder, holder);
+                    toggleView.setTag(R.id.recycleAdapterViewHolder, holder);
                     if (mDragOnLongPress) {
                         toggleView.setOnLongClickListener(mOnToggleViewLongClickListener);
                     } else {
@@ -85,7 +85,7 @@ public class DraggableController implements IDraggableListener {
                 @Override
                 public boolean onLongClick(View v) {
                     if (mItemTouchHelper != null && itemDragEnabled) {
-                        mItemTouchHelper.startDrag((RecyclerView.ViewHolder) v.getTag(R.id.BaseRecycleAdapter_ViewHolder));
+                        mItemTouchHelper.startDrag((RecyclerView.ViewHolder) v.getTag(R.id.recycleAdapterViewHolder));
                     }
                     return true;
                 }
@@ -98,7 +98,7 @@ public class DraggableController implements IDraggableListener {
                     if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN
                             && !mDragOnLongPress) {
                         if (mItemTouchHelper != null && itemDragEnabled) {
-                            mItemTouchHelper.startDrag((RecyclerView.ViewHolder) v.getTag(R.id.BaseRecycleAdapter_ViewHolder));
+                            mItemTouchHelper.startDrag((RecyclerView.ViewHolder) v.getTag(R.id.recycleAdapterViewHolder));
                         }
                         return true;
                     } else {
