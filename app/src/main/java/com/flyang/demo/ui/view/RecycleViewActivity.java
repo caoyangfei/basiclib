@@ -55,7 +55,7 @@ public class RecycleViewActivity extends BasePresenterActivity {
 
     @Override
     protected int getLayoutID() {
-        return R.layout.activity_test;
+        return R.layout.activity_recycle;
     }
 
     @Override
