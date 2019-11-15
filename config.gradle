@@ -60,9 +60,9 @@ ext {
 
     aopVersion = "1.1.1.2019_03"
 
-    progressVersion = "1.1.1.2019_02"
-    networkVersion = "1.1.1.2019_02"
-    imageloaderVersion = "1.1.1.2019_02"
+    progressVersion = "1.1.1.2019_03"
+    networkVersion = "1.1.1.2019_03"
+    imageloaderVersion = "1.1.1.2019_03"
 
     dep = [
             gson       : "com.google.code.gson:gson:2.8.5",
