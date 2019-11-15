@@ -31,7 +31,7 @@ android {
             //资源文件分包
             res.srcDirs =
                     [
-                            'src/main/res/layout/loading',
+                            'src/main/res/layout/view',
                             'src/main/res/layout',
                             'src/main/res'
                     ]
