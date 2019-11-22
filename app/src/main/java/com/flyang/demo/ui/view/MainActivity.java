@@ -14,6 +14,7 @@ import com.flyang.expandview.loader.indicator.IndicatorFactoryExp;
 import com.flyang.expandview.loader.indicator.IndicatorStyleExp;
 import com.flyang.util.app.ActivityUtils;
 import com.flyang.util.log.LogUtils;
+import com.flyang.view.progress.CircularAnim;
 
 import java.util.concurrent.TimeUnit;
 
@@ -60,20 +61,20 @@ public class MainActivity extends BasePresenterActivity {
                 startActivity(listIntent);
                 break;
             case R.id.btn4:
-//                CircularAnim.fullActivity(this, view)
-//                        .colorOrImageRes(R.color.color_2E8B57)
-//                        .go(new CircularAnim.OnAnimationEndListener() {
-//                            @Override
-//                            public void onAnimationEnd() {
-//                                ActivityUtils.startActivity(CacheActivity.class);
-//                            }
-//                        });
                 ActivityUtils.startActivity(CacheActivity.class);
                 break;
 
             case R.id.btn5:
-
-                ActivityUtils.startActivity(ImageActivity.class);
+                ActivityUtils.startActivity(this, ImageActivity.class);
+            case R.id.btn6:
+                CircularAnim.fullActivity(this, view)
+                        .colorOrImageRes(R.color.color_2E8B57)
+                        .go(new CircularAnim.OnAnimationEndListener() {
+                            @Override
+                            public void onAnimationEnd() {
+                                ActivityUtils.startActivity(DefaultSmartActivity.class);
+                            }
+                        });
                 break;
         }
 
