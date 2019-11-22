@@ -16,8 +16,8 @@ import android.widget.RelativeLayout;
 import com.flyang.base.view.SwipeBackLayout;
 import com.flyang.basic.R;
 import com.flyang.util.app.ApplicationUtils;
-import com.flyang.util.view.BarUtils;
 import com.flyang.util.view.ScreenUtils;
+import com.flyang.util.view.StatusBarUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -165,9 +165,9 @@ public class SwipeBackShadowView extends FrameLayout {
             ViewGroup.LayoutParams lp = null;
             if (!(mPreContentView instanceof SwipeBackLayout)) {
                 int width = mPreDecorView.getWidth();
-                int height = mPreDecorView.getHeight() - BarUtils.getNavBarHeight(activity);
+                int height = mPreDecorView.getHeight() - StatusBarUtils.getNavBarHeight(activity);
                 if (!ScreenUtils.isPortrait()) {
-                    width = mPreDecorView.getWidth() - BarUtils.getNavBarHeight(activity);
+                    width = mPreDecorView.getWidth() - StatusBarUtils.getNavBarHeight(activity);
                     height = mPreDecorView.getHeight();
                 }
                 if (mPreDecorView instanceof FrameLayout) {
@@ -212,7 +212,7 @@ public class SwipeBackShadowView extends FrameLayout {
         view.buildDrawingCache();
         Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache(), 0, 0,
                 ScreenUtils.getScreenWidth(),
-                ScreenUtils.getScreenHeight() - BarUtils.getNavBarHeight(mActivity));
+                ScreenUtils.getScreenHeight() - StatusBarUtils.getNavBarHeight(mActivity));
         view.destroyDrawingCache();
         return bitmap;
     }

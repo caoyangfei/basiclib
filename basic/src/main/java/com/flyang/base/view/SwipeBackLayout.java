@@ -56,8 +56,8 @@ import android.view.accessibility.AccessibilityEvent;
 
 import com.flyang.base.view.swipeback.SwipeBackShadowView;
 import com.flyang.util.app.ApplicationUtils;
-import com.flyang.util.view.BarUtils;
 import com.flyang.util.view.ScreenUtils;
+import com.flyang.util.view.StatusBarUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -630,11 +630,11 @@ public class SwipeBackLayout extends ViewGroup {
 
         // ======================== 新加的 START ========================
         if (!mIsNavigationBarOverlap && ScreenUtils.isPortrait()) {
-            maxLayoutHeight -= BarUtils.getNavBarHeight(mActivity);
+            maxLayoutHeight -= StatusBarUtils.getNavBarHeight(mActivity);
         }
 
         if (mIsNavigationBarOverlap && !ScreenUtils.isPortrait()) {
-            widthSize += BarUtils.getNavBarHeight(mActivity);
+            widthSize += StatusBarUtils.getNavBarHeight(mActivity);
         }
         // ======================== 新加的 END ========================
 

@@ -52,7 +52,7 @@ ext {
     annotationVersion = "1.1.1.2019_03"
     complierVersion = "1.1.1.2019_03"
 
-    utilVersion = "1.1.1.2019_03"
+    utilVersion = "1.1.1.2019_05"
 
     viewVersion = "1.1.1.2019_10"
     //控件拓展库

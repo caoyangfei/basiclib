@@ -9,4 +9,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="这是测试默认刷新的activity" />
+
 </LinearLayout>

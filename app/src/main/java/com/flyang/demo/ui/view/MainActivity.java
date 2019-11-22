@@ -1,10 +1,12 @@
 package com.flyang.demo.ui.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 
 import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.controller.ShapeLoadingController;
+import com.flyang.base.view.LoadingLayout;
 import com.flyang.base.view.inter.Loader;
 import com.flyang.demo.R;
 import com.flyang.demo.controller.IndicatorLoaderController;
@@ -14,7 +16,7 @@ import com.flyang.expandview.loader.indicator.IndicatorFactoryExp;
 import com.flyang.expandview.loader.indicator.IndicatorStyleExp;
 import com.flyang.util.app.ActivityUtils;
 import com.flyang.util.log.LogUtils;
-import com.flyang.view.progress.CircularAnim;
+import com.flyang.util.view.StatusBarUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,9 +34,12 @@ public class MainActivity extends BasePresenterActivity {
     @Override
     protected void initView() {
         super.initView();
-        //                ((SpinKitLoaderController) loaderController).setStyle(SpinKitStyle.WANDERING_CUBES);
+        StatusBarUtils.setColorForSwipeBack(this, Color.GRAY, 38);
+        //  ((SpinKitLoaderController) loaderController).setStyle(SpinKitStyle.WANDERING_CUBES);
         ((IndicatorLoaderController) loaderController).setStyle(IndicatorFactoryExp.create(IndicatorStyleExp.BallZigZagDeflectIndicator));
-
+        LoadingLayout wrap = LoadingLayout.wrap(this);
+        wrap.showError();
+        wrap.setRetryListener(v -> wrap.showContent());
     }
 
     public void Button(View view) {
@@ -66,15 +71,17 @@ public class MainActivity extends BasePresenterActivity {
 
             case R.id.btn5:
                 ActivityUtils.startActivity(this, ImageActivity.class);
+                break;
             case R.id.btn6:
-                CircularAnim.fullActivity(this, view)
-                        .colorOrImageRes(R.color.color_2E8B57)
-                        .go(new CircularAnim.OnAnimationEndListener() {
-                            @Override
-                            public void onAnimationEnd() {
-                                ActivityUtils.startActivity(DefaultSmartActivity.class);
-                            }
-                        });
+//                CircularAnim.fullActivity(this, view)
+//                        .colorOrImageRes(R.color.color_2E8B57)
+//                        .go(new CircularAnim.OnAnimationEndListener() {
+//                            @Override
+//                            public void onAnimationEnd() {
+//                                ActivityUtils.startActivity(DefaultSmartActivity.class);
+//                            }
+//                        });
+                ActivityUtils.startActivity(DefaultSmartActivity.class);
                 break;
         }
 

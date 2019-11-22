@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RestrictTo;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,10 @@ import android.view.ViewGroup;
 
 import com.flyang.api.bind.FacadeBind;
 import com.flyang.base.contract.IView;
+
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+import static android.support.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+import static android.support.annotation.RestrictTo.Scope.SUBCLASSES;
 
 /**
  * @author yangfei.cao
@@ -32,9 +37,23 @@ public abstract class BaseFragment extends Fragment implements IView {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(getLayoutID(), container, false);
+        View layout = inflater.inflate(getLayoutID(), container, false);
+        rootView = getSmartLayout(layout);
         return rootView;
     }
+
+    /**
+     * 不对外提供,默认刷新fragment使用
+     * {@link BaseSmartRefreshFragment}
+     *
+     * @param rootView
+     * @return
+     */
+    @RestrictTo({LIBRARY, LIBRARY_GROUP, SUBCLASSES})
+    protected View getSmartLayout(View rootView) {
+        return rootView;
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

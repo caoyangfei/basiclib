@@ -1,51 +1,41 @@
-package com.flyang.base.activity;
+package com.flyang.base.fragment;
 
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.flyang.annotation.apt.BindView;
 import com.flyang.base.view.SmartRefreshLayout;
 import com.flyang.basic.R;
 
 /**
  * @author yangfei.cao
  * @ClassName basiclib
- * @date 2019/11/21
+ * @date 2019/11/22
  * ------------- Description -------------
- * 默认刷新
+ * 默认刷新fragment
+ * <p>
+ * 默认不设置头部导航
  */
-public abstract class BaseSmartRefreshActivity extends BasePresenterActivity {
+public abstract class BaseSmartRefreshFragment extends BasePresenterFragment {
 
-    private int titleBar = R.layout.default_titlebar;
+    @BindView("smartRefreshLayout")
     SmartRefreshLayout smartRefreshLayout;
 
     @Override
-    public void setContentView(View view) {
-        View smartLayout = LayoutInflater.from(this).inflate(R.layout.default_smart_refresh, null);
+    protected View getSmartLayout(View rootView) {
+        View smartLayout = LayoutInflater.from(getActivity()).inflate(R.layout.default_smart_refresh, null);
         LinearLayout titleLayout = smartLayout.findViewById(R.id.titleLayout);
         LinearLayout bottomLayout = smartLayout.findViewById(R.id.bottomLayout);
         smartRefreshLayout = smartLayout.findViewById(R.id.smartRefreshLayout);
-        if (!isDefaultTitleBar())
-            titleBar = getTitleLayoutID();
-        if (titleBar != 0)
-            LayoutInflater.from(this).inflate(titleBar, titleLayout);
+        if (getTitleLayoutID() != 0)
+            LayoutInflater.from(getActivity()).inflate(getTitleLayoutID(), titleLayout);
         if (getBottomLayoutID() != 0)
-            LayoutInflater.from(this).inflate(getBottomLayoutID(), bottomLayout);
+            LayoutInflater.from(getActivity()).inflate(getBottomLayoutID(), bottomLayout);
 
-        smartRefreshLayout.setRefreshContent(view);
-        super.setContentView(smartLayout);
-    }
-
-    /**
-     * 是否使用默认TitleBar
-     * <p>
-     * false且getTitleLayoutID()==0,不显示导航
-     *
-     * @return
-     */
-    protected boolean isDefaultTitleBar() {
-        return true;
+        smartRefreshLayout.setRefreshContent(rootView);
+        return super.getSmartLayout(smartLayout);
     }
 
     /**
@@ -67,5 +57,4 @@ public abstract class BaseSmartRefreshActivity extends BasePresenterActivity {
     protected int getBottomLayoutID() {
         return 0;
     }
-
 }
