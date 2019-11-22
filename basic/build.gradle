@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 //apply plugin: 'maven'
 
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.caoyangfei'
+group = 'com.github.caoyangfei'
 
 configurations {
     deployerJars
@@ -32,6 +32,8 @@ android {
             res.srcDirs =
                     [
                             'src/main/res/layout/view',
+                            'src/main/res/layout/refresh',
+                            'src/main/res/layout/default',
                             'src/main/res/layout',
                             'src/main/res'
                     ]

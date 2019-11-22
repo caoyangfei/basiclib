@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.flyang.api.bind.FacadeBind;
 import com.flyang.base.contract.IView;
-import com.flyang.base.view.manager.SwipeBackManager;
+import com.flyang.base.view.swipeback.manager.SwipeBackManager;
 import com.flyang.base.view.inter.Delegate;
 import com.flyang.basic.R;
 import com.flyang.util.app.ActivityUtils;

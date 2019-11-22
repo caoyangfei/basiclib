@@ -1,9 +1,31 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyEllipsis">
     <string name="app_name">basic</string>
 
+    <!--LoadingLayout默认-->
     <string name="default_loadmore_init">滑到底部加载更多</string>
     <string name="default_loadmore_loading">正在加载...</string>
     <string name="default_loadmore_success">加载成功</string>
     <string name="default_loadmore_fail">加载失败，请点击重试</string>
     <string name="default_loadmore_nomoredata">没有更多数据</string>
+
+    <!--刷新布局默认-->
+    <string name="refresh_header_pulling">下拉可以刷新</string>
+    <string name="refresh_header_refreshing">正在刷新…</string>
+    <string name="refresh_header_loading">等待底部加载完成…</string>
+    <string name="refresh_header_release">释放立即刷新</string>
+    <string name="refresh_header_finish">刷新完成</string>
+    <string name="refresh_header_failed">刷新失败</string>
+    <string name="refresh_header_update">上次更新 M-d HH:mm</string>
+    <string name="refresh_header_secondary">释放进入二楼</string>
+
+    <string name="refresh_footer_pulling">上拉加载更多</string>
+    <string name="refresh_footer_release">释放立即加载</string>
+    <string name="refresh_footer_loading">正在加载…</string>
+    <string name="refresh_footer_refreshing">等待头部刷新完成…</string>
+    <string name="refresh_footer_finish">加载完成</string>
+    <string name="refresh_footer_failed">加载失败</string>
+    <string name="refresh_footer_nothing">没有更多数据了</string>
+
+    <string name="refresh_content_empty">SmartRefreshLayout中没有找到内容视图。您是否忘记在xml布局文件中添加？</string>
+    <string name="refresh_component_falsify" formatted="false">%s 虚假区域\n代表运行时拖动的高度【%.1fdp】 \n而不会显示任何东西</string>
 </resources>

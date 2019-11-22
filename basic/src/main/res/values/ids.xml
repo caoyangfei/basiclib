@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="recycleAdapterViewHolder" type="id"/>
-    <item name="recycleAdapterSwipe" type="id"/>
-    <item name="recycleAdapterDrag" type="id"/>
+    <item name="recycleAdapterViewHolder" type="id" />
+    <item name="recycleAdapterSwipe" type="id" />
+    <item name="recycleAdapterDrag" type="id" />
+
+    <!--导航布局-->
+    <item name="titleBarLayout" type="id" />
+    <item name="leftTextView" type="id" />
+    <item name="rightTextView" type="id" />
+    <item name="titleTextView" type="id" />
+
+    <!--智能刷新-->
+    <item name="smartRefreshLayout" type="id" />
+    <item name="refreshTag" type="id" />
 </resources>

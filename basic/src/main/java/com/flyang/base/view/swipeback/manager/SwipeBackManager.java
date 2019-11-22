@@ -1,4 +1,4 @@
-package com.flyang.base.view.manager;
+package com.flyang.base.view.swipeback.manager;
 
 import android.app.Activity;
 import android.support.annotation.DrawableRes;
