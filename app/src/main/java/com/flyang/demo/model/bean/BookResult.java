@@ -9,9 +9,6 @@ import com.flyang.network.model.ApiResult;
  * ------------- Description -------------
  */
 public class BookResult<T> extends ApiResult<T> {
-//    private int code;
-//    private String msg;
-//    private T data;
 
     @Override
     public boolean isOk() {
