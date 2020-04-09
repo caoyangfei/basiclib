@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--加载中-->
-
     <style name="LoadingLayoutStyle">
         <item name="llEmptyResId">@layout/loading_layout_empty</item>
         <item name="llLoadingResId">@layout/loading_layout_loading</item>

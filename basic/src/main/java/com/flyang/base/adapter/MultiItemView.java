@@ -8,10 +8,10 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import com.flyang.api.bind.FacadeBind;
+import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
 import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 import com.flyang.base.listener.OnItemChildViewClickListener;
-import com.flyang.base.adapter.viewholder.AbsListViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
