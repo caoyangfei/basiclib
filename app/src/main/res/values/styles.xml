@@ -8,10 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@null</item>
 
-        <item name="styleLoadingLayout">@style/LoadingLayoutStyle</item>
+        <item name="styleLoadingLayout">@style/CustomLoadingLayoutStyle</item>
     </style>
 
-    <style name="LoadingLayoutStyle" parent="LoadingLayout.Style">
+    <style name="CustomLoadingLayoutStyle" parent="LoadingLayoutStyle">
         <item name="llEmptyImage">@drawable/loading_empty_view</item>
         <item name="llErrorImage">@drawable/loading_error_view</item>
         <item name="llLoadingResId">@layout/common_loading</item>

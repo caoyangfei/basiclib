@@ -8,6 +8,7 @@
 
     <!--加载中布局-->
     <attr name="styleLoadingLayout" format="reference" />
+    <!--定义控件id-->
     <item name="loadingEmptyLayout" type="id" />
     <item name="loadingEmptyIv" type="id" />
     <item name="loadingEmptyTv" type="id" />
@@ -77,6 +78,8 @@
         <attr name="lineSize" format="dimension" />
     </declare-styleable>
 
+    <!--style配置默认属性-->
+    <attr name="styleSmartRefreshLayout" format="reference" />
     <!--智能刷新布局SmartRefreshLayout-->
     <attr name="refreshPrimaryColor" format="color" /><!--主题颜色-->
     <attr name="refreshAccentColor" format="color" /><!--强调颜色-->
@@ -157,41 +160,6 @@
         <!--指定固定底部的视图Id-->
         <attr name="refreshFixedFooterViewId" format="reference" />
     </declare-styleable>
-
-    <!--默认值-->
-    <style name="SmartRefreshStyle">
-        <item name="refreshPrimaryColor">@android:color/holo_blue_dark</item>
-        <item name="refreshAccentColor">@android:color/white</item>
-        <item name="refreshReboundDuration">300</item>
-        <item name="refreshHeaderHeight">100dp</item>
-        <item name="refreshFooterHeight">60dp</item>
-        <item name="refreshHeaderInsetStart">0dp</item>
-        <item name="refreshFooterInsetStart">0dp</item>
-        <item name="refreshDragRate">0.5</item>
-        <item name="refreshHeaderMaxDragRate">2.5</item>
-        <item name="refreshFooterMaxDragRate">2.5</item>
-        <item name="refreshHeaderTriggerRate">1</item>
-        <item name="refreshFooterTriggerRate">1</item>
-        <item name="refreshEnableRefresh">true</item>
-        <item name="refreshEnableLoadMore">false</item>
-        <item name="refreshEnableHeaderTranslationContent">true</item>
-        <item name="refreshEnableFooterTranslationContent">true</item>
-        <item name="refreshEnablePreviewInEditMode">true</item>
-        <item name="refreshEnableAutoLoadMore">true</item>
-        <item name="refreshEnableOverScrollDrag">false</item>
-        <item name="refreshEnableOverScrollBounce">true</item>
-        <item name="refreshEnablePureScrollMode">false</item>
-        <item name="refreshEnableNestedScrolling">true</item>
-        <item name="refreshEnableScrollContentWhenLoaded">true</item>
-        <item name="refreshEnableScrollContentWhenRefreshed">true</item>
-        <item name="refreshEnableLoadMoreWhenContentNotFull">true</item>
-        <item name="refreshEnableFooterFollowWhenLoadFinished">false</item>
-        <item name="refreshEnableFooterFollowWhenNoMoreData">false</item>
-        <item name="refreshEnableClipHeaderWhenFixedBehind">true</item>
-        <item name="refreshEnableClipFooterWhenFixedBehind">true</item>
-        <item name="refreshDisableContentWhenRefresh">false</item>
-        <item name="refreshDisableContentWhenLoading">false</item>
-    </style>
 
     <!--刷新布局子控件header设置属性-->
     <declare-styleable name="SmartRefreshLayout_Layout">

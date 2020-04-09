@@ -100,7 +100,7 @@ public class LoadingLayout extends FrameLayout {
         setBackgroundColor(Color.WHITE);
 
         mInflater = LayoutInflater.from(context);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LoadingLayout, defStyleAttr, R.style.LoadingLayout_Style);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LoadingLayout, defStyleAttr, R.style.LoadingLayoutStyle);
         mEmptyImage = a.getResourceId(R.styleable.LoadingLayout_llEmptyImage, NO_ID);
         mEmptyText = a.getString(R.styleable.LoadingLayout_llEmptyText);
 

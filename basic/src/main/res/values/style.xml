@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--加载中-->
-    <style name="LoadingLayout" />
 
-    <style name="LoadingLayout.Style">
+    <style name="LoadingLayoutStyle">
         <item name="llEmptyResId">@layout/loading_layout_empty</item>
         <item name="llLoadingResId">@layout/loading_layout_loading</item>
         <item name="llErrorResId">@layout/loading_layout_error</item>
@@ -17,6 +16,41 @@
         <item name="llErrorImage">@null</item>
         <item name="llErrorText">无网络连接，请检查您的网络...</item>
         <item name="llRetryText">加载失败，点击重试~~</item>
+    </style>
+
+    <!--默认值-->
+    <style name="SmartRefreshStyle">
+        <item name="refreshPrimaryColor">@android:color/holo_blue_dark</item>
+        <item name="refreshAccentColor">@android:color/white</item>
+        <item name="refreshReboundDuration">300</item>
+        <item name="refreshHeaderHeight">100dp</item>
+        <item name="refreshFooterHeight">60dp</item>
+        <item name="refreshHeaderInsetStart">0dp</item>
+        <item name="refreshFooterInsetStart">0dp</item>
+        <item name="refreshDragRate">0.5</item>
+        <item name="refreshHeaderMaxDragRate">2.5</item>
+        <item name="refreshFooterMaxDragRate">2.5</item>
+        <item name="refreshHeaderTriggerRate">1</item>
+        <item name="refreshFooterTriggerRate">1</item>
+        <item name="refreshEnableRefresh">true</item>
+        <item name="refreshEnableLoadMore">false</item>
+        <item name="refreshEnableHeaderTranslationContent">true</item>
+        <item name="refreshEnableFooterTranslationContent">true</item>
+        <item name="refreshEnablePreviewInEditMode">true</item>
+        <item name="refreshEnableAutoLoadMore">true</item>
+        <item name="refreshEnableOverScrollDrag">false</item>
+        <item name="refreshEnableOverScrollBounce">true</item>
+        <item name="refreshEnablePureScrollMode">false</item>
+        <item name="refreshEnableNestedScrolling">true</item>
+        <item name="refreshEnableScrollContentWhenLoaded">true</item>
+        <item name="refreshEnableScrollContentWhenRefreshed">true</item>
+        <item name="refreshEnableLoadMoreWhenContentNotFull">true</item>
+        <item name="refreshEnableFooterFollowWhenLoadFinished">false</item>
+        <item name="refreshEnableFooterFollowWhenNoMoreData">false</item>
+        <item name="refreshEnableClipHeaderWhenFixedBehind">true</item>
+        <item name="refreshEnableClipFooterWhenFixedBehind">true</item>
+        <item name="refreshDisableContentWhenRefresh">false</item>
+        <item name="refreshDisableContentWhenLoading">false</item>
     </style>
 
 </resources>

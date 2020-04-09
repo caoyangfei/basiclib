@@ -218,12 +218,21 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
 
     //构造方法
     public SmartRefreshLayout(Context context) {
-        this(context, null);
+        super(context);
+        init(context, null, R.attr.styleSmartRefreshLayout);
     }
 
     public SmartRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context, attrs, R.attr.styleSmartRefreshLayout);
+    }
 
+    public SmartRefreshLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context, attrs, defStyleAttr);
+    }
+
+    private void init(Context context, AttributeSet attrs, int defStyleAttr) {
         // TODO: 2019/10/22 布局中未设置id时代码设置id,防止因为id覆盖找不到控件
         if (getId() == -1)
             this.setId(R.id.smartRefreshLayout);
@@ -242,7 +251,7 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
         mFooterHeight = dp2px(60);
         mHeaderHeight = dp2px(100);
 
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SmartRefreshLayout);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SmartRefreshLayout, defStyleAttr, R.style.SmartRefreshStyle);
 
         if (!ta.hasValue(R.styleable.SmartRefreshLayout_android_clipToPadding)) {
             super.setClipToPadding(false);
