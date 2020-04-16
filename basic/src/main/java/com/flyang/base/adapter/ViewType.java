@@ -1,6 +1,11 @@
 package com.flyang.base.adapter;
 
 
+import android.support.annotation.RestrictTo;
+
+import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+import static android.support.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+
 /**
  * @author caoyangfei
  * @ClassName ViewType
@@ -8,6 +13,7 @@ package com.flyang.base.adapter;
  * ------------- Description -------------
  * 页面类型（内部使用）
  */
+@RestrictTo({LIBRARY, LIBRARY_GROUP})
 public final class ViewType {
     //空页面
     public static final int EMPTY = Integer.MAX_VALUE - 10000;

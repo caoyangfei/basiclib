@@ -48,9 +48,4 @@ public class DefaultSmartActivity extends BaseSmartRefreshActivity {
         });
     }
 
-    @Override
-    protected boolean isDefaultTitleBar() {
-        return false;
-    }
-
 }

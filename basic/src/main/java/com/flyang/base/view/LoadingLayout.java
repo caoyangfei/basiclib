@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.flyang.basic.R;
+import com.flyang.util.data.ConvertUtils;
 import com.flyang.util.data.PreconditionUtils;
 
 import java.util.HashMap;
@@ -109,10 +110,10 @@ public class LoadingLayout extends FrameLayout {
         mRetryText = a.getString(R.styleable.LoadingLayout_llRetryText);
 
         mTextColor = a.getColor(R.styleable.LoadingLayout_llTextColor, 0xff999999);
-        mTextSize = a.getDimensionPixelSize(R.styleable.LoadingLayout_llTextSize, dp2px(16));
+        mTextSize = a.getDimensionPixelSize(R.styleable.LoadingLayout_llTextSize, ConvertUtils.dp2px(16));
 
         mButtonTextColor = a.getColor(R.styleable.LoadingLayout_llButtonTextColor, 0xff999999);
-        mButtonTextSize = a.getDimensionPixelSize(R.styleable.LoadingLayout_llButtonTextSize, dp2px(16));
+        mButtonTextSize = a.getDimensionPixelSize(R.styleable.LoadingLayout_llButtonTextSize, ConvertUtils.dp2px(16));
         mButtonBackground = a.getDrawable(R.styleable.LoadingLayout_llButtonBackground);
 
         mEmptyResId = a.getResourceId(R.styleable.LoadingLayout_llEmptyResId, R.layout.loading_layout_empty);
@@ -121,9 +122,7 @@ public class LoadingLayout extends FrameLayout {
         a.recycle();
     }
 
-    int dp2px(float dp) {
-        return (int) (getResources().getDisplayMetrics().density * dp);
-    }
+
 
 
     LayoutInflater mInflater;

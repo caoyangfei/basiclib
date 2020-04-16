@@ -21,8 +21,8 @@ import com.flyang.base.view.refresh.constant.RefreshState;
 import com.flyang.base.view.refresh.constant.SpinnerStyle;
 import com.flyang.base.view.refresh.inter.RefreshHeader;
 import com.flyang.base.view.refresh.inter.RefreshLayout;
-import com.flyang.base.view.refresh.util.SmartUtil;
 import com.flyang.basic.R;
+import com.flyang.util.data.ConvertUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -93,8 +93,8 @@ public class ClassicsHeader extends ClassicsAbstract<ClassicsHeader> implements 
         LayoutParams lpArrow = (LayoutParams) arrowView.getLayoutParams();
         LayoutParams lpProgress = (LayoutParams) progressView.getLayoutParams();
         LinearLayout.LayoutParams lpUpdateText = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-        lpUpdateText.topMargin = ta.getDimensionPixelSize(R.styleable.ClassicsHeader_refreshTextTimeMarginTop, SmartUtil.dp2px(0));
-        lpProgress.rightMargin = ta.getDimensionPixelSize(R.styleable.ClassicsHeader_refreshDrawableMarginRight, SmartUtil.dp2px(20));
+        lpUpdateText.topMargin = ta.getDimensionPixelSize(R.styleable.ClassicsHeader_refreshTextTimeMarginTop, ConvertUtils.dp2px(0));
+        lpProgress.rightMargin = ta.getDimensionPixelSize(R.styleable.ClassicsHeader_refreshDrawableMarginRight, ConvertUtils.dp2px(20));
         lpArrow.rightMargin = lpProgress.rightMargin;
 
         lpArrow.width = ta.getLayoutDimension(R.styleable.ClassicsHeader_refreshDrawableArrowSize, lpArrow.width);
@@ -128,13 +128,13 @@ public class ClassicsHeader extends ClassicsAbstract<ClassicsHeader> implements 
         }
 
         if (ta.hasValue(R.styleable.ClassicsHeader_refreshTextSizeTitle)) {
-            mTitleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsHeader_refreshTextSizeTitle, SmartUtil.dp2px(16)));
+            mTitleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsHeader_refreshTextSizeTitle, ConvertUtils.dp2px(16)));
 //        } else {
 //            mTitleText.setTextSize(16);
         }
 
         if (ta.hasValue(R.styleable.ClassicsHeader_refreshTextSizeTime)) {
-            mLastUpdateText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsHeader_refreshTextSizeTime, SmartUtil.dp2px(12)));
+            mLastUpdateText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsHeader_refreshTextSizeTime, ConvertUtils.dp2px(12)));
 //        } else {
 //            mLastUpdateText.setTextSize(12);
         }
@@ -346,7 +346,7 @@ public class ClassicsHeader extends ClassicsAbstract<ClassicsHeader> implements 
     public ClassicsHeader setTextTimeMarginTop(float dp) {
         final View updateView = mLastUpdateText;
         MarginLayoutParams lp = (MarginLayoutParams) updateView.getLayoutParams();
-        lp.topMargin = SmartUtil.dp2px(dp);
+        lp.topMargin = ConvertUtils.dp2px(dp);
         updateView.setLayoutParams(lp);
         return this;
     }

@@ -26,7 +26,7 @@ public abstract class BaseSmartRefreshActivity extends BasePresenterActivity {
         LinearLayout titleLayout = smartLayout.findViewById(R.id.titleLayout);
         LinearLayout bottomLayout = smartLayout.findViewById(R.id.bottomLayout);
         smartRefreshLayout = smartLayout.findViewById(R.id.smartRefreshLayout);
-        if (!isDefaultTitleBar())
+        if (getTitleLayoutID() != 0)
             titleBar = getTitleLayoutID();
         if (titleBar != 0)
             LayoutInflater.from(this).inflate(titleBar, titleLayout);
@@ -35,17 +35,6 @@ public abstract class BaseSmartRefreshActivity extends BasePresenterActivity {
 
         smartRefreshLayout.setRefreshContent(view);
         super.setContentView(smartLayout);
-    }
-
-    /**
-     * 是否使用默认TitleBar
-     * <p>
-     * false且getTitleLayoutID()==0,不显示导航
-     *
-     * @return
-     */
-    protected boolean isDefaultTitleBar() {
-        return true;
     }
 
     /**

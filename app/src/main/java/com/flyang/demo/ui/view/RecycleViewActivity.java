@@ -83,7 +83,6 @@ public class RecycleViewActivity extends BasePresenterActivity {
         for (int i = 0; i < 5; i++) {
             strings.add("条目" + i);
         }
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.addItemDecoration(new GridAndStaggeredDecoration(this));
 
         recyclerViewAdapter = new RecyclerViewAdapter(this);

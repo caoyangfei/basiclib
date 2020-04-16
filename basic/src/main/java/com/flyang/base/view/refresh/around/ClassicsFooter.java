@@ -14,8 +14,8 @@ import com.flyang.base.view.refresh.constant.RefreshState;
 import com.flyang.base.view.refresh.constant.SpinnerStyle;
 import com.flyang.base.view.refresh.inter.RefreshFooter;
 import com.flyang.base.view.refresh.inter.RefreshLayout;
-import com.flyang.base.view.refresh.util.SmartUtil;
 import com.flyang.basic.R;
+import com.flyang.util.data.ConvertUtils;
 
 
 /**
@@ -66,7 +66,7 @@ public class ClassicsFooter extends ClassicsAbstract<ClassicsFooter> implements 
 
         LayoutParams lpArrow = (LayoutParams) arrowView.getLayoutParams();
         LayoutParams lpProgress = (LayoutParams) progressView.getLayoutParams();
-        lpProgress.rightMargin = ta.getDimensionPixelSize(R.styleable.ClassicsFooter_refreshDrawableMarginRight, SmartUtil.dp2px(20));
+        lpProgress.rightMargin = ta.getDimensionPixelSize(R.styleable.ClassicsFooter_refreshDrawableMarginRight, ConvertUtils.dp2px(20));
         lpArrow.rightMargin = lpProgress.rightMargin;
 
         lpArrow.width = ta.getLayoutDimension(R.styleable.ClassicsFooter_refreshDrawableArrowSize, lpArrow.width);
@@ -99,7 +99,7 @@ public class ClassicsFooter extends ClassicsAbstract<ClassicsFooter> implements 
         }
 
         if (ta.hasValue(R.styleable.ClassicsFooter_refreshTextSizeTitle)) {
-            mTitleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsFooter_refreshTextSizeTitle, SmartUtil.dp2px(16)));
+            mTitleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, ta.getDimensionPixelSize(R.styleable.ClassicsFooter_refreshTextSizeTitle, ConvertUtils.dp2px(16)));
         }
 
         if (ta.hasValue(R.styleable.ClassicsFooter_refreshPrimaryColor)) {

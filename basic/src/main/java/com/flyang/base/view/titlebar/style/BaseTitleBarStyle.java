@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.TypedValue;
 import android.view.Gravity;
 
 import com.flyang.base.view.titlebar.ITitleBarStyle;
+import com.flyang.util.data.ConvertUtils;
 
 
 /**
@@ -32,12 +32,12 @@ public abstract class BaseTitleBarStyle implements ITitleBarStyle {
 
     @Override
     public int getDrawablePadding() {
-        return dp2px(2);
+        return ConvertUtils.dp2px(2);
     }
 
     @Override
     public int getChildPadding() {
-        return dp2px(12);
+        return ConvertUtils.dp2px(12);
     }
 
     @Override
@@ -55,22 +55,22 @@ public abstract class BaseTitleBarStyle implements ITitleBarStyle {
             return actionBarSize;
         }
         // ActionBar 的高度为 154 px，计算得出为 56 dp
-        return dp2px(56);
+        return ConvertUtils.dp2px(56);
     }
 
     @Override
     public float getLeftSize() {
-        return sp2px(14);
+        return ConvertUtils.sp2px(14);
     }
 
     @Override
     public float getTitleSize() {
-        return sp2px(16);
+        return ConvertUtils.sp2px(16);
     }
 
     @Override
     public float getRightSize() {
-        return sp2px(14);
+        return ConvertUtils.sp2px(14);
     }
 
     public Context getContext() {
@@ -93,17 +93,5 @@ public abstract class BaseTitleBarStyle implements ITitleBarStyle {
         }
     }
 
-    /**
-     * dp转px
-     */
-    protected int dp2px(float dpValue) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, getContext().getResources().getDisplayMetrics());
-    }
 
-    /**
-     * sp转px
-     */
-    protected int sp2px(float spValue) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spValue, getContext().getResources().getDisplayMetrics());
-    }
 }

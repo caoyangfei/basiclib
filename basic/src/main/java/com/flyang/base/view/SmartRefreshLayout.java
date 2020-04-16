@@ -58,6 +58,7 @@ import com.flyang.base.view.refresh.wrapper.RefreshContentWrapper;
 import com.flyang.base.view.refresh.wrapper.RefreshFooterWrapper;
 import com.flyang.base.view.refresh.wrapper.RefreshHeaderWrapper;
 import com.flyang.basic.R;
+import com.flyang.util.data.ConvertUtils;
 import com.flyang.util.data.PreconditionUtils;
 
 import static android.view.MotionEvent.obtain;
@@ -67,7 +68,6 @@ import static android.view.View.MeasureSpec.getSize;
 import static android.view.View.MeasureSpec.makeMeasureSpec;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-import static com.flyang.base.view.refresh.util.SmartUtil.dp2px;
 import static com.flyang.base.view.refresh.util.SmartUtil.fling;
 import static com.flyang.base.view.refresh.util.SmartUtil.isContentView;
 import static java.lang.System.currentTimeMillis;
@@ -248,8 +248,8 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
         mMinimumVelocity = configuration.getScaledMinimumFlingVelocity();
         mMaximumVelocity = configuration.getScaledMaximumFlingVelocity();
 
-        mFooterHeight = dp2px(60);
-        mHeaderHeight = dp2px(100);
+        mFooterHeight = ConvertUtils.dp2px(60);
+        mHeaderHeight = ConvertUtils.dp2px(100);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SmartRefreshLayout, defStyleAttr, R.style.SmartRefreshStyle);
 
@@ -417,7 +417,7 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
                 }
             }
             if (mRefreshContent == null) {
-                final int padding = dp2px(20);
+                final int padding = ConvertUtils.dp2px(20);
                 final TextView errorView = new TextView(thisView.getContext());
                 errorView.setTextColor(0xffff6600);
                 errorView.setGravity(Gravity.CENTER);
@@ -1462,7 +1462,7 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
                     }
                     animationRunnable = null;
                     if (Math.abs(mSpinner) >= Math.abs(mSmoothDistance)) {
-                        int duration = 10 * Math.min(Math.max((int) SmartUtil.px2dp(Math.abs(mSpinner - mSmoothDistance)), 30), 100);
+                        int duration = 10 * Math.min(Math.max((int) ConvertUtils.px2dp(Math.abs(mSpinner - mSmoothDistance)), 30), 100);
                         animSpinner(mSmoothDistance, 0, mReboundInterpolator, duration);
                     }
                 }
@@ -1866,7 +1866,7 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
      */
     @Override
     public RefreshLayout setHeaderHeight(float heightDp) {
-        return setHeaderHeightPx(dp2px(heightDp));
+        return setHeaderHeightPx(ConvertUtils.dp2px(heightDp));
     }
 
     /**
@@ -1919,7 +1919,7 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
      */
     @Override
     public RefreshLayout setFooterHeight(float heightDp) {
-        return setFooterHeightPx(dp2px(heightDp));
+        return setFooterHeightPx(ConvertUtils.dp2px(heightDp));
     }
 
     /**
@@ -1965,7 +1965,7 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
      */
     @Override
     public RefreshLayout setHeaderInsetStart(float insetDp) {
-        mHeaderInsetStart = dp2px(insetDp);
+        mHeaderInsetStart = ConvertUtils.dp2px(insetDp);
         return this;
     }
 
@@ -1990,7 +1990,7 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
      */
     @Override
     public RefreshLayout setFooterInsetStart(float insetDp) {
-        mFooterInsetStart = dp2px(insetDp);
+        mFooterInsetStart = ConvertUtils.dp2px(insetDp);
         return this;
     }
 
