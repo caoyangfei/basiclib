@@ -57,11 +57,11 @@ public final class TitleBarLayout extends FrameLayout implements View.OnClickLis
     private boolean isOk;
 
     public TitleBarLayout(Context context) {
-        this(context, null, 0);
+        this(context, null, R.attr.styleTitleBarLayout);
     }
 
     public TitleBarLayout(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, R.attr.styleTitleBarLayout);
     }
 
     public TitleBarLayout(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -70,7 +70,7 @@ public final class TitleBarLayout extends FrameLayout implements View.OnClickLis
             setId(R.id.titleBarLayout);
 
         initView(context);
-        initStyle(attrs);
+        initStyle(attrs, defStyleAttr);
         initBar();
     }
 
@@ -132,14 +132,14 @@ public final class TitleBarLayout extends FrameLayout implements View.OnClickLis
         mRightView.setOnClickListener(this);
     }
 
-    private void initStyle(AttributeSet attrs) {
+    private void initStyle(AttributeSet attrs, int defStyleAttr) {
         // 判断默认样式是否为空
         if (sDefaultStyle == null) {
             // 由于默认样式是静态的，所以必须使用 Application 作为上下文
             sDefaultStyle = new TitleBarLightStyle(getContext().getApplicationContext());
         }
 
-        final TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.TitleBarLayout);
+        final TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.TitleBarLayout, defStyleAttr, 0);
 
         // 样式设置
         switch (array.getInt(R.styleable.TitleBarLayout_barStyle, 0)) {

@@ -6,7 +6,7 @@
         <attr name="shapeTextAppearance" format="reference" />
     </declare-styleable>
 
-    <!--加载中布局-->
+    <!--加载中布局style-->
     <attr name="styleLoadingLayout" format="reference" />
     <!--定义控件id-->
     <item name="loadingEmptyLayout" type="id" />
@@ -46,6 +46,8 @@
         <attr name="llButtonBackground" format="reference" />
     </declare-styleable>
 
+    <!--标题布局style-->
+    <attr name="styleTitleBarLayout" format="reference" />
     <!--头部导航栏-->
     <declare-styleable name="TitleBarLayout">
         <!-- 整体样式 -->
