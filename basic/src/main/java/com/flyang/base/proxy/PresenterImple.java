@@ -7,6 +7,7 @@ import com.flyang.annotation.Presenter;
 import com.flyang.base.contract.IPresenter;
 import com.flyang.base.contract.IView;
 import com.flyang.base.presenter.BasePresenter;
+import com.flyang.util.data.PreconditionUtils;
 import com.flyang.util.data.ReflectUtils;
 
 import java.lang.reflect.Field;
@@ -52,11 +53,11 @@ public class PresenterImple implements IProxy {
                 .subscribe(field -> {
 
                     Class<? extends BasePresenter> aClass = (Class<? extends BasePresenter>) field.getType();
+
                     //和instanceof有点像， 只不过instance用于对象的判断，而isAssignableFrom用于class判断。
-                    if (!BasePresenter.class.isAssignableFrom(aClass)) {
-                        // 这个 Class 是不是继承自 BasePresenter 如果不是抛异常
-                        throw new RuntimeException(aClass.getName() + " Not extends BasePresenter");
-                    }
+                    // 这个 Class 是不是继承自 BasePresenter 如果不是抛异常
+                    PreconditionUtils.checkArgument(BasePresenter.class.isAssignableFrom(aClass), "Not extends BasePresenter");
+
                     BasePresenter presenter = getInstance(aClass);
                     if (presenter == null)
                         presenter = ReflectUtils.on(aClass).create().get();
@@ -89,19 +90,25 @@ public class PresenterImple implements IProxy {
      * @param presenter
      */
     private void checkView(BasePresenter presenter) {
-        /**
-         * getGenericSuperclass()返回直接继承的父类（包含泛型参数）
-         * 此处返回具体presenter父辈basePresenter<V extends IView>
-         */
-        Type genericSuperclass = presenter.getClass().getSuperclass().getGenericSuperclass();
-        //ParameterizedType参数化类型，即泛型，它是type的一种
+        Class mClass = presenter.getClass();
+        Class viewClazz = null;
+        while (!mClass.equals(Object.class)) {
+            if (mClass.getSuperclass().getName().equals(BasePresenter.class.getName())) {
+                Type genericSuperclass = mClass.getGenericSuperclass();
+                if (genericSuperclass instanceof ParameterizedType) {
+                    ParameterizedType pt = (ParameterizedType) genericSuperclass;
+                    //泛型数组
+                    Type[] actualTypeArguments = pt.getActualTypeArguments();
+                    viewClazz = (Class) actualTypeArguments[0];
+                }
+                break;
+            }
+            mClass = mClass.getSuperclass();
+        }
 
-        ParameterizedType pt = (ParameterizedType) genericSuperclass;
-        //泛型数组
-        Type[] actualTypeArguments = pt.getActualTypeArguments();
-        Class viewClazz = (Class) actualTypeArguments[0];
+        PreconditionUtils.checkNotNull(viewClazz, "BasePresenter must have genericity view extend IView");
 
-        //拿到view层所有接口，这里指activity或fragment或viewGroup
+        //拿到view层所有接口，这里指activity或fragment或Controller
         Class<?>[] viewClasses = mView.getClass().getInterfaces();
         boolean isImplementsView = false;
         //遍历view层接口
@@ -111,9 +118,7 @@ public class PresenterImple implements IProxy {
                 isImplementsView = true;
             }
         }
-        if (!isImplementsView) {
-            throw new RuntimeException(mView.getClass().getSimpleName() + " must implements " + viewClazz.getName());
-        }
+        PreconditionUtils.checkArgument(isImplementsView, mView.getClass().getSimpleName() + " must implements " + viewClazz.getName());
     }
 
 }
