@@ -24,7 +24,7 @@ public class ShapeLoadingController extends BaseLoaderController {
     }
 
     @Override
-    protected int getViewID() {
+    protected int getLayoutID() {
         return R.layout.dialog_shape_loading;
     }
 

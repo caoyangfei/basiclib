@@ -9,11 +9,9 @@ import com.flyang.base.controller.ShapeLoadingController;
 import com.flyang.base.view.LoadingLayout;
 import com.flyang.base.view.inter.Loader;
 import com.flyang.demo.R;
-import com.flyang.demo.controller.IndicatorLoaderController;
+import com.flyang.demo.controller.CircleLoaderController;
 import com.flyang.demo.ui.view.net.CacheActivity;
 import com.flyang.demo.ui.view.net.ImageActivity;
-import com.flyang.expandview.loader.indicator.IndicatorFactoryExp;
-import com.flyang.expandview.loader.indicator.IndicatorStyleExp;
 import com.flyang.util.app.ActivityUtils;
 import com.flyang.util.log.LogUtils;
 import com.flyang.util.view.StatusBarUtils;
@@ -36,7 +34,7 @@ public class MainActivity extends BasePresenterActivity {
         super.initView();
         StatusBarUtils.setColorForSwipeBack(this, Color.GRAY, 38);
         //  ((SpinKitLoaderController) loaderController).setStyle(SpinKitStyle.WANDERING_CUBES);
-        ((IndicatorLoaderController) loaderController).setStyle(IndicatorFactoryExp.create(IndicatorStyleExp.BallZigZagDeflectIndicator));
+//        ((IndicatorLoaderController) loaderController).setStyle(IndicatorFactoryExp.create(IndicatorStyleExp.BallZigZagDeflectIndicator));
         LoadingLayout wrap = LoadingLayout.wrap(this);
         wrap.showError();
         wrap.setRetryListener(v -> wrap.showContent());
@@ -50,6 +48,7 @@ public class MainActivity extends BasePresenterActivity {
                 startActivity(intent);
                 break;
             case R.id.btn2:
+                loaderController.setBackDismiss(false);
                 loaderController.showLoader("加载中。。。");
                 Flowable.just(1)
                         .delay(10, TimeUnit.SECONDS)
@@ -89,8 +88,8 @@ public class MainActivity extends BasePresenterActivity {
 
     @Override
     protected Loader getLoaderController() {
-        IndicatorLoaderController shapeLoadingController = new IndicatorLoaderController(this, rootView);
-        registerController(ShapeLoadingController.class.getSimpleName(), shapeLoadingController);
-        return shapeLoadingController;
+        CircleLoaderController circleLoaderController = new CircleLoaderController(this, rootView);
+        registerController(ShapeLoadingController.class.getSimpleName(), circleLoaderController);
+        return circleLoaderController;
     }
 }

@@ -1,7 +1,5 @@
 package com.flyang.base.view.inter;
 
-import android.text.TextUtils;
-
 /**
  * @author caoyangfei
  * @ClassName Loader
@@ -11,26 +9,15 @@ import android.text.TextUtils;
  */
 public interface Loader {
 
-    default void showLoader(String msg) {
-        if (TextUtils.isEmpty(msg))
-            msg = "正在处理中。。。！";
-    }
+    void setBackDismiss(boolean backDismiss);
+
+    void showLoader(String msg);
 
     void closeLoader();
 
-    default void showMsg(String msg) {
-        if (TextUtils.isEmpty(msg))
-            msg = "正在处理中。。。！";
-    }
+    void showMsg(String msg);
 
-    default void showResultMsg(String msg, boolean isSuccess) {
-        if (TextUtils.isEmpty(msg))
-            if (isSuccess) {
-                msg = "操作成功！";
-            } else {
-                msg = "加载失败！";
-            }
-    }
+    void showResultMsg(String msg, boolean isSuccess);
 
     void setLoadingText(String str);
 

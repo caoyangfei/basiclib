@@ -27,7 +27,7 @@ public class IOSLoaderController extends BaseLoaderController {
     }
 
     @Override
-    protected int getViewID() {
+    protected int getLayoutID() {
         return R.layout.dialog_ios_loading;
     }
 

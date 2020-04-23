@@ -46,7 +46,7 @@ public class CircleLoaderController extends BaseLoaderController {
 
 
     @Override
-    protected int getViewID() {
+    protected int getLayoutID() {
         return R.layout.dialog_circle_loading;
     }
 
@@ -76,8 +76,7 @@ public class CircleLoaderController extends BaseLoaderController {
                         BitmapFactory.decodeResource(activity.getResources(), R.drawable.loading_fail_basic));
             }
             setLoadingText(msg);
-            backDismiss = false;
-            mPopupWindow.dismiss();
+            dismiss();
         }
     }
 

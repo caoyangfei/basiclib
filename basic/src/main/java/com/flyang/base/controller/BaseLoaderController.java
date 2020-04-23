@@ -1,5 +1,6 @@
 package com.flyang.base.controller;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
@@ -13,6 +14,8 @@ import android.widget.PopupWindow;
 
 import com.flyang.base.activity.BasePresenterActivity;
 import com.flyang.base.view.inter.Loader;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author caoyangfei
@@ -29,28 +32,29 @@ public abstract class BaseLoaderController extends BaseViewController implements
 
     protected PopupWindow mPopupWindow;
 
-    protected boolean backDismiss = true;//拦截返回键(取消拦截返回键，重写setOnDismissListener监听和修改默认值为false)
+    private boolean backDismiss = true;//拦截返回键(取消拦截返回键)
+    protected AtomicBoolean atomicBackDismiss = new AtomicBoolean(backDismiss);
 
     public BaseLoaderController(FragmentActivity activity, View rootView) {
         super(activity, rootView);
         initPop();
+
     }
 
     protected void initPop() {
-        if (getViewID() != 0) {
-            View contentView = LayoutInflater.from(activity).inflate(getViewID(), null);
+        if (getLayoutID() != 0) {
+            View contentView = LayoutInflater.from(activity).inflate(getLayoutID(), null);
             if (mPopupWindow == null) {
                 mPopupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT) {
                     @Override
                     public void dismiss() {
-                        dismiss(backDismiss);
+                        dismiss(atomicBackDismiss.getAndSet(backDismiss));
                     }
 
                     public void dismiss(boolean isBackDismiss) {
-                        if (isBackDismiss) {
-                            return;
-                        } else {
+                        if (!isBackDismiss) {
+                            backgroundAlpha(1.0f);
                             super.dismiss();
                         }
                     }
@@ -58,7 +62,7 @@ public abstract class BaseLoaderController extends BaseViewController implements
                 mPopupWindow.setFocusable(true);
                 mPopupWindow.setOutsideTouchable(false);
                 mPopupWindow.setTouchable(true);
-                mPopupWindow.setBackgroundDrawable(null);
+                mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
 
                 mPopupWindow.setTouchInterceptor(new View.OnTouchListener() {
                     @Override
@@ -67,21 +71,22 @@ public abstract class BaseLoaderController extends BaseViewController implements
                         return true;
                     }
                 });
-                mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        backDismiss = true;
-                        backgroundAlpha(1.0f);
-                    }
-                });
-
                 mPopupWindow.update();
             }
         }
     }
 
-    abstract protected int getViewID();
+    /**
+     * 控制返回键拦截
+     *
+     * @param backDismiss
+     */
+    public void setBackDismiss(boolean backDismiss) {
+        this.backDismiss = backDismiss;
+        atomicBackDismiss.set(backDismiss);
+    }
 
+    protected abstract int getLayoutID();
 
     @Override
     public void showLoader(String s) {
@@ -101,8 +106,7 @@ public abstract class BaseLoaderController extends BaseViewController implements
     @Override
     public void closeLoader() {
         if (mPopupWindow != null && mPopupWindow.isShowing()) {
-            backDismiss = false;
-            mPopupWindow.dismiss();
+            dismiss();
         }
     }
 
@@ -111,9 +115,13 @@ public abstract class BaseLoaderController extends BaseViewController implements
     public void showResultMsg(String s, boolean b) {
         setLoadingText(s);
         if (mPopupWindow != null && mPopupWindow.isShowing()) {
-            backDismiss = false;
-            mPopupWindow.dismiss();
+            dismiss();
         }
+    }
+
+    public void dismiss() {
+        atomicBackDismiss.set(false);
+        mPopupWindow.dismiss();
     }
 
     public void setBackground(int color) {

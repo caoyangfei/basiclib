@@ -30,7 +30,7 @@ public class IndicatorLoaderController extends BaseLoaderController {
     }
 
     @Override
-    protected int getViewID() {
+    protected int getLayoutID() {
         return R.layout.dialog_indicator_loading;
     }
 
