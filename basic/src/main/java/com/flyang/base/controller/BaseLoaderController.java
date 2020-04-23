@@ -1,6 +1,6 @@
 package com.flyang.base.controller;
 
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
@@ -62,7 +62,7 @@ public abstract class BaseLoaderController extends BaseViewController implements
                 mPopupWindow.setFocusable(true);
                 mPopupWindow.setOutsideTouchable(false);
                 mPopupWindow.setTouchable(true);
-                mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+                mPopupWindow.setBackgroundDrawable(new ColorDrawable());
 
                 mPopupWindow.setTouchInterceptor(new View.OnTouchListener() {
                     @Override
