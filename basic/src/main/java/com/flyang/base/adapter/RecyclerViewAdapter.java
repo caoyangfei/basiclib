@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.flyang.base.adapter.viewholder.CommonViewHolder;
 import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
+import com.flyang.base.listener.OnEmptyViewClickListener;
 import com.flyang.util.data.PreconditionUtils;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
     protected @Nullable
     LayoutInflater inflater;
     private RecyclerView mRecyclerView;
+    private OnEmptyViewClickListener onEmptyViewClickListener;
 
     public RecyclerViewAdapter(Context context) {
         super(context);
@@ -197,6 +199,15 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
     }
 
     /**
+     * 空页面点击事件
+     *
+     * @param onItemChildViewClickListener
+     */
+    public void setOnEmptyViewClickListener(OnEmptyViewClickListener onEmptyViewClickListener) {
+        this.onEmptyViewClickListener = onEmptyViewClickListener;
+    }
+
+    /**
      * Empty页面回调
      * <p>
      * 此方法中可监听空页面点击事件
@@ -206,6 +217,10 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
      * @param position
      */
     public void onBindEmptyView(@NonNull final RecyclerViewHolder holder, int position) {
+        mEmptyView.setOnClickListener(v -> {
+            if (onEmptyViewClickListener != null)
+                onEmptyViewClickListener.onEmptyViewClick(holder, position);
+        });
     }
 
     /**

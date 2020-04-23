@@ -1,6 +1,6 @@
 package com.flyang.base.listener;
 
-import android.view.View;
+import com.flyang.base.adapter.viewholder.RecyclerViewHolder;
 
 /**
  * @author caoyangfei
@@ -13,10 +13,8 @@ public interface OnEmptyViewClickListener {
     /**
      * item 内子控件点击事件监听回调
      *
-     * @param childView 子控件
+     * @param holder
      * @param position  索引
-     * @param action    活动类型
-     * @param obj       额外数据
      */
-    void onEmptyViewClick(View childView, int position, int action, Object obj);
+    void onEmptyViewClick(RecyclerViewHolder holder, int position);
 }
