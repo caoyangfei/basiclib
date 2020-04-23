@@ -54,8 +54,8 @@ public class CircleLoaderController extends BaseLoaderController {
     @Override
     public void showLoader(String msg) {
         if (mPopupWindow != null && !mPopupWindow.isShowing()) {
-            backgroundAlpha(0.3f);
             setLoadingText(msg);
+            backgroundAlpha(0.3f);
             mPopupWindow.showAtLocation(getRootView(), Gravity.CENTER, 0, 0);
             mLoadingView.revertAnimation();
             mLoadingView.startAnimation();
@@ -76,7 +76,7 @@ public class CircleLoaderController extends BaseLoaderController {
                         BitmapFactory.decodeResource(activity.getResources(), R.drawable.loading_fail_basic));
             }
             setLoadingText(msg);
-            dismiss();
+            closeLoader();
         }
     }
 

@@ -1,5 +1,7 @@
 package com.flyang.base.view.inter;
 
+import com.flyang.base.listener.OnSuccessListener;
+
 /**
  * @author caoyangfei
  * @ClassName Loader
@@ -15,9 +17,11 @@ public interface Loader {
 
     void closeLoader();
 
-    void showMsg(String msg);
+    void showResultMsg(String msg, boolean dismiss);
 
-    void showResultMsg(String msg, boolean isSuccess);
+    void showResultMsg(String msg, boolean dismiss, long delayTime);
+
+    void showResultMsg(String msg, boolean isSuccess, long delayTime, OnSuccessListener listener);
 
     void setLoadingText(String str);
 

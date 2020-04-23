@@ -1,5 +1,6 @@
 package com.flyang.base.controller;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.app.FragmentActivity;
@@ -13,9 +14,14 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import com.flyang.base.activity.BasePresenterActivity;
+import com.flyang.base.listener.OnSuccessListener;
 import com.flyang.base.view.inter.Loader;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * @author caoyangfei
@@ -90,38 +96,42 @@ public abstract class BaseLoaderController extends BaseViewController implements
 
     @Override
     public void showLoader(String s) {
-        setLoadingText(s);
         if (mPopupWindow != null && !mPopupWindow.isShowing()) {
+            setLoadingText(s);
             backgroundAlpha(0.3f);
             mPopupWindow.showAtLocation(getRootView(), Gravity.CENTER, 0, 0);
         }
     }
 
     @Override
-    public void showMsg(String s) {
-        if (mPopupWindow != null && mPopupWindow.isShowing())
-            setLoadingText(s);
-    }
-
-    @Override
     public void closeLoader() {
         if (mPopupWindow != null && mPopupWindow.isShowing()) {
-            dismiss();
+            atomicBackDismiss.set(false);
+            mPopupWindow.dismiss();
         }
     }
-
 
     @Override
-    public void showResultMsg(String s, boolean b) {
-        setLoadingText(s);
-        if (mPopupWindow != null && mPopupWindow.isShowing()) {
-            dismiss();
-        }
+    public void showResultMsg(String msg, boolean dismiss) {
+        showResultMsg(msg, dismiss, 0);
     }
 
-    public void dismiss() {
-        atomicBackDismiss.set(false);
-        mPopupWindow.dismiss();
+    @SuppressLint("CheckResult")
+    @Override
+    public void showResultMsg(String msg, boolean dismiss, long delayTime) {
+        showResultMsg(msg, dismiss, delayTime, null);
+    }
+
+    @SuppressLint("CheckResult")
+    @Override
+    public void showResultMsg(String msg, boolean dismiss, long delayTime, OnSuccessListener listener) {
+        setLoadingText(msg);
+        Flowable.timer(delayTime, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aLong -> {
+                    if (dismiss) closeLoader();
+                    if (listener != null) listener.onSuccess(null);
+                });
     }
 
     public void setBackground(int color) {
