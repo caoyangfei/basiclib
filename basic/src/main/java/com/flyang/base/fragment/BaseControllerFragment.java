@@ -26,7 +26,7 @@ public abstract class BaseControllerFragment extends BaseFragment {
     /**
      * 同步fragment周期管理器
      */
-    final static LifecycleManage lifecycleManage = new LifecycleManage();
+    final LifecycleManage lifecycleManage = new LifecycleManage();
 
     private ControllerImple mController;
     private Loader loaderController;
