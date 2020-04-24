@@ -6,13 +6,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.flyang.annotation.apt.BindView;
-import com.flyang.base.activity.BasePresenterActivity;
+import com.flyang.base.activity.BaseControllerActivity;
 import com.flyang.base.adapter.AbsListViewAdapter;
 import com.flyang.base.adapter.animation.AnimationConstant;
 import com.flyang.base.listener.OnItemChildViewClickListener;
+import com.flyang.demo.R;
 import com.flyang.demo.ui.item.ListItemIntView;
 import com.flyang.demo.ui.item.ListItemStrView;
-import com.flyang.demo.R;
 import com.flyang.util.log.LogUtils;
 
 import java.util.LinkedList;
@@ -22,7 +22,7 @@ import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
-public class ListViewActivity extends BasePresenterActivity {
+public class ListViewActivity extends BaseControllerActivity {
     @BindView("listView")
     ListView listView;
     private LinkedList strings;

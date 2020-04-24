@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.flyang.api.bind.FacadeBind;
+import com.flyang.base.listener.OnCallBackLisenter;
 
 import java.lang.ref.WeakReference;
 
@@ -20,7 +21,7 @@ public class BaseViewController extends BaseController {
     protected WeakReference<View> rootView;
 
     @NonNull
-    protected ResultCallBackLisenter mResultCallBackLisenter;
+    protected OnCallBackLisenter mOnResultCallBackLisenter;
 
     public BaseViewController(FragmentActivity activity, View rootView) {
         super(activity);
@@ -28,25 +29,13 @@ public class BaseViewController extends BaseController {
         FacadeBind.bind(rootView);
     }
 
+    @Override
     public View getRootView() {
         return rootView.get();
     }
 
-    public void setResultCallBackLisenter(ResultCallBackLisenter resultCallBackLisenter) {
-        this.mResultCallBackLisenter = resultCallBackLisenter;
-    }
-
-    /**
-     * 结果回调
-     *
-     * @param <T>
-     * @param <B>
-     */
-    public interface ResultCallBackLisenter<T, B> {
-
-        void resultSuccess(T t);
-
-        void resultError(B b);
+    public void setOnResultCallBackLisenter(OnCallBackLisenter mOnResultCallBackLisenter) {
+        this.mOnResultCallBackLisenter = mOnResultCallBackLisenter;
     }
 }
 

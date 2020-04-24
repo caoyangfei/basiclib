@@ -7,7 +7,7 @@ package com.flyang.base.proxy;
  * ------------- Description -------------
  * 代理接口
  */
-public interface IProxy {
+public interface IPresenterProxy {
     /**
      * 绑定Presenter
      */
@@ -20,9 +20,7 @@ public interface IProxy {
      * @param <T>
      * @return
      */
-    default <T> T getInstance(Class clazz) {
-        return null;
-    }
+    <T> T getInstance(Class clazz);
 
     /**
      * 解绑

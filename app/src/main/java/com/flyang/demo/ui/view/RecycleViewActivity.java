@@ -9,7 +9,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.flyang.annotation.apt.BindView;
-import com.flyang.base.activity.BasePresenterActivity;
+import com.flyang.base.activity.BaseControllerActivity;
 import com.flyang.base.adapter.DraggableController;
 import com.flyang.base.adapter.RecyclerViewAdapter;
 import com.flyang.base.adapter.animation.AnimationConstant;
@@ -43,7 +43,7 @@ import io.reactivex.functions.Consumer;
  * @date 2019/6/30
  * ------------- Description -------------
  */
-public class RecycleViewActivity extends BasePresenterActivity {
+public class RecycleViewActivity extends BaseControllerActivity {
     @BindView("recycleview")
     RecyclerView recyclerView;
 

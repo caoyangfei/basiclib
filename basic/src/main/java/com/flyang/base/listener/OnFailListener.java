@@ -7,7 +7,7 @@ package com.flyang.base.listener;
  * ------------- Description -------------
  * 失败监听
  */
-public interface OnFailListener {
+public interface OnFailListener<F> {
 
-    void onFail(String errorMsg);
+    void onFail(F f);
 }

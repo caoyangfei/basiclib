@@ -15,39 +15,61 @@ public interface Lifecycle {
     /**
      * 初始化
      */
-    void onInit();
+    default void onInit() {
 
-    void onHiddenChanged(boolean hidden);
+    }
+
+    default void onHiddenChanged(boolean hidden) {
+
+    }
 
     /**
      * 初始化VIEW
      */
-    void initView();
+    default void initView() {
+
+    }
 
     /**
      * 初始化事件监听
      */
-    void initListener();
+    default void initListener() {
+
+    }
 
     /**
      * 初始化数据
      */
-    void initData();
+    default void initData() {
 
-    void onStart();
+    }
 
-    void onResume();
+    default void onStart() {
+
+    }
+
+    default void onResume() {
+
+    }
 
 
-    void onPause();
+    default void onPause() {
 
-    void onStop();
+    }
+
+    default void onStop() {
+
+    }
 
     /**
      * 撤消
      */
-    void onDestroy();
+    default void onDestroy() {
+
+    }
 
 
-    void onActivityResult(int requestCode, int resultCode, Intent data);
+    default void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    }
 }

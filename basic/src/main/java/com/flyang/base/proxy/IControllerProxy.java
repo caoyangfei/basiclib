@@ -4,12 +4,12 @@ import com.flyang.base.Lifecycle;
 
 /**
  * @author caoyangfei
- * @ClassName FragmentPresenterProxy
+ * @ClassName ControllerProxy
  * @date 2019/7/12
  * ------------- Description -------------
  * Controller的Presenter代理
  */
-public interface ControllerProxy extends IProxy {
+public interface IControllerProxy {
 
     /**
      * 绑定Controller
@@ -22,7 +22,5 @@ public interface ControllerProxy extends IProxy {
      * @param key
      * @param controller
      */
-    default void registerController(String key, Lifecycle controller) {
-
-    }
+    void registerController(String key, Lifecycle controller);
 }

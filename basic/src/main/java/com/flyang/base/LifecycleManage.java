@@ -22,6 +22,9 @@ public class LifecycleManage implements Lifecycle {
         iifecycleMap = new WeakHashMap<>();
     }
 
+    public WeakHashMap<String, Lifecycle> getIifecycleMap() {
+        return iifecycleMap;
+    }
 
     public void register(String key, Lifecycle lifecycle) {
         iifecycleMap.put(key, lifecycle);

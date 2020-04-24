@@ -2,19 +2,29 @@ package com.flyang.base.activity;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.flyang.api.bind.FacadeBind;
+import com.flyang.api.router.IRouter;
+import com.flyang.api.router.IntentRouter;
 import com.flyang.base.contract.IView;
-import com.flyang.base.view.swipeback.manager.SwipeBackManager;
 import com.flyang.base.view.inter.Delegate;
+import com.flyang.base.view.swipeback.manager.SwipeBackManager;
 import com.flyang.basic.R;
 import com.flyang.util.app.ActivityUtils;
+import com.flyang.util.data.PreconditionUtils;
 import com.flyang.util.view.AdaptScreenUtils;
 import com.flyang.util.view.KeyboardUtils;
+import com.flyang.util.view.SnackbarUtils;
+
+import java.util.Map;
 
 /**
  * @author yangfei.cao
@@ -50,10 +60,23 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
         return AdaptScreenUtils.adaptWidth(super.getResources(), 720);
     }
 
+    @Override
+    public Object getObj() {
+        return this;
+    }
+
+    @Override
+    public FragmentActivity getFragmentActivity() {
+        return this;
+    }
+
+    @Override
     public View getRootView() {
         return rootView;
     }
 
+
+    /*************************初始化***********************/
     protected void onInit() {
         FacadeBind.bind(this);
     }
@@ -62,11 +85,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
      * 初始化view
      */
     protected void initView() {
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     /**
@@ -81,6 +99,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
     protected void initData() {
     }
 
+
+    /*************************侧滑返回***********************/
 
     /**
      * 初始化滑动返回。在 super.onCreate(savedInstanceState) 之前调用该方法
@@ -148,12 +168,52 @@ public abstract class BaseActivity extends AppCompatActivity implements Delegate
         overridePendingTransition(0, 0);
     }
 
+    /*************************侧滑返回***********************/
+
+
     @Override
     public void onBackPressed() {
         // 正在滑动返回的时候取消返回按钮事件
         if (mSwipeBackManager.isSliding()) {
             return;
         }
+        back();
+    }
+
+    @Override
+    public void showMessage(@NonNull String message) {
+        SnackbarUtils.with(rootView).setMessage(message).show();
+    }
+
+    @Override
+    public void launchActivity(@NonNull String path, Map<String, Object> params) {
+        PreconditionUtils.checkNotNull(path);
+        IRouter build = IntentRouter.build(path);
+        if (params != null && params.size() > 0) {
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
+                build.with(entry.getKey(), entry.getValue());
+            }
+        }
+        build.go(this);
+    }
+
+    @Override
+    public void launchFragment(@IdRes int resId, @NonNull String path, Map<String, Object> params) {
+        PreconditionUtils.checkNotNull(path);
+        IRouter build = IntentRouter.build(path);
+        if (params != null && params.size() > 0) {
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
+                build.with(entry.getKey(), entry.getValue());
+            }
+        }
+        Fragment fragment = (Fragment) build.getFragment(this);
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(resId, fragment).commit();
+        }
+    }
+
+    @Override
+    public void killMyself() {
         back();
     }
 

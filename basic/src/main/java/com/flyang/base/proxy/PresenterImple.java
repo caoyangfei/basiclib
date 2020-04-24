@@ -25,7 +25,7 @@ import io.reactivex.Flowable;
  * ------------- Description -------------
  * presenter实现接口
  */
-public class PresenterImple implements IProxy {
+public abstract class PresenterImple implements IPresenterProxy {
 
     private List<IPresenter> mPresenters;
     private IView mView;

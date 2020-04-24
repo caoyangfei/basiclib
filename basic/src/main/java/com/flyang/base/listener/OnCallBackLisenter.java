@@ -2,10 +2,10 @@ package com.flyang.base.listener;
 
 /**
  * @author caoyangfei
- * @ClassName OnResultListener
+ * @ClassName OnCallBackLisenter
  * @date 2019/9/19
  * ------------- Description -------------
  * 结果监听
  */
-public interface OnResultListener<T> extends OnSuccessListener<T>, OnFailListener {
+public interface OnCallBackLisenter<T, F> extends OnSuccessListener<T>, OnFailListener<F> {
 }

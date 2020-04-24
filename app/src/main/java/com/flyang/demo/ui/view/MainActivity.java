@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 
-import com.flyang.base.activity.BasePresenterActivity;
-import com.flyang.base.controller.ShapeLoadingController;
+import com.flyang.annotation.Controller;
+import com.flyang.base.activity.BaseControllerActivity;
 import com.flyang.base.view.LoadingLayout;
 import com.flyang.base.view.inter.Loader;
 import com.flyang.demo.R;
@@ -13,7 +13,6 @@ import com.flyang.demo.controller.CircleLoaderController;
 import com.flyang.demo.ui.view.net.CacheActivity;
 import com.flyang.demo.ui.view.net.ImageActivity;
 import com.flyang.util.app.ActivityUtils;
-import com.flyang.util.log.LogUtils;
 import com.flyang.util.view.StatusBarUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -22,7 +21,10 @@ import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
-public class MainActivity extends BasePresenterActivity {
+public class MainActivity extends BaseControllerActivity {
+
+    @Controller
+    ModuleController moduleController;
 
     @Override
     protected int getLayoutID() {
@@ -43,9 +45,10 @@ public class MainActivity extends BasePresenterActivity {
     public void Button(View view) {
         switch (view.getId()) {
             case R.id.btn1:
-                LogUtils.d("测试打印日记");
-                Intent intent = new Intent(this, RecycleViewActivity.class);
-                startActivity(intent);
+                moduleController.setString();
+//                LogUtils.d("测试打印日记");
+//                Intent intent = new Intent(this, RecycleViewActivity.class);
+//                startActivity(intent);
                 break;
             case R.id.btn2:
                 loaderController.setBackDismiss(false);
@@ -89,7 +92,7 @@ public class MainActivity extends BasePresenterActivity {
     @Override
     protected Loader getLoaderController() {
         CircleLoaderController circleLoaderController = new CircleLoaderController(this, rootView);
-        registerController(ShapeLoadingController.class.getSimpleName(), circleLoaderController);
+        registerController(CircleLoaderController.class.getSimpleName(), circleLoaderController);
         return circleLoaderController;
     }
 }
