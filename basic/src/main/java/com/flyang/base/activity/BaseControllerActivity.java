@@ -29,7 +29,7 @@ public abstract class BaseControllerActivity extends BasePresenterActivity {
     /**
      * 同步activity周期管理器
      */
-    final static LifecycleManage lifecycleManage = new LifecycleManage();
+    final LifecycleManage lifecycleManage = new LifecycleManage();
 
     protected Loader loaderController;
 

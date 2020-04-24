@@ -40,7 +40,7 @@ public class BasePresenterController extends BaseViewController {
     /**
      * 同步Controller周期管理器
      */
-    final static LifecycleManage lifecycleManage = new LifecycleManage();
+    final LifecycleManage lifecycleManage = new LifecycleManage();
 
 
     public BasePresenterController(FragmentActivity activity, View rootView) {
@@ -181,6 +181,7 @@ public class BasePresenterController extends BaseViewController {
     public void hideLoading() {
         loaderController.closeLoader();
     }
+
     @Override
     public void showMessage(@NonNull String message) {
         SnackbarUtils.with(rootView.get()).setMessage(message).show();
