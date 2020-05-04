@@ -17,7 +17,7 @@ import com.flyang.base.view.inter.Loader;
  * @date 2019/7/13
  * ------------- Description -------------
  * <p>
- * 此基类包含controller和默认加载框
+ * 此基类包含controller/presenter/默认加载框
  * <p>
  * Loader加载动画，替换动画重写{@link #getLoaderController()},
  * 必须{@link #registerController(String, Lifecycle)}，目的为了监听加载控制器生命周期
