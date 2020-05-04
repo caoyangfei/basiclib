@@ -13,7 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
-import com.flyang.base.activity.BasePresenterActivity;
+import com.flyang.base.activity.BaseControllerActivity;
 import com.flyang.base.listener.OnSuccessListener;
 import com.flyang.base.view.inter.Loader;
 
@@ -32,7 +32,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  * <p>
  * 自定义加载样式
  * 重写此类，仿照{@link ShapeLoadingController}
- * 然后在activity重写{@link BasePresenterActivity#getLoaderController()}
+ * 然后在activity重写{@link BaseControllerActivity#getLoaderController()}
  */
 public abstract class BaseLoaderController extends BaseViewController implements Loader {
 
