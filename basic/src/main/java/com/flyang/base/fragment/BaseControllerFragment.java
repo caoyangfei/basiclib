@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.flyang.annotation.apt.InstanceFactory;
 import com.flyang.base.Lifecycle;
 import com.flyang.base.LifecycleManage;
 import com.flyang.base.controller.ShapeLoadingController;
@@ -43,14 +44,33 @@ public abstract class BaseControllerFragment extends BaseFragment {
     @SuppressLint("CheckResult")
     protected void initBindController() {
         if (mController == null)
-            mController = new ControllerImple(this) {
+            mController = new ControllerImple(getActivity(), this) {
+
+                @Override
+                public <T> T getInstance(Class clazz) {
+                    return BaseControllerFragment.this.getInstance(clazz);
+                }
 
                 @Override
                 public void registerController(String key, Lifecycle controller) {
                     BaseControllerFragment.this.registerController(key, controller);
                 }
             };
+        mController.bindPresenter();
         mController.bindController();
+    }
+
+    /**
+     * 重写此方发获取Presenter对象（不是必写方法）
+     * <p>
+     * 配合{@link InstanceFactory}使用，InstanceFactory注解Presenter生成工厂类InstanceFactory
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    protected <T> T getInstance(Class clazz) {
+        return null;
     }
 
     /**
@@ -153,7 +173,12 @@ public abstract class BaseControllerFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        loaderController.closeLoader();
+        if (mController != null)
+            mController.unbind();
+        mController = null;
+
+        if (loaderController != null)
+            loaderController.closeLoader();
         lifecycleManage.onDestroy();
     }
 }

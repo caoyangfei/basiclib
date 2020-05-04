@@ -10,10 +10,10 @@ import android.view.View;
 
 import com.flyang.annotation.Controller;
 import com.flyang.annotation.Presenter;
+import com.flyang.annotation.apt.InstanceFactory;
 import com.flyang.base.Lifecycle;
 import com.flyang.base.LifecycleManage;
 import com.flyang.base.proxy.ControllerImple;
-import com.flyang.base.proxy.PresenterImple;
 import com.flyang.base.view.inter.Loader;
 import com.flyang.util.view.SnackbarUtils;
 
@@ -33,7 +33,6 @@ import static android.support.annotation.RestrictTo.Scope.SUBCLASSES;
  */
 
 public class BasePresenterController extends BaseViewController {
-    private PresenterImple mPresenter;
     private ControllerImple mController;
 
     protected Loader loaderController;
@@ -50,22 +49,19 @@ public class BasePresenterController extends BaseViewController {
     }
 
     private void initBind() {
-        if (mPresenter == null)
-            mPresenter = new PresenterImple(activity, this) {
+        if (mController == null)
+            mController = new ControllerImple(activity, this) {
+                @Override
+                public void registerController(String key, Lifecycle controller) {
+                    BasePresenterController.this.registerController(key, controller);
+                }
+
                 @Override
                 public <T> T getInstance(Class clazz) {
                     return BasePresenterController.this.getInstance(clazz);
                 }
             };
-        mPresenter.bindPresenter();
-
-        if (mController == null)
-            mController = new ControllerImple(this) {
-                @Override
-                public void registerController(String key, Lifecycle controller) {
-                    BasePresenterController.this.registerController(key, controller);
-                }
-            };
+        mController.bindPresenter();
         mController.bindController();
     }
 
@@ -165,9 +161,10 @@ public class BasePresenterController extends BaseViewController {
 
     @Override
     public void onDestroy() {
-        if (mPresenter != null)
-            mPresenter.unbind();
-        mPresenter = null;
+        if (mController != null)
+            mController.unbind();
+        mController = null;
+
         lifecycleManage.onDestroy();
     }
 

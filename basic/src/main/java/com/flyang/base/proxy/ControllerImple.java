@@ -1,6 +1,7 @@
 package com.flyang.base.proxy;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 
 import com.flyang.annotation.Controller;
 import com.flyang.base.contract.IView;
@@ -21,12 +22,19 @@ import io.reactivex.Flowable;
  * ------------- Description -------------
  * Controller代理实现presenter注解
  */
-public abstract class ControllerImple implements IControllerProxy {
+public abstract class ControllerImple implements IControllerProxy ,IPresenterProxy{
     private BaseController baseController;//寄生Controller注入宿主Controller内,它同时获取宿主Controller周期
     private IView mView;
+    private final PresenterImple presenterImple;
 
-    public ControllerImple(IView view) {
+    public ControllerImple(Context context, IView view) {
         this.mView = view;
+        presenterImple = new PresenterImple(context, view) {
+            @Override
+            public <T> T getInstance(Class clazz) {
+                return ControllerImple.this.getInstance(clazz);
+            }
+        };
     }
 
     @SuppressLint("CheckResult")
@@ -62,4 +70,13 @@ public abstract class ControllerImple implements IControllerProxy {
                 });
     }
 
+    @Override
+    public void bindPresenter() {
+        presenterImple.bindPresenter();
+    }
+
+    @Override
+    public void unbind() {
+        presenterImple.unbind();
+    }
 }

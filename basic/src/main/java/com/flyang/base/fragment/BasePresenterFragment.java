@@ -1,6 +1,7 @@
 package com.flyang.base.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 
 import com.flyang.annotation.apt.InstanceFactory;
 import com.flyang.base.contract.IView;
@@ -15,7 +16,7 @@ import com.flyang.base.proxy.PresenterImple;
  * <p>
  * MVP中P层
  * <p>
- * {@link BasePresenter#onAttached(IView)}关联P和V层，
+ * {@link BasePresenter#onAttached(Context, IView)}关联P和V层，
  * 在Presenter中结果回来以后调用传递给Fragment
  */
 public abstract class BasePresenterFragment extends BaseFragment {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.flyang.annotation.apt.InstanceFactory;
 import com.flyang.base.Lifecycle;
 import com.flyang.base.LifecycleManage;
 import com.flyang.base.controller.ShapeLoadingController;
@@ -24,7 +25,7 @@ import com.flyang.base.view.inter.Loader;
  * Loader加载动画，替换动画重写{@link #getLoaderController()},
  * 必须{@link #registerController(String, Lifecycle)}，目的为了监听加载控制器生命周期
  */
-public abstract class BaseControllerActivity extends BasePresenterActivity {
+public abstract class BaseControllerActivity extends BaseActivity {
 
     /**
      * 同步activity周期管理器
@@ -47,13 +48,33 @@ public abstract class BaseControllerActivity extends BasePresenterActivity {
     @SuppressLint("CheckResult")
     protected void initBindController() {
         if (mController == null)
-            mController = new ControllerImple(this) {
+            mController = new ControllerImple(this,this) {
                 @Override
                 public void registerController(String key, Lifecycle controller) {
                     BaseControllerActivity.this.registerController(key, controller);
                 }
+
+                @Override
+                public <T> T getInstance(Class clazz) {
+                    return BaseControllerActivity.this.getInstance(clazz);
+                }
             };
+        mController.bindPresenter();
         mController.bindController();
+    }
+    /**
+     * 重写此方发获取Presenter对象
+     * <p>
+     * 配合{@link InstanceFactory}使用，InstanceFactory注解Presenter生成工厂类InstanceFactory
+     * <p>
+     * 重写此方法减少反射，优化性能（不是必写方法）
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    protected <T> T getInstance(Class clazz) {
+        return null;
     }
 
     /**
@@ -158,6 +179,10 @@ public abstract class BaseControllerActivity extends BasePresenterActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mController != null)
+            mController.unbind();
+        mController = null;
+
         if (loaderController != null)
             loaderController.closeLoader();
         lifecycleManage.onDestroy();
