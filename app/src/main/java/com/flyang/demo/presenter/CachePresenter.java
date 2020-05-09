@@ -1,5 +1,6 @@
 package com.flyang.demo.presenter;
 
+import com.flyang.annotation.apt.InstanceFactory;
 import com.flyang.demo.model.bean.BookEntity;
 import com.flyang.demo.model.contract.CacheAPIContract;
 import com.flyang.network.FlyangHttp;
@@ -16,6 +17,7 @@ import java.util.List;
  * @date 2019/10/21
  * ------------- Description -------------
  */
+@InstanceFactory
 public class CachePresenter extends CacheAPIContract.Presenter {
     @Override
     public void getBook() {
