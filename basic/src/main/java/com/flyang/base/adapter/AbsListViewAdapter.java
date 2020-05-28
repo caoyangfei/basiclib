@@ -163,6 +163,20 @@ public class AbsListViewAdapter<T> extends BaseAdapter implements IListAdapter<T
     }
 
     @Override
+    public void notifyDataSetChangedIdle() {
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void notifyItemChangedIdle(View view, int pos) {
+        if (view == null) return;
+        int viewType = getItemViewType(pos);
+        MultiItemView multiItemView = multiTypePool.getMultiItemView(viewType);
+        AbsListViewHolder itemViewHolder = (AbsListViewHolder) view.getTag(multiItemView.getLayoutId());
+        multiItemView.onBindData(itemViewHolder, getItem(pos), pos);
+    }
+
+    @Override
     public long getItemId(int position) {
         return position;
     }

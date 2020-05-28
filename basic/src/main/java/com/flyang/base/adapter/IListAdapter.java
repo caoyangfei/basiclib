@@ -2,6 +2,7 @@ package com.flyang.base.adapter;
 
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import java.util.List;
 
@@ -109,8 +110,7 @@ public interface IListAdapter<T> {
      */
     int getListSize();
 
-    /**
-     * 刷新适配器
-     */
-    void notifyDataSetChanged();
+    void notifyDataSetChangedIdle();
+
+    void notifyItemChangedIdle(View view, final int pos);
 }
