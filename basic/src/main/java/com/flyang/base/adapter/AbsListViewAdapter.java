@@ -162,12 +162,17 @@ public class AbsListViewAdapter<T> extends BaseAdapter implements IListAdapter<T
         return mDataList.size();
     }
 
-    @Override
-    public void notifyDataSetChangedIdle() {
-        notifyDataSetChanged();
-    }
-
-    @Override
+    /**
+     * 局部刷新
+     * int firstVisiblePosition = listView.getFirstVisiblePosition();
+     * int lastVisiblePosition = listView.getLastVisiblePosition();
+     * //在看见范围内才更新，不可见的滑动后自动会调用getView方法更新
+     * if(position >=firstVisiblePosition &&position <=lastVisiblePosition)
+     * View view = listView.getChildAt(position - firstVisiblePosition);
+     *
+     * @param view
+     * @param pos
+     */
     public void notifyItemChangedIdle(View view, int pos) {
         if (view == null) return;
         int viewType = getItemViewType(pos);

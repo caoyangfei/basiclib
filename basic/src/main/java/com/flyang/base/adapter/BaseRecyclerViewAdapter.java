@@ -257,9 +257,8 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
     /**
      * 刷新数据，防止滑动时刷新崩溃
      */
-    @Override
     public void notifyDataSetChangedIdle() {
-        notifyItemChangedIdle(null, -1);
+        notifyItemChangedIdle(-1);
     }
 
     /**
@@ -267,13 +266,12 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
      *
      * @param pos
      */
-    @Override
-    public void notifyItemChangedIdle(View view, final int pos) {
+    public void notifyItemChangedIdle(final int pos) {
         if (mRecyclerView == null) {
             return;
         }
         if (mRecyclerView.getScrollState() == RecyclerView.SCROLL_STATE_IDLE || !mRecyclerView.isComputingLayout()) {
-            mRecyclerView.postDelayed(() -> notifyItemChangedIdle(null, pos), 100);
+            mRecyclerView.postDelayed(() -> notifyItemChangedIdle(pos), 100);
         } else if (pos < 0 || pos >= getItemCount()) {
             notifyDataSetChanged();
         } else {
