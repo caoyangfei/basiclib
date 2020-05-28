@@ -83,6 +83,8 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
     //加载监听器
     protected OnLoadListener mLoadListener;
 
+    protected RecyclerView mRecyclerView;
+
     public BaseRecyclerViewAdapter(Context context) {
         this(context, new LinkedList<>());
     }
@@ -244,6 +246,12 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
             T item = mDataList.get(position);
             return multiTypePool.getItemViewType(item, position);
         }
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
     }
 
     /**
@@ -487,7 +495,7 @@ abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerV
     /**
      * 获取空占位View数量
      */
-    protected int getEmptyViewCounts() {
+    public int getEmptyViewCounts() {
         return isInEmptyStatus() ? 1 : 0;
     }
 

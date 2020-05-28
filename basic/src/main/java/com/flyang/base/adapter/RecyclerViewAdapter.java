@@ -33,7 +33,6 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
 
     protected @Nullable
     LayoutInflater inflater;
-    private RecyclerView mRecyclerView;
     private OnEmptyViewClickListener onEmptyViewClickListener;
 
     public RecyclerViewAdapter(Context context) {
@@ -111,7 +110,6 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        mRecyclerView = recyclerView;
         //判断是不是空页面，头部，底部，设置每行数量
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
         if (manager instanceof GridLayoutManager) {
@@ -146,7 +144,7 @@ public class RecyclerViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
                 || isInLoadMorePos(holder.getLayoutPosition())
                 || isInEmptyStatus()) {
             ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
-            if (lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams) {
+            if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
                 StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
                 p.setFullSpan(true);
             }
